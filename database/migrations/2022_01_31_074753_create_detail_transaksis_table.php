@@ -34,6 +34,6 @@ class CreateDetailTransaksisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('detail_transaksis');
+        Schema::dropIfExists('tb_detail_transaksi');
     }
 }

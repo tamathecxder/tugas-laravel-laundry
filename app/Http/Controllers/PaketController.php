@@ -15,7 +15,7 @@ class PaketController extends Controller
      */
     public function index()
     {
-        //
+        return view('paket.index');
     }
 
     /**
