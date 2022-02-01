@@ -8,6 +8,8 @@
   <title>
     Material Dashboard 2 by Creative Tim
   </title>
+  {{-- Datatables css --}}
+  <link rel="stylesheet" type="text/css" href="{{ asset('assets') }}/js/DataTables/datatables.min.css"/>
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
   <!-- Nucleo Icons -->
@@ -69,13 +71,20 @@
   </main>
 
 
-
+  {{-- Jquery --}}
+  <script src="{{ asset('assets') }}/js/jQuery/jquery-3.6.0.min.js"></script>
   <!--   Core JS Files   -->
   <script src="{{ asset('assets') }}/js/core/popper.min.js"></script>
   <script src="{{ asset('assets') }}/js/core/bootstrap.min.js"></script>
   <script src="{{ asset('assets') }}/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="{{ asset('assets') }}/js/plugins/smooth-scrollbar.min.js"></script>
   <script src="{{ asset('assets') }}/js/plugins/chartjs.min.js"></script>
+
+  {{-- Data Tables --}}
+  <script src="{{ asset('assets') }}/js/DataTables/jquery.datatables.min.js"></script>
+
+  {{-- sweet alert --}}
+  <script src="{{ asset('assets') }}/js/sweetalert/sweetalert.min.js"></script>
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -89,6 +98,7 @@
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="{{ asset('assets') }}/js/material-dashboard.min.js?v=3.0.0"></script>
+  @stack('script')
 </body>
 
 </html>

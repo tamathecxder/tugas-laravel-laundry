@@ -15,7 +15,9 @@ class OutletController extends Controller
      */
     public function index()
     {
-        return view('outlet.index');
+        return view('outlet.index', [
+            'outlet' => Outlet::all(),
+        ]);
     }
 
     /**
@@ -36,7 +38,18 @@ class OutletController extends Controller
      */
     public function store(StoreOutletRequest $request)
     {
-        //
+        $data = $request->validate([
+            'nama' => 'required',
+            'alamat' => 'required',
+            'tlp' => 'required'
+        ]);
+        $outlet = Outlet::create($data);
+
+        if ( $outlet ) {
+            return redirect()->route('outlet.index')->with('success', 'Data outlet telah berhasil ditambahkan.');
+        } else {
+            return redirect()->route('outlet.index')->with('error', 'Data outlet gagal ditambahkan!');
+        }
     }
 
     /**
@@ -68,9 +81,23 @@ class OutletController extends Controller
      * @param  \App\Models\Outlet  $outlet
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateOutletRequest $request, Outlet $outlet)
+    public function update(UpdateOutletRequest $request, $id)
     {
-        //
+        $outlet = Outlet::findOrFail($id);
+
+        $rules = $request->validate([
+            'nama' => 'required',
+            'alamat' => 'required',
+            'tlp' => 'required',
+        ]);
+
+        $update = $outlet->update($rules);
+
+        if ( $update ) {
+            return redirect()->route('outlet.index')->with('success', 'Data outlet telah berhasil di-edit');
+        } else {
+            return redirect()->route('outlet.index')->with('error', 'Data outlet gagal di-edit');
+        }
     }
 
     /**
@@ -79,8 +106,16 @@ class OutletController extends Controller
      * @param  \App\Models\Outlet  $outlet
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Outlet $outlet)
+    public function destroy($id)
     {
-        //
+        $outlet = Outlet::findOrFail($id);
+
+        $delete = $outlet->delete($id);
+
+        if ( $delete ) {
+            return redirect()->route('outlet.index')->with('success', 'Data outlet tersebut telah berhasil dihapus');
+        } else {
+            return redirect()->route('outlet.index')->with('error', 'Data outlet tersebut gagal dihapus!');
+        }
     }
 }

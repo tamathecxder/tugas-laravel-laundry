@@ -13,7 +13,7 @@
         <li class="nav-item">
           <a class="{{ (request()->routeIs('home')) ? 'active bg-gradient-primary' : '' }} nav-link text-white" href="{{ route('home') }}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">dashboard</i>
+                <i class="material-icons opacity-10">dashboard</i>
             </div>
             <span class="nav-link-text ms-1">Dashboard</span>
           </a>

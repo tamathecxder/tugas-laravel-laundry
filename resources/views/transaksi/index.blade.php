@@ -21,8 +21,9 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-8 mb-md-0 mb-4">
-                    <a class="btn bg-gradient-dark mb-0" href="javascript:;"><i
-                        class="material-icons text-sm">add</i>&nbsp;&nbsp;Add New Data</a>
+                    <a class="btn bg-gradient-dark mb-0" href="javascript:;">
+                        <i
+    class="material-icons text-sm">add</i>&nbsp;&nbsp;Add New Data</a>
                 </div>
             </div>
         </div>
