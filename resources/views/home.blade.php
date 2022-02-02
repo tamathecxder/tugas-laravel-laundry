@@ -1,5 +1,6 @@
 @extends('layouts.main')
 
+@section('title', 'Melayani tanpa pilih kasih!')
 
 @section('sidebar')
     @include('partials.sidebar')

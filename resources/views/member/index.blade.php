@@ -204,7 +204,7 @@
                 modal.find('.modal-title').text('Input data member');
                 modal.find('.modal-body #nama').val('').change();
                 modal.find('.modal-body #alamat').val('').change();
-                modal.find('.modal-body #jenis_kelamin').val('').change();
+                modal.find('.modal-body #jenis_kelamin').change();
                 modal.find('.modal-body #tlp').val('').change();
                 modal.find('.modal-footer #btn-submit').text('Input');
                 modal.find('.modal-body #method').html('');

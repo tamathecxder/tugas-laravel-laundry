@@ -177,7 +177,7 @@
             let modal = $(this);
 
             if (mode == 'edit') {
-                modal.find('.modal-title').text('Edit data Member');
+                modal.find('.modal-title').text('Edit data Outlet');
                 modal.find('.modal-body #nama').val(nama).change();
                 modal.find('.modal-body #alamat').val(alamat).change();
                 modal.find('.modal-body #tlp').val(tlp).change();
@@ -185,7 +185,7 @@
                 modal.find('.modal-body #method').html('{{ method_field('patch') }}');
                 modal.find('.modal-body form').attr('action', 'outlet/' + id);
             } else {
-                modal.find('.modal-title').text('Input data member');
+                modal.find('.modal-title').text('Input data Outlet');
                 modal.find('.modal-body #nama').val('').change();
                 modal.find('.modal-body #alamat').val('').change();
                 modal.find('.modal-body #tlp').val('').change();

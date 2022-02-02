@@ -6,7 +6,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets') }}/img/apple-icon.png">
   <link rel="icon" type="image/png" href="{{ asset('assets') }}/img/favicon.png">
   <title>
-    Material Dashboard 2 by Creative Tim
+    Sumber Jaya Laundry - @yield('title')
   </title>
   {{-- Datatables css --}}
   <link rel="stylesheet" type="text/css" href="{{ asset('assets') }}/js/DataTables/datatables.min.css"/>
