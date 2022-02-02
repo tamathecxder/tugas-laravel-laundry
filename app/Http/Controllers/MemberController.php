@@ -15,7 +15,9 @@ class MemberController extends Controller
      */
     public function index()
     {
-        return view('member.index');
+        return view('member.index', [
+            'member' => Member::all(),
+        ]);
     }
 
     /**
@@ -36,7 +38,20 @@ class MemberController extends Controller
      */
     public function store(StoreMemberRequest $request)
     {
-        //
+        $validationData = $request->validate([
+            'nama' => 'required',
+            'alamat' => 'required',
+            'tlp' => 'required|digits:12',
+            'jenis_kelamin' => 'required',
+        ]);
+
+        $member = Member::create($validationData);
+
+        if ( $member ) {
+            return redirect()->route('member.index')->with('success', 'Data member telah berhasil ditambahkan');
+        } else {
+            return redirect()->route('member.index')->with('error', 'Data member gagal ditambahkan!');
+        }
     }
 
     /**
@@ -68,9 +83,24 @@ class MemberController extends Controller
      * @param  \App\Models\Member  $member
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateMemberRequest $request, Member $member)
+    public function update(UpdateMemberRequest $request, $id)
     {
-        //
+        $member = Member::findOrFail($id);
+
+        $rules = $request->validate([
+            'nama' => 'required',
+            'alamat' => 'required',
+            'tlp' => 'required',
+            'jenis_kelamin' => 'required',
+        ]);
+
+        $update = $member->update($rules);
+
+        if ( $update) {
+            return redirect()->route('member.index')->with('success', 'Data member tersebut telah berhasil di-update');
+        } else {
+            return redirect()->route('member.index')->with('success', 'Data member tersebut gagal di-update!');
+        }
     }
 
     /**
@@ -79,8 +109,16 @@ class MemberController extends Controller
      * @param  \App\Models\Member  $member
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Member $member)
+    public function destroy($id)
     {
-        //
+        $member = Member::findOrFail($id);
+
+        $delete = $member->delete($id);
+
+        if ( $delete )  {
+            return redirect()->route('member.index')->with('success', 'Data member tersebut telah berhasil dihapus');
+        } else {
+            return redirect()->route('member.index')->with('success', 'Data member tersebut gagal dihapus');
+        }
     }
 }
