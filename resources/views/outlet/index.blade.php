@@ -1,5 +1,7 @@
 @extends('layouts.main')
 
+@section('title', 'Halaman Outlet')
+
 @section('sidebar')
     @include('partials.sidebar')
 @endsection

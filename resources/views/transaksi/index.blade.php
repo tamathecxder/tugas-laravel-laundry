@@ -1,5 +1,7 @@
 @extends('layouts.main')
 
+@section('title', 'Proses Transaksi')
+
 @section('sidebar')
     @include('partials.sidebar')
 @endsection
