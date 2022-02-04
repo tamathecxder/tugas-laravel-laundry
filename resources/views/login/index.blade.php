@@ -2,10 +2,10 @@
 
 @section('name', 'class="bg-primary"')
 
-@section('title', 'Halaman Member')
+@section('title', 'Login')
 
 @section('login')
-    <main class="main-content  mt-0">
+    <main class="main-content mt-0">
         <div class="page-header align-items-start min-vh-100"
             style="background-image: url('https://images.unsplash.com/photo-1497294815431-9365093b7331?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80');">
             <span class="mask bg-gradient-dark opacity-6"></span>
@@ -14,8 +14,22 @@
                     <div class="col-lg-4 col-md-8 col-12 mx-auto">
                         <div class="card z-index-0 fadeIn3 fadeInBottom">
                             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                                @if (session('success'))
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="alert alert-success alert-dismissible text-white" role="alert"
+                                                id="success-alert">
+                                                <span class="text-sm">{{ session('success') }}</span>
+                                                <button type="button" class="btn-close text-lg py-3 opacity-10"
+                                                    data-bs-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
                                 <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
-                                    <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Sign in</h4>
+                                    <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Log In</h4>
                                     <div class="row mt-3">
                                         <div class="col-2 text-center ms-auto">
                                             <a class="btn btn-link px-3" href="javascript:;">
@@ -40,7 +54,8 @@
                                     @csrf
                                     <div class="input-group input-group-outline my-3">
                                         <label class="form-label">Email</label>
-                                        <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror">
+                                        <input type="email" name="email" id="email"
+                                            class="form-control @error('email') is-invalid @enderror">
 
                                         @error('email')
                                             <div class="invalid-feedback">
@@ -57,9 +72,9 @@
                                             in</button>
                                     </div>
                                     <p class="mt-4 text-sm text-center">
-                                        Don't have an account?
-                                        <a href="../pages/sign-up.html"
-                                            class="text-primary text-gradient font-weight-bold">Sign up</a>
+                                        Belum memiliki akun?
+                                        <a href="{{ route('register') }}"
+                                            class="text-primary text-gradient font-weight-bold">Register</a>
                                     </p>
                                 </form>
                             </div>
@@ -71,3 +86,14 @@
     </main>
 
 @endsection
+
+@push('script')
+    <script>
+        $(document).ready(function() {
+            $("#success-alert").fadeTo(2000, 500).slideUp(500, function() {
+                $("#success-alert").slideUp(500);
+            });
+        });
+    </script>
+
+@endpush
