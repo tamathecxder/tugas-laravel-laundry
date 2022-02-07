@@ -20,7 +20,7 @@ class LoginController extends Controller
         if (Auth::guard('web')->attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->route('home');
+            return redirect('/');
         }
 
         return back()->withErrors([

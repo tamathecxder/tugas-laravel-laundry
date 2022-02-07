@@ -11,15 +11,17 @@ use Illuminate\Support\Facades\Route;
 
 
 // Home Route
-Route::get('/', HomeController::class)->name('home')->middleware('auth');
+Route::get('/', [HomeController::class, 'default'])->middleware('level:kasir,admin,owner');
 
-// 3 tables route
-Route::resource('/paket', PaketController::class)->middleware('auth');
-Route::resource('/member', MemberController::class)->middleware('auth');
-Route::resource('/outlet', OutletController::class)->middleware('auth');
+// Member
+Route::resource('/member', MemberController::class)->middleware('level:admin');
 
-Route::resource('/transaksi', TransaksiController::class)->middleware('auth');
+// CRUD Paket dan Outlet pada Admin
+Route::resource('/outlet', OutletController::class)->middleware('level:admin');
+Route::resource('/paket', PaketController::class)->middleware('level:admin');
 
+// Transaksi pada admin dan kasir
+Route::resource('/transaksi', TransaksiController::class)->middleware(['level:admin,kasir']);
 
 // Login
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
@@ -31,3 +33,32 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('auth.logout');
 // Register
 Route::get('/register', [RegisterController::class, 'index'])->name('register')->middleware('guest');
 Route::post('/register', [RegisterController::class, 'regist'])->name('auth.register');
+
+
+
+
+
+
+
+
+// PAKAI MULTI ROLEEEEEEEEEEEEEEEEEEEEEEEE
+
+// // Middleware kasir
+// Route::group(['middleware' => ['kasir']], function () {
+//     Route::get('/home', [HomeController::class, 'kasirHome'])->name('kasir.home');
+//     Route::resource('/transaksi', TransaksiController::class)->midd;
+// });
+
+
+// // Middleware admin
+// Route::group(['middleware' => ['admin']], function () {
+//     Route::resource('/transaksi', TransaksiController::class);
+//     Route::resource('/paket', PaketController::class)->middleware('auth');
+//     Route::resource('/outlet', OutletController::class)->middleware('auth');
+//     // Route::get('/home', [HomeController::class, 'adminHome'])->name('admin.home');
+// });
+
+// // Middleware owner
+// Route::group(['middleware' => ['owner']], function () {
+//     // Route::get('/home', [HomeController::class, 'ownerHome'])->name('owner.home');
+// });

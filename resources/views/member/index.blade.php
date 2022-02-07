@@ -48,7 +48,7 @@
             <div class="card-header pb-0 p-3">
                 <div class="row">
                     <div class="col-md-6 d-flex align-items-center">
-                        <h6 class="mb-0">member Table CRUD</h6>
+                        <h6 class="mb-0">Member Table & Data</h6>
                     </div>
                 </div>
             </div>
@@ -58,7 +58,7 @@
                         <!-- Button trigger modal -->
                         <button type="button" class="btn bg-gradient-dark" data-bs-toggle="modal"
                             data-bs-target="#inputDataMember">
-                            <i class="material-icons">add</i>&nbsp;&nbsp; CRUD Data member
+                            <i class="material-icons">add</i>&nbsp;&nbsp; Input Data member
                         </button>
                     </div>
 
@@ -130,7 +130,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                    <button type="submit" class="btn btn-primary" id="btn-submit">Save changes</button>
 
                                     {{-- END FORM --}}
                                     </form>
