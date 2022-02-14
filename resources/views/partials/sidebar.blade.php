@@ -45,7 +45,7 @@
         </li>
         @endcan
 
-        @can('isAdmin, isKasir')
+        @can('isAdmin', 'isKasir')
         <li class="nav-item">
           <a class="{{ request()->routeIs('transaksi.index') ? 'active bg-gradient-primary' : '' }} nav-link text-white" href="{{ route('transaksi.index') }}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -55,6 +55,7 @@
           </a>
         </li>
         @endcan
+
         <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
         </li>

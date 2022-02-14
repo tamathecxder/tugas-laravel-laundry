@@ -105,7 +105,7 @@ table.dataTable td.dt-control:before {
 }
 table.dataTable tr.dt-hasChild td.dt-control:before {
   content: "-";
-  background-color: #d33333;
+  background-color: #8a3d3d;
 }
 
 /*! Bootstrap 5 integration for DataTables

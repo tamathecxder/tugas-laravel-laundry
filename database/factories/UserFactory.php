@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Outlet;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -15,13 +16,21 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'nama' => 'owner',
-            'email' => 'owner@example.com',
-            'username' => 'owner_utama',
-            'id_outlet' => 6,
-            'role' => 'owner',
+            // 'id_outlet' => Outlet::all()->random()->id,
+            // 'jenis' => $this->faker->randomElement(['kaos', 'selimut', 'kiloan', 'bed_cover', 'lain']),
+            // 'nama_paket' => $this->faker->sentence(1),
+            // 'harga' => round($this->faker->numberBetween($min = 5000, $max = 60000)),
+
+            // default password = password
+            // '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+
+            'nama' => $this->faker->name(),
+            'email' => $this->faker->email(),
+            'username' => $this->faker->userName(),
+            'id_outlet' => Outlet::all()->random()->id,
+            'role' => $this->faker->randomElement(['admin', 'kasir', 'owner']),
             'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password' => bcrypt('password'),
             'remember_token' => Str::random(10),
         ];
     }

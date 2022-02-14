@@ -19,7 +19,7 @@ class CreateMembersTable extends Migration
             $table->string('nama', 100);
             $table->text('alamat');
             $table->enum('jenis_kelamin', ['L', 'P']);
-            $table->string('tlp', 15);
+            $table->string('tlp', 20);
             $table->timestamps();
         });
     }

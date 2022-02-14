@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 
 
 // Home Route
-Route::get('/', [HomeController::class, 'default'])->middleware('level:kasir,admin,owner');
+Route::get('/', [HomeController::class, 'default'])->middleware('level:kasir,admin,owner', 'auth');
 
 // Member
 Route::resource('/member', MemberController::class)->middleware('level:admin');
@@ -21,7 +21,7 @@ Route::resource('/outlet', OutletController::class)->middleware('level:admin');
 Route::resource('/paket', PaketController::class)->middleware('level:admin');
 
 // Transaksi pada admin dan kasir
-Route::resource('/transaksi', TransaksiController::class)->middleware(['level:admin,kasir']);
+Route::resource('/transaksi', TransaksiController::class)->middleware('level:admin,kasir', 'auth');
 
 // Login
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
