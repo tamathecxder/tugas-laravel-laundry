@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\OutletController;
@@ -34,7 +35,8 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('auth.logout');
 Route::get('/register', [RegisterController::class, 'index'])->name('register')->middleware('guest');
 Route::post('/register', [RegisterController::class, 'regist'])->name('auth.register');
 
-
+// Laporan
+Route::get('/laporan', LaporanController::class)->name('laporan.index')->middleware('level:admin,kasir,owner', 'auth');
 
 
 

@@ -44,7 +44,7 @@
     </div>
     <div class="card-body">
         <div class="data-paket">
-            <table class="table table-bordered" id="tbl-paket">
+            <table class="table table-bordered" id="tbl-paket-utama">
                 <thead class="table-dark">
                     <tr>
                         <td>ID Outlet</td>

@@ -52,7 +52,8 @@
                         <div class="card-body">
                             <label class="form-label text-2xl">Total Harga</label>
                             <div class="input-group mb-3">
-                                <input type="text" name="total_harga" id="total_harga" class="form-control py-3 text-4xl border">
+                                <input type="text" name="total_harga" id="total_harga"
+                                    class="form-control py-3 text-4xl border">
                             </div>
                         </div>
                     </div>
@@ -89,7 +90,6 @@
             $('#tlp').text(tlp);
             $('#jenis_kelamin').text(jenis_kelamin);
             $('#pilihDataMember').modal('hide');
-
         });
 
 
@@ -107,10 +107,10 @@
                     <td>${harga}</td>
                     <td><input type="number" value="1" min="1" class="qty"></td>
                     <td><button type="button" class="btnRemovePaket">Remove</button></td>
-                </tr>
+                    </tr>
             `;
 
-            $('#tbl-paket tbody').append(insertToTable);
+            $('#tbl-paket-utama tbody').append(insertToTable);
             totalHarga += parseFloat(harga);
             $('#total-harga').val(totalHarga);
             $('#pilihDataPaket').modal('hide');

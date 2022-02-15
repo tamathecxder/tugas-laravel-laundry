@@ -56,6 +56,17 @@
         </li>
         @endcan
 
+        @can('isOwner', 'isAdmin', 'isKasir')
+        <li class="nav-item">
+          <a class="{{ request()->routeIs('laporan.index') ? 'active bg-gradient-primary' : '' }} nav-link text-white" href="{{ route('laporan.index') }}">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">receipt_long</i>
+            </div>
+            <span class="nav-link-text ms-1">Generate Laporan</span>
+          </a>
+        </li>
+        @endcan
+
         <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
         </li>
