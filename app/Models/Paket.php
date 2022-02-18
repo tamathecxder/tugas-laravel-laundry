@@ -14,13 +14,14 @@ class Paket extends Model
     public $incrementing = true;
     protected $table = 'tb_paket';
     protected $fillable = [
-        'id_outlet',
+        'outlet_id',
         'jenis',
         'nama_paket',
         'harga',
     ];
 
 }
+
 
 class PaketJenis {
     public static $jenis = [

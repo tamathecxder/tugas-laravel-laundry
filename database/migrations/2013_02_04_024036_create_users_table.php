@@ -21,14 +21,14 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('username', 30);
             $table->text('password');
-            $table->unsignedBigInteger('id_outlet');
+            $table->unsignedBigInteger('outlet_id');
             $table->enum('role', [
                 'admin', 'kasir', 'owner'
             ]);
             $table->rememberToken();
             $table->timestamps();
 
-            $table->foreign('id_outlet')->references('id')->on('tb_outlet')->onDelete('cascade');
+            $table->foreign('outlet_id')->references('id')->on('tb_outlet')->onDelete('cascade');
         });
     }
 

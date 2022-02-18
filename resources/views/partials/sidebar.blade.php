@@ -56,6 +56,17 @@
         </li>
         @endcan
 
+        @can('isAdmin', 'isKasir')
+        <li class="nav-item">
+          <a class="{{ request()->routeIs('main-transaksi.index') ? 'active bg-gradient-primary' : '' }} nav-link text-white" href="{{ route('main-transaksi.index') }}">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">receipt_long</i>
+            </div>
+            <span class="nav-link-text ms-1">Main Transaksi</span>
+          </a>
+        </li>
+        @endcan
+
         @can('isOwner', 'isAdmin', 'isKasir')
         <li class="nav-item">
           <a class="{{ request()->routeIs('laporan.index') ? 'active bg-gradient-primary' : '' }} nav-link text-white" href="{{ route('laporan.index') }}">

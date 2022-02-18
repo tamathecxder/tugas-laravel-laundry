@@ -3,6 +3,7 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MainTransaksiController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\OutletController;
 use App\Http\Controllers\PaketController;
@@ -22,6 +23,11 @@ Route::resource('/outlet', OutletController::class)->middleware('level:admin');
 Route::resource('/paket', PaketController::class)->middleware('level:admin');
 
 // Transaksi pada admin dan kasir
+/**
+ * Route::resource('/transaksi', TransaksiController::class)->middleware('level:admin,kasir', 'auth');
+ *
+ */
+
 Route::resource('/transaksi', TransaksiController::class)->middleware('level:admin,kasir', 'auth');
 
 // Login
@@ -39,7 +45,8 @@ Route::post('/register', [RegisterController::class, 'regist'])->name('auth.regi
 Route::get('/laporan', LaporanController::class)->name('laporan.index')->middleware('level:admin,kasir,owner', 'auth');
 
 
-
+// Main Transaksi
+Route::resource('/main-transaksi', MainTransaksiController::class)->middleware('level:admin,kasir,owner');
 
 
 

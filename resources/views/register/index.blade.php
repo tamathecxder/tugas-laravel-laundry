@@ -19,6 +19,25 @@
                         <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-5">
                             <div class="card">
                                 <div class="card-header">
+                                    @if ($errors->any())
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="alert alert-danger alert-dismissible text-white" role="alert"
+                                                    id="error-alert">
+                                                    @foreach ($errors->all() as $error)
+                                                        <ul>
+                                                            <li>{{ $error }}</li>
+                                                        </ul>
+                                                    @endforeach
+                                                    <button type="button" class="btn-close text-lg py-3 opacity-10"
+                                                        data-bs-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+
                                     <h4 class="font-weight-bolder">Register</h4>
                                     <p class="mb-0">Masukkan data untuk register dengan baik dan teratur.</p>
                                 </div>
@@ -27,7 +46,9 @@
                                         @csrf
                                         <div class="input-group input-group-outline mb-3">
                                             <label class="form-label">Nama lengkap</label>
-                                            <input type="text" name="nama" id="nama" class="form-control @error('nama') is-invalid @enderror" value="{{ old('nama') }}">
+                                            <input type="text" name="nama" id="nama"
+                                                class="form-control @error('nama') is-invalid @enderror"
+                                                value="{{ old('nama') }}">
 
                                             @error('nama')
                                                 <div class="invalid-feedback">
@@ -37,7 +58,9 @@
                                         </div>
                                         <div class="input-group input-group-outline mb-3">
                                             <label class="form-label">Username</label>
-                                            <input type="text" name="username" id="username" class="form-control @error('username') is-invalid @enderror" value="{{ old('username') }}">
+                                            <input type="text" name="username" id="username"
+                                                class="form-control @error('username') is-invalid @enderror"
+                                                value="{{ old('username') }}">
 
                                             @error('username')
                                                 <div class="invalid-feedback">
@@ -47,7 +70,9 @@
                                         </div>
                                         <div class="input-group input-group-outline mb-3">
                                             <label class="form-label">Email</label>
-                                            <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}">
+                                            <input type="email" name="email" id="email"
+                                                class="form-control @error('email') is-invalid @enderror"
+                                                value="{{ old('email') }}">
 
                                             @error('email')
                                                 <div class="invalid-feedback">
@@ -56,7 +81,7 @@
                                             @enderror
                                         </div>
                                         <div class="form-floating mb-3 border-rounded">
-                                            <select class="form-select" name="id_outlet" id="id_outlet"
+                                            <select class="form-select" name="outlet_id" id="outlet_id"
                                                 aria-label="Floating label select example">
                                                 <option selected>Open this select menu...</option>
                                                 @foreach ($id_outlet as $ot)
@@ -79,7 +104,8 @@
                                         </div>
                                         <div class="input-group input-group-outline mb-3">
                                             <label class="form-label">Password</label>
-                                            <input type="password" name="password" id="password" class="form-control @error('cpassword') is-invalid @enderror">
+                                            <input type="password" name="password" id="password"
+                                                class="form-control @error('cpassword') is-invalid @enderror">
 
                                             @error('password')
                                                 <div class="invalid-feedback">
@@ -89,7 +115,8 @@
                                         </div>
                                         <div class="input-group input-group-outline mb-3">
                                             <label class="form-label">Confirm Password</label>
-                                            <input type="password" name="cpassword" id="cpassword" class="form-control @error('cpassword') is-invalid @enderror">
+                                            <input type="password" name="cpassword" id="cpassword"
+                                                class="form-control @error('cpassword') is-invalid @enderror">
 
                                             @error('cpassword')
                                                 <div class="invalid-feedback">

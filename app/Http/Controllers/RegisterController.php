@@ -21,7 +21,7 @@ class RegisterController extends Controller
             'nama' => 'required',
             'email' => 'required|email|email',
             'username' => 'required',
-            'id_outlet' => 'required',
+            'outlet_id' => 'required',
             'password' => 'required|min:5|max:30',
             'cpassword' => 'required|min:5|max:30|same:password',
             'role' => 'required',

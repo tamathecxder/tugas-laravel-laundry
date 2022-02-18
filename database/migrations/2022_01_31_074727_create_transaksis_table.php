@@ -16,7 +16,7 @@ class CreateTransaksisTable extends Migration
         Schema::create('tb_transaksi', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->id();
-            $table->unsignedBigInteger('id_outlet')->index();
+            $table->unsignedBigInteger('outlet_id')->index();
             $table->string('kode_invoice');
             $table->unsignedBigInteger('id_member');
             $table->date('tgl');
@@ -33,7 +33,7 @@ class CreateTransaksisTable extends Migration
             $table->unsignedBigInteger('id_user');
             $table->timestamps();
 
-            $table->foreign('id_outlet')->references('id')->on('tb_outlet')->onDelete('cascade');
+            $table->foreign('outlet_id')->references('id')->on('tb_outlet')->onDelete('cascade');
             $table->foreign('id_member')->references('id')->on('tb_member')->onDelete('cascade');
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
         });

@@ -18,4 +18,14 @@ class Outlet extends Model
         'alamat',
         'tlp',
     ];
+
+    public function paket() {
+        return $this->hasMany(Paket::class);
+    }
+
+    public function user() {
+        return $this->hasMany(User::class);
+    }
+
+
 }

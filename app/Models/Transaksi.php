@@ -13,17 +13,22 @@ class Transaksi extends Model
     protected $primaryKey = 'id';
     public $incrementing = true;
     protected $table = 'tb_transaksi';
-    protected $fillable = [
-        'id_outlet',
-        'kode_invoice',
-        'id_member',
-        'tgl',
-        'biaya_tambahan',
-        'batas_waktu',
-        'diskon',
-        'pajak',
-        'status',
-        'pembayaran',
-        'id_user',
-    ];
+    protected $guarded = ['id', 'created_at', 'updated_at'];
+    // protected $fillable = [
+    //     'id_outlet',
+    //     'kode_invoice',
+    //     'id_member',
+    //     'tgl',
+    //     'biaya_tambahan',
+    //     'batas_waktu',
+    //     'diskon',
+    //     'pajak',
+    //     'status',
+    //     'pembayaran',
+    //     'id_user',
+    // ];
+
+    public function outlet() {
+        return $this->belongsTo(Outlet::class);
+    }
 }

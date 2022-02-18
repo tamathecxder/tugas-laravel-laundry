@@ -16,7 +16,7 @@ class CreatePaketsTable extends Migration
         Schema::create('tb_paket', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->id();
-            $table->unsignedBigInteger('id_outlet');
+            $table->unsignedBigInteger('outlet_id');
             $table->enum('jenis', [
                 'kiloan', 'selimut', 'bed_cover', 'kaos', 'lain'
             ]);
@@ -24,7 +24,7 @@ class CreatePaketsTable extends Migration
             $table->integer('harga');
             $table->timestamps();
 
-            $table->foreign('id_outlet')->references('id')->on('tb_outlet')->onDelete('cascade');
+            $table->foreign('outlet_id')->references('id')->on('tb_outlet')->onDelete('cascade');
         });
     }
 
