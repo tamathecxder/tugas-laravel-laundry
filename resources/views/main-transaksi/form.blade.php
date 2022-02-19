@@ -197,8 +197,6 @@
 {{-- End Modal Member --}}
 
 
-
-
 <!-- Modal Paket -->
 <div class="modal fade" id="modalPaket" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">

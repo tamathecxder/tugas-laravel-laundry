@@ -35,7 +35,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <p class="text-xs font-weight-bold mb-0">{{ $data_paket->id_outlet }}</p>
+                                    <p class="text-xs font-weight-bold mb-0">{{ $data_paket->outlet_id }}</p>
                                 </td>
                                 <td class="text-sm">
                                     <p class="text-xs font-weight-bold mb-0">{{ $data_paket->jenis }}</p>
@@ -51,7 +51,7 @@
                                         data-toggle="tooltip" data-original-title="Edit user" data-bs-toggle="modal" data-bs-target="#inputDataPaket"
                                         data-mode="edit"
                                         data-id="{{ $data_paket->id }}"
-                                        data-id_outlet="{{ $data_paket->id_outlet }}"
+                                        data-id_outlet="{{ $data_paket->outlet_id }}"
                                         data-jenis="{{ $data_paket->jenis }}"
                                         data-nama_paket="{{ $data_paket->nama_paket }}"
                                         data-harga="{{ $data_paket->harga }}"

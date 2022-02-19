@@ -17,11 +17,11 @@ class PaketController extends Controller
      */
     public function index()
     {
+        $data['paket'] = Paket::where('outlet_id', auth()->user()->outlet_id)->get();
+        $data['outlet'] = Outlet::where('id', auth()->user()->outlet_id)->get();
         return view('paket.index', [
-            'paket' => Paket::all(),
             'jenis' => PaketJenis::$jenis,
-            'outletId' => Outlet::all(),
-        ]);
+        ])->with($data);
     }
 
     /**
@@ -43,7 +43,7 @@ class PaketController extends Controller
     public function store(StorePaketRequest $request)
     {
         $validationData = $request->validate([
-            'id_outlet' => 'required',
+            'outlet_id' => 'required',
             'jenis' => 'required',
             'nama_paket' => 'required',
             'harga' => 'required|numeric',
@@ -92,7 +92,7 @@ class PaketController extends Controller
         $paket = Paket::findOrFail($id);
 
         $rules = $request->validate([
-            'id_outlet' => 'required',
+            'outlet_id' => 'required',
             'jenis' => 'required',
             'nama_paket' => 'required',
             'harga' => 'required|numeric',

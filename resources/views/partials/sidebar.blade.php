@@ -18,6 +18,7 @@
             <span class="nav-link-text ms-1">Dashboard</span>
           </a>
         </li>
+
         @can('isAdmin')
         <li class="nav-item">
           <a class="{{ (request()->routeIs('outlet.index')) ? 'active bg-gradient-primary' : '' }} nav-link text-white" href="{{ route('outlet.index') }}">
@@ -45,18 +46,16 @@
         </li>
         @endcan
 
-        @can('isAdmin', 'isKasir')
-        <li class="nav-item">
+        @can('isKasir')
+        {{-- <li class="nav-item">
           <a class="{{ request()->routeIs('transaksi.index') ? 'active bg-gradient-primary' : '' }} nav-link text-white" href="{{ route('transaksi.index') }}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">receipt_long</i>
             </div>
             <span class="nav-link-text ms-1">Transaksi</span>
           </a>
-        </li>
-        @endcan
+        </li> --}}
 
-        @can('isAdmin', 'isKasir')
         <li class="nav-item">
           <a class="{{ request()->routeIs('main-transaksi.index') ? 'active bg-gradient-primary' : '' }} nav-link text-white" href="{{ route('main-transaksi.index') }}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -67,7 +66,26 @@
         </li>
         @endcan
 
-        @can('isOwner', 'isAdmin', 'isKasir')
+        @can('isAdmin')
+        <li class="nav-item">
+          <a class="{{ request()->routeIs('transaksi.index') ? 'active bg-gradient-primary' : '' }} nav-link text-white" href="{{ route('transaksi.index') }}">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">receipt_long</i>
+            </div>
+            <span class="nav-link-text ms-1">Transaksi</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="{{ request()->routeIs('main-transaksi.index') ? 'active bg-gradient-primary' : '' }} nav-link text-white" href="{{ route('main-transaksi.index') }}">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">receipt_long</i>
+            </div>
+            <span class="nav-link-text ms-1">Main Transaksi</span>
+          </a>
+        </li>
+        @endcan
+
         <li class="nav-item">
           <a class="{{ request()->routeIs('laporan.index') ? 'active bg-gradient-primary' : '' }} nav-link text-white" href="{{ route('laporan.index') }}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -76,7 +94,6 @@
             <span class="nav-link-text ms-1">Generate Laporan</span>
           </a>
         </li>
-        @endcan
 
         <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>

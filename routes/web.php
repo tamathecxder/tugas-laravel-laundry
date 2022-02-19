@@ -28,7 +28,7 @@ Route::resource('/paket', PaketController::class)->middleware('level:admin');
  *
  */
 
-Route::resource('/transaksi', TransaksiController::class)->middleware('level:admin,kasir', 'auth');
+// Route::resource('/transaksi', TransaksiController::class)->middleware('level:admin,kasir', 'auth');
 
 // Login
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
@@ -42,11 +42,11 @@ Route::get('/register', [RegisterController::class, 'index'])->name('register')-
 Route::post('/register', [RegisterController::class, 'regist'])->name('auth.register');
 
 // Laporan
-Route::get('/laporan', LaporanController::class)->name('laporan.index')->middleware('level:admin,kasir,owner', 'auth');
+Route::get('/laporan', LaporanController::class)->name('laporan.index')->middleware('level:admin,kasir,owner');
 
 
 // Main Transaksi
-Route::resource('/main-transaksi', MainTransaksiController::class)->middleware('level:admin,kasir,owner');
+Route::resource('/main-transaksi', MainTransaksiController::class)->middleware('level:admin,kasir');
 
 
 

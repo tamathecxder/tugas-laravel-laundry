@@ -94,15 +94,15 @@
                                         </div>
                                         <div class="mb-3">
                                             <select
-                                                class="form-select border form-select-sm @error('id_outlet') is-invalid @enderror"
-                                                name="id_outlet" id="id_outlet">
-                                                <option selected>OUTLET ID</option>
-                                                @foreach ($outletId as $otId)
-                                                    <option value="{{ $otId->id }}">{{ $otId->id }}</option>
+                                                class="form-select border form-select-sm @error('outlet_id') is-invalid @enderror"
+                                                name="outlet_id" id="outlet_id">
+                                                <option selected disabled>OUTLET ID</option>
+                                                @foreach ($outlet as $otId)
+                                                    <option value="{{ $otId->id }}" @if( old('outlet_id') === $otId->id ) selected @endif>{{ $otId->id }} | {{ $otId->nama }}</option>
                                                 @endforeach
                                             </select>
 
-                                            @error('id_outlet')
+                                            @error('outlet_id')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
                                                 </div>
@@ -190,7 +190,7 @@
             let button = $(e.relatedTarget);
             // console.log(button);
             let id = button.data('id');
-            let id_outlet = button.data('id_outlet');
+            let outlet_id = button.data('outlet_id');
             let jenis = button.data('jenis');
             let nama_paket = button.data('nama_paket');
             let harga = button.data('harga');
@@ -199,7 +199,7 @@
 
             if (mode == 'edit') {
                 modal.find('.modal-title').text('Edit data Member');
-                modal.find('.modal-body #id_outlet').val(id_outlet).change();
+                modal.find('.modal-body #outlet_id').val({outlet_id}).change();
                 modal.find('.modal-body #jenis').val(jenis).change();
                 modal.find('.modal-body #nama_paket').val(nama_paket).change();
                 modal.find('.modal-body #harga').val(harga).change();
@@ -208,7 +208,7 @@
                 modal.find('.modal-body form').attr('action', 'paket/' + id);
             } else {
                 modal.find('.modal-title').text('Input data Paket');
-                modal.find('.modal-body #id_outlet').change();
+                modal.find('.modal-body #outlet_id').change();
                 modal.find('.modal-body #jenis').change();
                 modal.find('.modal-body #nama_paket').val('').change();
                 modal.find('.modal-body #harga').val('').change();
