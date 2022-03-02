@@ -20,6 +20,14 @@ class Paket extends Model
         'harga',
     ];
 
+    public function detail() {
+        return $this->hasMany(DetailTransaksi::class);
+    }
+
+    public function outlet() {
+        return $this->belongsTo(Outlet::class, 'outlet_id');
+    }
+
 }
 
 

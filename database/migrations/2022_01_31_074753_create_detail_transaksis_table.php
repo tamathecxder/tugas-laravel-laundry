@@ -17,13 +17,13 @@ class CreateDetailTransaksisTable extends Migration
             $table->engine = 'InnoDB';
             $table->id();
             $table->unsignedBigInteger('id_transaksi');
-            $table->unsignedBigInteger('id_paket');
+            $table->unsignedBigInteger('paket_id');
             $table->double('qty');
             $table->text('keterangan');
             $table->timestamps();
 
             $table->foreign('id_transaksi')->references('id')->on('tb_transaksi')->onDelete('cascade');
-            $table->foreign('id_paket')->references('id')->on('tb_paket')->onDelete('cascade');
+            $table->foreign('paket_id')->references('id')->on('tb_paket')->onDelete('cascade');
         });
     }
 

@@ -50,4 +50,7 @@ class User extends Authenticatable
         return $this->belongsTo(Outlet::class);
     }
 
+    public function Member() {
+        return $this->belongsTo(Member::class);
+    }
 }

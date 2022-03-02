@@ -1,29 +1,37 @@
 <div class="collapse" id="formLaundry">
     <div class="card card-body">
-        @if ($errors->any())
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li class="text-white">{{ $error }}</li>
-                    @endforeach
-                </ul>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
-            </div>
-        @endif
-
-        <div class="row">
-            <div class="col-md-6">
-                @if (session('success'))
-                    <div class="alert alert-success" role="alert" id="success-alert">
-                        {{ session('success') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+        @if (session('success'))
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-success alert-dismissible text-white" role="alert" id="success-alert">
+                        <span class="text-sm">{{ session('success') }}</span>
+                        <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert"
+                            aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                @endif
+                </div>
             </div>
-        </div>
+        @endif
+
+        @if ($errors->any())
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-danger alert-dismissible text-white" role="alert" id="error-alert">
+                        @foreach ($errors->all() as $error)
+                            <ul>
+                                <li>{{ $error }}</li>
+                            </ul>
+                        @endforeach
+                        <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert"
+                            aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        @endif
+
         <div class="row justify-content-end">
             <div class="col-md-4 col-sm-12">
                 <div class="text-center col-sm-12 col-md-12">
@@ -107,8 +115,8 @@
                                     <td><span id="subtotal">0</span></td>
                                     <td rowspan="4">
                                         <label for="">Pembayaran</label>
-                                        <input type="text" class="form-control" name="pembayaran" style="width: 180px;"
-                                            value="0">
+                                        <input type="text" class="form-control" name="pembayaran"
+                                            style="width: 180px;" value="0">
                                         <div>
                                             <button class="btn btn-primary" type="submit"
                                                 style="margin-top: 10px; width: 180px">Bayar</button>
@@ -175,8 +183,7 @@
                             <tr>
                                 <td>
                                     {{ $x = isset($x) ? ++$x : ($x = 1) }}
-                                    <input type="hidden" name="id_member"
-                                        value="{{ $mb->id }}" />
+                                    <input type="hidden" class="idMember" value="{{ $mb->id }}" />
                                 </td>
                                 <td>{{ $mb->nama }}</td>
                                 <td>{{ Str::limit($mb->alamat, 40, '...') }}</td>
@@ -220,7 +227,8 @@
                             <tr>
                                 <td>
                                     {{ $x = isset($x) ? ++$x : ($x = 1) }}
-                                    <input type="hidden" class="idPaket" id="idPaket" value="{{ $pkt->id }}">
+                                    <input type="hidden" class="idPaket" id="idPaket"
+                                        value="{{ $pkt->id }}">
                                 </td>
                                 <td>{{ $pkt->nama_paket }}</td>
                                 <td>{{ $pkt->harga }}</td>

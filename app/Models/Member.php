@@ -19,4 +19,8 @@ class Member extends Model
         'jenis_kelamin',
         'tlp',
     ];
+
+    public function transaki() {
+        return $this->hasMany(Member::class);
+    }
 }

@@ -27,7 +27,7 @@ class StoreMainTransaksiRequest extends FormRequest
             'tgl' => 'required|date',
             'id_member' => 'required',
             'batas_waktu' => 'required',
-            'id_paket' => 'required',
+            'paket_id' => 'required',
             'qty' => 'required',
             'pembayaran' => 'required',
         ];
@@ -35,7 +35,7 @@ class StoreMainTransaksiRequest extends FormRequest
 
     public function messages() {
         return [
-            'id_paket.required' => 'Belum ada data paket yang dipilih',
+            'paket_id.required' => 'Belum ada data paket yang dipilih',
             'id_member.required' => 'Belum ada data member/pelanggan yang dipilih',
         ];
     }

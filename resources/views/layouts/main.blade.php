@@ -82,7 +82,7 @@
   <script src="{{ asset('assets') }}/js/core/bootstrap.min.js"></script>
   <script src="{{ asset('assets') }}/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="{{ asset('assets') }}/js/plugins/smooth-scrollbar.min.js"></script>
-  <script src="{{ asset('assets') }}/js/plugins/chartjs.min.js"></script>
+  {{-- <script src="{{ asset('assets') }}/js/plugins/chartjs.min.js"></script> --}}
 
   {{-- Data Tables --}}
   <script src="{{ asset('assets') }}/js/DataTables/jquery.datatables.min.js"></script>

@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PaketExport;
 use App\Models\Paket;
 use App\Http\Requests\StorePaketRequest;
 use App\Http\Requests\UpdatePaketRequest;
+use App\Imports\PaketImport;
 use App\Models\Outlet;
 use App\Models\PaketJenis;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Date;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PaketController extends Controller
 {
@@ -125,5 +130,27 @@ class PaketController extends Controller
         } else {
             return redirect()->route('paket.index')->with('error', 'Data paket gagal dihapus!');
         }
+    }
+
+    public function export() {
+        $tanggal = new Date('Y-m-d');
+        return Excel::download(new PaketExport, "paket-$tanggal.xlsx");
+    }
+
+    public function import(Request $request) {
+
+        $request->validate([
+            'file2' => 'file|required|mimes:xlsx',
+        ]);
+
+        if ( $request ) {
+            Excel::import(new PaketImport, $request->file('file2'));
+        } else {
+            return back()->withErrors([
+                'file2' => 'file belum terisi',
+            ]);
+        }
+
+        return redirect()->route('paket.index')->with('success', 'All good!');
     }
 }

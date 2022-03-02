@@ -17,7 +17,6 @@
                 </div>
             </div>
             <ul class="navbar-nav  justify-content-end">
-
                 <li class="nav-item dropdown pe-2 d-flex align-items-center">
                     <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton"
                         data-bs-toggle="dropdown" aria-expanded="false">

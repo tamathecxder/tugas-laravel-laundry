@@ -26,7 +26,7 @@
     @endif
 
     @if ($errors->any())
-        <div class="row">
+        <div class="row justify-content-between">
             <div class="col-md-12">
                 <div class="alert alert-danger alert-dismissible text-white" role="alert" id="error-alert">
                     @foreach ($errors->all() as $error)
@@ -43,102 +43,107 @@
         </div>
     @endif
 
-    <div class="col-md-4 mb-lg-0 mb-4">
-        <div class="card my-3">
-            <div class="card-header pb-0 p-3">
-                <div class="row">
-                    <div class="col-md-6 d-flex align-items-center">
-                        <h6 class="mb-0">Paket Table & Data</h6>
+    <div class="row">
+        <div class="col-md-4 mb-lg-0 mb-4">
+            <div class="card my-3">
+                <div class="card-header pb-0 p-3">
+                    <div class="row">
+                        <div class="col-md-6 d-flex align-items-center">
+                            <h6 class="mb-0">Paket Table & Data</h6>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-12 mb-md-0 mb-4">
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn bg-gradient-dark" data-bs-toggle="modal"
-                            data-bs-target="#inputDataPaket">
-                            <i class="material-icons">add</i>&nbsp;&nbsp; Input Data paket
-                        </button>
-                    </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12 mb-md-0 mb-4">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn bg-gradient-dark" data-bs-toggle="modal"
+                                data-bs-target="#inputDataPaket">
+                                <i class="material-icons">add</i>&nbsp;&nbsp; Input Data paket
+                            </button>
+                        </div>
 
-                    <!-- Modal -->
-                    <div class="modal fade" id="inputDataPaket" tabindex="-1" aria-labelledby="inputDataPaketLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="inputDataPaketLabel">Create Data</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    {{-- START FORM --}}
-                                    <form role="form" method="post" action="{{ route('paket.store') }}">
-                                        @csrf
-                                        <div id="method"></div>
-                                        <div class="mb-3">
-                                            <select id="jenis" name="jenis" class="form-select border form-select-sm"
-                                                aria-label="Default select example" required>
-                                                <option selected>Jenis-jenis paket...</option>
-                                                @foreach ($jenis as $jns)
-                                                    <option value="{{ $jns }}">{{ $jns }}</option>
-                                                @endforeach
-                                            </select>
+                        <!-- Modal -->
+                        <div class="modal fade" id="inputDataPaket" tabindex="-1" aria-labelledby="inputDataPaketLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="inputDataPaketLabel">Create Data</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        {{-- START FORM --}}
+                                        <form role="form" method="post" action="{{ route('paket.store') }}">
+                                            @csrf
+                                            <div id="method"></div>
+                                            <div class="mb-3">
+                                                <select id="jenis" name="jenis" class="form-select border form-select-sm"
+                                                    aria-label="Default select example" required>
+                                                    <option selected>Jenis-jenis paket...</option>
+                                                    @foreach ($jenis as $jns)
+                                                        <option value="{{ $jns }}">{{ $jns }}</option>
+                                                    @endforeach
+                                                </select>
 
-                                            @error('nama')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                        </div>
-                                        <div class="mb-3">
-                                            <select
-                                                class="form-select border form-select-sm @error('outlet_id') is-invalid @enderror"
-                                                name="outlet_id" id="outlet_id">
-                                                <option selected disabled>OUTLET ID</option>
-                                                @foreach ($outlet as $otId)
-                                                    <option value="{{ $otId->id }}" @if( old('outlet_id') === $otId->id ) selected @endif>{{ $otId->id }} | {{ $otId->nama }}</option>
-                                                @endforeach
-                                            </select>
+                                                @error('nama')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-3">
+                                                <select
+                                                    class="form-select border form-select-sm @error('outlet_id') is-invalid @enderror"
+                                                    name="outlet_id" id="outlet_id">
+                                                    <option selected disabled>OUTLET ID</option>
+                                                    @foreach ($outlet as $otId)
+                                                        <option value="{{ $otId->id }}"
+                                                            @if (old('outlet_id') === $otId->id) selected @endif>
+                                                            {{ $otId->id }} | {{ $otId->nama }}</option>
+                                                    @endforeach
+                                                </select>
 
-                                            @error('outlet_id')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                        </div>
-                                        <div class="input-group input-group-outline mb-3">
-                                            <label for="nama_paket" class="form-label">Nama Paket</label>
-                                            <input type="text" name="nama_paket" id="nama_paket"
-                                                class="form-control @error('nama_paket') is-invalid @enderror"
-                                                value="{{ old('nama_paket') }}">
+                                                @error('outlet_id')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                            <div class="input-group input-group-outline mb-3">
+                                                <label for="nama_paket" class="form-label">Nama Paket</label>
+                                                <input type="text" name="nama_paket" id="nama_paket"
+                                                    class="form-control @error('nama_paket') is-invalid @enderror"
+                                                    value="{{ old('nama_paket') }}">
 
-                                            @error('nama_paket')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                        </div>
-                                        <div class="input-group input-group-outline mb-3">
-                                            <label for="harga" class="form-label">Harga Paket</label>
-                                            <input type="text" name="harga" id="harga"
-                                                class="form-control @error('harga') is-invalid @enderror"
-                                                value="{{ old('harga') }}">
+                                                @error('nama_paket')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                            <div class="input-group input-group-outline mb-3">
+                                                <label for="harga" class="form-label">Harga Paket</label>
+                                                <input type="text" name="harga" id="harga"
+                                                    class="form-control @error('harga') is-invalid @enderror"
+                                                    value="{{ old('harga') }}">
 
-                                            @error('harga')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                        </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary" id="btn-submit">Save changes</button>
+                                                @error('harga')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary" id="btn-submit">Save changes</button>
 
-                                    {{-- END FORM --}}
-                                    </form>
+                                        {{-- END FORM --}}
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -146,6 +151,58 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-4 mb-lg-0 mb-4">
+            <div class="card my-3">
+                <div class="card-header pb-0 p-3">
+                    <div class="row">
+                        <div class="col-md-8 d-flex align-items-center">
+                            <h6 class="mb-0">Export Data Ke Excel</h6>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-8 mb-md-0 mb-4">
+                                <a href="{{  route('paket.export')  }}" class="btn btn-success text-decoration-none">Export</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-lg-0 mb-4">
+            <div class="card my-3">
+                <div class="card-header pb-0 p-3">
+                    <div class="row">
+                        <div class="col-md-12 d-flex align-items-center">
+                            <h6 class="mb-0">Import Excel Ke Database</h6>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12 mb-md-0-mb-4">
+                                <form method="post" action="{{ route('paket.import') }}" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <input type="file" name="file2" class="form-control  border" placeholder="Pilih file excel(.xlsx)">
+                                            </div>
+                                            @error('file2')
+                                                <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-6">
+                                            <button type="submit" class="btn btn-info" id="submit">Import</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
     @include('paket.table')
 
@@ -199,7 +256,9 @@
 
             if (mode == 'edit') {
                 modal.find('.modal-title').text('Edit data Member');
-                modal.find('.modal-body #outlet_id').val({outlet_id}).change();
+                modal.find('.modal-body #outlet_id').val({
+                    outlet_id
+                }).change();
                 modal.find('.modal-body #jenis').val(jenis).change();
                 modal.find('.modal-body #nama_paket').val(nama_paket).change();
                 modal.find('.modal-body #harga').val(harga).change();

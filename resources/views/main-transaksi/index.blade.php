@@ -27,7 +27,7 @@
             @csrf
             @include('main-transaksi.form')
             @include('main-transaksi.data')
-            {{-- <input type="hidden" name="id_member" id="id_member"> --}}
+            <input type="hidden" name="id_member" id="idMember">
         </form>
     </div>
 
@@ -81,10 +81,10 @@
                 <tr>
                     <td>${namaPaket}</td>
                     <td>${hargaPaket}</td>
-                    <td><input type="hidden" name="id_paket[]" value="${idPaket}"></td>
                     <td><input type="number" value="1" min="1" class="qty" name="qty[]" size="2" style="width: 50px" /></td>
                     <td><label name="sub_total[]" class="subTotal">${hargaPaket}</label></td>
                     <td><button type="button" class="btnRemovePaket"><span class="fas fa-times-circle"></span></button></td>
+                    <td><input type="hidden" name="paket_id[]" value="${idPaket}"></td>
                 </tr>
             `;
 
