@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\MemberExport;
 use App\Models\Member;
 use App\Http\Requests\StoreMemberRequest;
 use App\Http\Requests\UpdateMemberRequest;
+use App\Imports\MemberImport;
+use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MemberController extends Controller
 {
@@ -120,5 +124,26 @@ class MemberController extends Controller
         } else {
             return redirect()->route('member.index')->with('success', 'Data member tersebut gagal dihapus');
         }
+    }
+
+    public function export() {
+        $date = date('Y-m-d');
+        return Excel::download(new MemberExport, $date . '_member.xlsx');
+    }
+
+    public function import(Request $request) {
+        $validatedData = $request->validate([
+            'excel' => 'required|mimes:xlsx,csv,xls|file',
+        ]);
+
+        if ( $validatedData ) {
+            Excel::import(new MemberImport, $request->file('excel'));
+        } else {
+            return back()->withErrors([
+                'excel' => 'File belum diisi atau ada kesalahan, harap coba lagi!',
+            ]);
+        }
+
+        return redirect()->route('member.index')->with('success', 'File excel berhasil diimport!');
     }
 }

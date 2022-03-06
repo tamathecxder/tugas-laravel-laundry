@@ -43,88 +43,145 @@
         </div>
     @endif
 
-    <div class="col-md-4 mb-lg-0 mb-4">
-        <div class="card my-3">
-            <div class="card-header pb-0 p-3">
-                <div class="row">
-                    <div class="col-md-6 d-flex align-items-center">
-                        <h6 class="mb-0">Outlet Table & Data</h6>
+    <div class="row">
+        <div class="col-md-4 mb-lg-0 mb-4">
+            <div class="card my-3">
+                <div class="card-header pb-0 p-3">
+                    <div class="row">
+                        <div class="col-md-6 d-flex align-items-center">
+                            <h6 class="mb-0">Outlet Table & Data</h6>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-12 mb-md-0 mb-4">
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn bg-gradient-dark" data-bs-toggle="modal"
-                            data-bs-target="#inputDataOutlet">
-                            <i class="material-icons">add</i>&nbsp;&nbsp; Input Data Outlet
-                        </button>
-                    </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 mb-md-0 mb-4">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn bg-gradient-dark" data-bs-toggle="modal"
+                                data-bs-target="#inputDataOutlet">
+                                <i class="material-icons">add</i>&nbsp;&nbsp; Input Data Outlet
+                            </button>
+                        </div>
 
-                    <!-- Modal -->
-                    <div class="modal fade" id="inputDataOutlet" tabindex="-1" aria-labelledby="inputDataOutletLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="inputDataOutletLabel">Create Data</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    {{-- START FORM --}}
-                                    <form role="form" method="post" action="{{ route('outlet.store') }}">
-                                        @csrf
-                                        <div id="method"></div>
-                                        <div class="input-group input-group-outline mb-3">
-                                            <label for="nama" class="form-label">Nama Outlet</label>
-                                            <input type="text" name="nama" id="nama"
-                                                class="form-control @error('nama') is-invalid @enderror"
-                                                value="{{ old('nama') }}">
+                        <!-- Modal -->
+                        <div class="modal fade" id="inputDataOutlet" tabindex="-1"
+                            aria-labelledby="inputDataOutletLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="inputDataOutletLabel">Create Data</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        {{-- START FORM --}}
+                                        <form role="form" method="post" action="{{ route('outlet.store') }}">
+                                            @csrf
+                                            <div id="method"></div>
+                                            <div class="input-group input-group-outline mb-3">
+                                                <label for="nama" class="form-label">Nama Outlet</label>
+                                                <input type="text" name="nama" id="nama"
+                                                    class="form-control @error('nama') is-invalid @enderror"
+                                                    value="{{ old('nama') }}">
 
-                                            @error('nama')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                        </div>
-                                        <div class="input-group input-group-outline mb-3">
-                                            <label for="alamat" class="form-label">Alamat</label>
-                                            <input type="text" name="alamat" id="alamat"
-                                                class="form-control @error('alamat') is-invalid @enderror"
-                                                value={{ old('alamat') }}>
+                                                @error('nama')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                            <div class="input-group input-group-outline mb-3">
+                                                <label for="alamat" class="form-label">Alamat</label>
+                                                <input type="text" name="alamat" id="alamat"
+                                                    class="form-control @error('alamat') is-invalid @enderror"
+                                                    value={{ old('alamat') }}>
 
-                                            @error('alamat')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                        </div>
-                                        <div class="input-group input-group-outline mb-3">
-                                            <label for="tlp" class="form-label">Nomor Telepon</label>
-                                            <input type="text" name="tlp" id="tlp"
-                                                class="form-control @error('tlp') is-invalid @enderror"
-                                                value={{ old('tlp') }}>
+                                                @error('alamat')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                            <div class="input-group input-group-outline mb-3">
+                                                <label for="tlp" class="form-label">Nomor Telepon</label>
+                                                <input type="text" name="tlp" id="tlp"
+                                                    class="form-control @error('tlp') is-invalid @enderror"
+                                                    value={{ old('tlp') }}>
 
-                                            @error('tlp')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                        </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary" id="btn-submit">Save changes</button>
+                                                @error('tlp')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary" id="btn-submit">Save changes</button>
 
-                                    {{-- END FORM --}}
-                                    </form>
+                                        {{-- END FORM --}}
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-lg-0 mb-4">
+            <div class="card my-3">
+                <div class="card-header pb-0 p-3">
+                    <div class="row">
+                        <div class="col-md-8 d-flex align-items-center">
+                            <h6 class="mb-0"> Export Data Ke Excel</h6>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12 mb-md-0 mb-4">
+                                <a href="{{ route('outlet.export') }}" class="btn btn-success text-decoration-none"><i
+                                        data-feather="file-text" class="align-items-center"></i> Export</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-lg-0 mb-4">
+            <div class="card my-3">
+                <div class="card-header pb-0 p-3">
+                    <div class="row">
+                        <div class="col-md-8 col-sm-6 d-flex align-items-center">
+                            <h6 class="mb-0">Import Excel Ke Database</h6>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12 mb-md-0 mb-4">
+                                <form method="post" action="{{ route('outlet.import') }}" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="row">
+                                        <div class="col-md-8 col-6">
+                                            <div class="form-group">
+                                                <input type="file" name="excel" class="form-control border"
+                                                    placeholder="Pilih file excel(.xlsx)">
+                                            </div>
+                                            @error('file2')
+                                                <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-4 col-6">
+                                            <button type="submit" class="btn btn-info" id="submit"><i
+                                                    data-feather="download-cloud"></i> </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

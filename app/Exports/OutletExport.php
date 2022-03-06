@@ -2,69 +2,61 @@
 
 namespace App\Exports;
 
-use App\Models\Paket;
+use App\Models\Outlet;
 use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\Importable;
-use Maatwebsite\Excel\Concerns\RegistersEventListeners;
-use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithEvents;
-use Maatwebsite\Excel\Concerns\WithMapping;
-use Maatwebsite\Excel\Concerns\WithStyles;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Events\BeforeImport;
 
-class PaketExport implements FromCollection, WithHeadings, WithEvents
+class OutletExport implements FromCollection, WithHeadings, WithEvents
 {
-    use Importable, RegistersEventListeners;
-
     /**
-     * @return \Illuminate\Support\Collection
-     */
+    * @return \Illuminate\Support\Collection
+    */
     public function collection()
     {
-        return Paket::where('outlet_id', auth()->user()->outlet_id)->get();
+        return Outlet::all();
     }
 
     public function headings(): array
     {
         return [
             'No.',
-            'Outlet Id',
-            'Jenis',
-            'Nama Paket',
-            'Harga',
+            'Nama',
+            'Alamat',
+            'Tlp',
             'Tanggal Input',
-            'Tanggal Update',
+            'Tanggal Update'
         ];
     }
 
     public function registerEvents(): array
     {
         return [
-            // Array callable, refering to a static method.
-            BeforeImport::class => function (BeforeImport $event) {
+            BeforeImport::class => function(BeforeImport $event) {
                 $totalRows = $event->getReader()->getTotalRows();
 
-                if (!empty($totalRows)) {
+                if ( !empty($totalRows) ) {
                     echo $totalRows['Worksheet'];
                 }
             },
 
-            AfterSheet::class => function (AfterSheet $event) {
+            AfterSheet::class => function(AfterSheet $event) {
                 $event->sheet->getColumnDimension('A')->setAutoSize(true);
                 $event->sheet->getColumnDimension('B')->setAutoSize(true);
                 $event->sheet->getColumnDimension('C')->setAutoSize(true);
                 $event->sheet->getColumnDimension('D')->setAutoSize(true);
                 $event->sheet->getColumnDimension('E')->setAutoSize(true);
                 $event->sheet->getColumnDimension('F')->setAutoSize(true);
-                $event->sheet->getColumnDimension('G')->setAutoSize(true);
 
                 $event->sheet->insertNewRowBefore(1, 2);
-                $event->sheet->mergeCells('A1:G1');
-                $event->sheet->setCellValue('A1', 'DATA PAKET LAUNDRY SUMBER JAYA');
-                $event->sheet->getStyle('A1')->getFont()->setBold(true);
+                $event->sheet->mergeCells('A1:F1');
+                $event->sheet->setCellValue('A1', 'DATA OUTLET LAUNDRY SUMBER JAYA');
+                $event->sheet->getStyle('A1')->getFont()->setBOld(true);
                 $event->sheet->getStyle('A1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-                $event->sheet->getStyle('A3:G' . $event->sheet->getHighestRow())->applyFromArray([
+                $event->sheet->getStyle('A3:F' . $event->sheet->getHighestRow())->applyFromArray([
+                    // Set border
                     'borders' => [
                         'allBorders' => [
                             'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
@@ -73,9 +65,9 @@ class PaketExport implements FromCollection, WithHeadings, WithEvents
                     ],
                 ]);
                 $event->sheet->styleCells(
-                    'A3:G3',
+                    'A3:F3',
                     [
-                        //Set border Style
+                        // Set border Style
                         'borders' => [
                             'outline' => [
                                 'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
@@ -84,25 +76,22 @@ class PaketExport implements FromCollection, WithHeadings, WithEvents
 
                         ],
 
-                        //Set font style
+                        // Set font style
                         'font' => [
                             'name'      =>  'Calibri',
                             'size'      =>  12,
                         ],
 
-                        //Set background style
+                        // Set background style
                         'fill' => [
                             'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                             'startColor' => [
                                 'rgb' => 'ef5454',
                              ]
                         ],
-
                     ]
                 );
             }
-
         ];
     }
-
 }

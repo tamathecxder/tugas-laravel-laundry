@@ -35,7 +35,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <p class="text-xs font-weight-bold mb-0">{{ $data_paket->outlet_id }}</p>
+                                    <p class="text-xs font-weight-bold mb-0">{{ $data_paket->outlet->nama }}</p>
                                 </td>
                                 <td class="text-sm">
                                     <p class="text-xs font-weight-bold mb-0">{{ $data_paket->jenis }}</p>

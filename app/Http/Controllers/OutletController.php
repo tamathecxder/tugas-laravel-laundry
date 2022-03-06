@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\OutletExport;
 use App\Models\Outlet;
 use App\Http\Requests\StoreOutletRequest;
 use App\Http\Requests\UpdateOutletRequest;
+use App\Imports\OutletImport;
+use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class OutletController extends Controller
 {
@@ -117,5 +121,26 @@ class OutletController extends Controller
         } else {
             return redirect()->route('outlet.index')->with('error', 'Data outlet tersebut gagal dihapus!');
         }
+    }
+
+    public function export() {
+        $date = date('Y-m-d');
+        return Excel::download(new OutletExport, $date . '_outlet.xlsx');
+    }
+
+    public function import(Request $request) {
+        $validatedData = $request->validate([
+            'excel' => 'required|file|mimes:xlsx,csv,xls'
+        ]);
+
+        if ( $validatedData ) {
+            Excel::import(new OutletImport, $request->file('excel'));
+        } else {
+            return back()->withErrors([
+                'excel' => 'File excel tidak terisi atau ada kesalahan!',
+            ]);
+        }
+
+        return redirect()->route('outlet.index')->with('success', 'File excel telah diimport!');
     }
 }

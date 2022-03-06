@@ -155,14 +155,14 @@
             <div class="card my-3">
                 <div class="card-header pb-0 p-3">
                     <div class="row">
-                        <div class="col-md-8 d-flex align-items-center">
-                            <h6 class="mb-0">Export Data Ke Excel</h6>
+                        <div class="col-md-6 d-flex align-items-center">
+                            <h6 class="mb-0"> Export Data Ke Excel</h6>
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-8 mb-md-0 mb-4">
-                                <a href="{{  route('paket.export')  }}" class="btn btn-success text-decoration-none">Export</a>
+                            <div class="col-md-12 mb-md-0 mb-4">
+                                <a href="{{  route('paket.export')  }}" class="btn btn-success text-decoration-none"><i data-feather="file-text" class="align-items-center"></i> Export</a>
                             </div>
                         </div>
                     </div>
@@ -173,26 +173,26 @@
             <div class="card my-3">
                 <div class="card-header pb-0 p-3">
                     <div class="row">
-                        <div class="col-md-12 d-flex align-items-center">
+                        <div class="col-md-8 col-sm-6 d-flex align-items-center">
                             <h6 class="mb-0">Import Excel Ke Database</h6>
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-12 mb-md-0-mb-4">
+                            <div class="col-md-12 mb-md-0 mb-4">
                                 <form method="post" action="{{ route('paket.import') }}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-8 col-6">
                                             <div class="form-group">
-                                                <input type="file" name="file2" class="form-control  border" placeholder="Pilih file excel(.xlsx)">
+                                                <input type="file" name="file2" class="form-control border" placeholder="Pilih file excel(.xlsx)">
                                             </div>
                                             @error('file2')
                                                 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <div class="col-md-6">
-                                            <button type="submit" class="btn btn-info" id="submit">Import</button>
+                                        <div class="col-md-4 col-6">
+                                            <button type="submit" class="btn btn-info" id="submit"><i data-feather="download-cloud"></i></button>
                                         </div>
                                     </div>
                                 </form>

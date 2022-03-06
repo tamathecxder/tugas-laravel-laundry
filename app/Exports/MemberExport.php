@@ -2,39 +2,33 @@
 
 namespace App\Exports;
 
-use App\Models\Paket;
+use App\Models\Member;
 use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\Importable;
-use Maatwebsite\Excel\Concerns\RegistersEventListeners;
-use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithEvents;
-use Maatwebsite\Excel\Concerns\WithMapping;
-use Maatwebsite\Excel\Concerns\WithStyles;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Events\BeforeImport;
 
-class PaketExport implements FromCollection, WithHeadings, WithEvents
+class MemberExport implements FromCollection, WithHeadings, WithEvents
 {
-    use Importable, RegistersEventListeners;
-
     /**
-     * @return \Illuminate\Support\Collection
-     */
+    * @return \Illuminate\Support\Collection
+    */
     public function collection()
     {
-        return Paket::where('outlet_id', auth()->user()->outlet_id)->get();
+        return Member::all();
     }
 
-    public function headings(): array
+    public function headings():  array
     {
         return [
             'No.',
-            'Outlet Id',
-            'Jenis',
-            'Nama Paket',
-            'Harga',
+            'Nama',
+            'Alamat',
+            'Jenis Kelamin',
+            'Tlp',
             'Tanggal Input',
-            'Tanggal Update',
+            'Tanggal Update'
         ];
     }
 
@@ -61,7 +55,7 @@ class PaketExport implements FromCollection, WithHeadings, WithEvents
 
                 $event->sheet->insertNewRowBefore(1, 2);
                 $event->sheet->mergeCells('A1:G1');
-                $event->sheet->setCellValue('A1', 'DATA PAKET LAUNDRY SUMBER JAYA');
+                $event->sheet->setCellValue('A1', 'DATA MEMBER LAUNDRY SUMBER JAYA');
                 $event->sheet->getStyle('A1')->getFont()->setBold(true);
                 $event->sheet->getStyle('A1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
                 $event->sheet->getStyle('A3:G' . $event->sheet->getHighestRow())->applyFromArray([
@@ -104,5 +98,4 @@ class PaketExport implements FromCollection, WithHeadings, WithEvents
 
         ];
     }
-
 }

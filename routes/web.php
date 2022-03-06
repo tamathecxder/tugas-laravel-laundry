@@ -18,19 +18,18 @@ Route::get('/', [HomeController::class, 'default'])->middleware('level:kasir,adm
 
 // Member
 Route::resource('/member', MemberController::class)->middleware('level:admin');
+Route::get('/export/member', [MemberController::class, 'export'])->name('member.export')->middleware('level:admin');
+Route::post('/import/member', [MemberController::class, 'import'])->name('member.import')->middleware('level:admin');
 
-// CRUD Paket dan Outlet pada Admin
+// Route outlet
 Route::resource('/outlet', OutletController::class)->middleware('level:admin');
-Route::resource('/paket', PaketController::class)->middleware('level:admin');
-Route::get('/export', [PaketController::class, 'export'])->name('paket.export');
-Route::post('/import', [PaketController::class, 'import'])->name('paket.import')->middleware('level:admin');
-// Transaksi pada admin dan kasir
-/**
- * Route::resource('/transaksi', TransaksiController::class)->middleware('level:admin,kasir', 'auth');
- *
- */
+Route::get('/export/outlet', [OutletController::class, 'export'])->name('outlet.export')->middleware('level:admin');
+Route::post('/import/outlet', [OutletController::class, 'import'])->name('outlet.import')->middleware('level:admin');
 
-// Route::resource('/transaksi', TransaksiController::class)->middleware('level:admin,kasir', 'auth');
+// Route paket
+Route::resource('/paket', PaketController::class)->middleware('level:admin');
+Route::get('/export/paket', [PaketController::class, 'export'])->name('paket.export')->middleware('level:admin');
+Route::post('/import/paket', [PaketController::class, 'import'])->name('paket.import')->middleware('level:admin');
 
 // Login
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
@@ -56,3 +55,14 @@ Route::get('/laporan/generate_pdf', [LaporanController::class, 'generatePDF'])->
 
 Route::resource('/barang_inventaris', BarangInventarisController::class)->middleware('level:admin,kasir');
 
+
+
+
+
+// Transaksi pada admin dan kasir
+/**
+ * Route::resource('/transaksi', TransaksiController::class)->middleware('level:admin,kasir', 'auth');
+ *
+ */
+
+// Route::resource('/transaksi', TransaksiController::class)->middleware('level:admin,kasir', 'auth');

@@ -10,7 +10,6 @@ use App\Imports\PaketImport;
 use App\Models\Outlet;
 use App\Models\PaketJenis;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Date;
 use Maatwebsite\Excel\Facades\Excel;
 
 class PaketController extends Controller
@@ -133,12 +132,11 @@ class PaketController extends Controller
     }
 
     public function export() {
-        $tanggal = new Date('Y-m-d');
-        return Excel::download(new PaketExport, "paket-$tanggal.xlsx");
+        $tanggal = date('Y-m-d');
+        return Excel::download(new PaketExport, $tanggal . "_paket.xlsx");
     }
 
     public function import(Request $request) {
-
         $request->validate([
             'file2' => 'file|required|mimes:xlsx',
         ]);
@@ -151,6 +149,6 @@ class PaketController extends Controller
             ]);
         }
 
-        return redirect()->route('paket.index')->with('success', 'All good!');
+        return redirect()->route('paket.index')->with('success', 'File excel berhasil diimport!');
     }
 }
