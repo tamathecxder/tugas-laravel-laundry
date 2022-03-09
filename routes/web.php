@@ -55,7 +55,9 @@ Route::get('/laporan/generate_pdf', [LaporanController::class, 'generatePDF'])->
 
 Route::resource('/barang_inventaris', BarangInventarisController::class)->middleware('level:admin,kasir');
 
-
+// Simulasi buat UJIKOM
+Route::get('/simulasi', [HomeController::class, 'simulasi'])->name('simulasi.sorting')->middleware('level:admin');
+Route::get('/test2', [HomeController::class, 'test'])->name('simulasi.test')->middleware('level:admin');
 
 
 
