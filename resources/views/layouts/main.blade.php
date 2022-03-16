@@ -20,13 +20,19 @@
     {{-- Data tables --}}
     <link href="{{ asset('assets') }}/css/nucleo-svg.css" rel="stylesheet" />
     <!-- Font Awesome Icons -->
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    {{-- <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script> --}}
+    <link rel="stylesheet" href="{{ asset('assets/js/fontawesome.js') }}">
+
     <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
     {{-- feather icons --}}
-    <script src="https://unpkg.com/feather-icons"></script>
+    {{-- <script src="https://unpkg.com/feather-icons"></script> --}}
+    <script src="{{ asset('assets/js/feather.min.js') }}"></script>
+    
     {{-- bootstrap --}}
     {{-- <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}"> --}}
+
     <!-- CSS Files -->
     <link id="pagestyle" href="{{ asset('assets') }}/css/material-dashboard.css" rel="stylesheet" />
 

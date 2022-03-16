@@ -31,7 +31,7 @@ class MemberController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**

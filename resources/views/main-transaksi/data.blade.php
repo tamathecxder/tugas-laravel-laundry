@@ -65,6 +65,7 @@
                                             <td class="d-flex flex-row text-sm">
                                                 <a href="download_pdf/{{ $data['kode_invoice'] }}" class="btn btn-info btn-sm" target="_blank">Download PDF</a> &nbsp;
                                                 <a href="{{ route('stream-pdf') }}" class="btn btn-danger btn-sm" target="_blank">Stream</a>
+                                                <a href="{{ route('main-transaksi.test', $data['id']) }}" class="btn btn-success btn-sm" target="_blank">Test View PDF</a>
                                             </td>
                                         </tr>
                                     @endforeach

@@ -33,6 +33,12 @@ class MainTransaksiController extends Controller
         $pdf = PDF::loadview('main-transaksi.test-faktur', ['paket' => $paket]);
         return $pdf->stream();
     }
+
+    public function testPDF($id) {
+        return view('main-transaksi.test', [
+            'transaksi' => Transaksi::all()
+        ]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -49,6 +55,7 @@ class MainTransaksiController extends Controller
 
         foreach( $data['transaksi'] as $key => $data ) {
             $newArray = array();
+            $newArray['id'] = $data->id;
             $newArray['kode_invoice'] = $data->kode_invoice;
             $newArray['id_member'] = $data->member->nama;
             $newArray['id_member'] = $data->member->nama;

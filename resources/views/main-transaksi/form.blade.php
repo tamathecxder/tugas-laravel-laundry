@@ -62,7 +62,7 @@
                     <div class="col-md-6">
                         <button type="button" class="btn btn-info col-2" data-bs-toggle="modal"
                             data-bs-target="#modalMember">
-                            <i class="fas fa-plus"></i>
+                            <i class="fas fa-plus">Pilih Member</i>
                         </button>
                     </div>
                 </div>
@@ -146,13 +146,6 @@
                         </table>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        {{-- pembayaran --}}
-        <div class="card border my-3">
-            <div class="card-body">
-                Data Laundry
             </div>
         </div>
     </div>

@@ -23,4 +23,9 @@ class Member extends Model
     public function transaki() {
         return $this->hasMany(Member::class);
     }
+
+    public function penjemputan()
+    {
+        return $this->hasMany(Penjemputan::class);
+    }
 }

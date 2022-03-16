@@ -8,6 +8,7 @@ use App\Http\Controllers\MainTransaksiController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\OutletController;
 use App\Http\Controllers\PaketController;
+use App\Http\Controllers\PenjemputanController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TransaksiController;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,12 @@ Route::resource('/paket', PaketController::class)->middleware('level:admin');
 Route::get('/export/paket', [PaketController::class, 'export'])->name('paket.export')->middleware('level:admin');
 Route::post('/import/paket', [PaketController::class, 'import'])->name('paket.import')->middleware('level:admin');
 
+// Route penjemputan
+Route::resource('/penjemputan', PenjemputanController::class)->middleware('level:admin');
+Route::post('/penjemputan/status/{id}', [PenjemputanController::class, 'status'])->name('penjemputan.status');
+Route::get('/export/penjemputan', [PenjemputanController::class, 'export'])->name('penjemputan.export')->middleware('auth');
+Route::post('/import/penjemputan', [PenjemputanController::class, 'import'])->name('penjemputan.import');
+
 // Login
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate'])->name('auth.login');
@@ -47,7 +54,7 @@ Route::post('/register', [RegisterController::class, 'regist'])->name('auth.regi
 Route::resource('/main-transaksi', MainTransaksiController::class)->middleware('level:admin,kasir');
 Route::get('/download_pdf/{transaksi:kode_invoice}', [MainTransaksiController::class, 'downloadPDF'])->name('download-pdf')->middleware('level:admin,kasir');
 Route::get('/stream_pdf', [MainTransaksiController::class, 'stream_pdf'])->name('stream-pdf')->middleware('level:admin,kasir');
-// Route::get('/test-faktur/{$id}', [MainTransaksiController::class, 'testFaktur'])->name('main-transaksi.test-faktur')->middleware('level:admin,kasir');
+Route::get('/test-pdf/{id}', [MainTransaksiController::class, 'testPDF'])->name('main-transaksi.test');
 
 // Laporan
 Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index')->middleware('level:admin,kasir,owner');
@@ -58,7 +65,7 @@ Route::resource('/barang_inventaris', BarangInventarisController::class)->middle
 // Simulasi buat UJIKOM
 Route::get('/simulasi', [HomeController::class, 'simulasi'])->name('simulasi.sorting')->middleware('level:admin');
 Route::get('/test2', [HomeController::class, 'test'])->name('simulasi.test')->middleware('level:admin');
-
+Route::get('/simulasi-gaji-karyawan', [HomeController::class, 'simulasiGajiKaryawan'])->name('simulasi.gaji-karyawan')->middleware('level:admin');
 
 
 // Transaksi pada admin dan kasir

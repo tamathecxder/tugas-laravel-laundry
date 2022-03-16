@@ -21,4 +21,8 @@ class HomeController extends Controller
     public function test() {
         return view('etc.test2');
     }
+
+    public function simulasiGajiKaryawan() {
+        return view('try-out.index');
+    }
 }
