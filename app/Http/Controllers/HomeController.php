@@ -25,4 +25,8 @@ class HomeController extends Controller
     public function simulasiGajiKaryawan() {
         return view('try-out.index');
     }
+
+    public function barang() {
+        return view('try-out.barang');
+    }
 }

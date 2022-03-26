@@ -15,7 +15,6 @@ class Penjemputan extends Model
     protected $table = 'tb_penjemputan';
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
-
     public function member(){
         return $this->belongsTo(Member::class, 'member_id');
     }

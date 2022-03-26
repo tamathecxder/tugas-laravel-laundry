@@ -3,7 +3,7 @@
     {{-- @method('put') --}}
     <select name="status" class="form-select border form-select-sm statusTabel">
         <option value="{{ $data->status }}" selected>{{ $data->status }}</option>
-        <option disabled>========== ||||| ==========</option>
+        <option disabled>========== DATA STATUS ==========</option>
         @foreach ($status as $sts)
             <option value="{{ $sts }}">{{ $sts }}</option>
         @endforeach

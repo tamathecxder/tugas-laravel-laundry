@@ -31,11 +31,11 @@
 			@foreach($transaksi as $tr)
 			<tr>
 				<td>{{ $i++ }}</td>
-				<td>{{$tr->outlet_id}}</td>
-				<td>{{$tr->kode_invoice}}</td>
-				<td>{{$tr->id_member}}</td>
-				<td>{{$tr->tgl}}</td>
-				<td>{{$tr->batas_waktu}}</td>
+				<td>{{ $tr->outlet->nama }}</td>
+				<td>{{ $tr->kode_invoice }}</td>
+				<td>{{ $tr->member->nama }}</td>
+				<td>{{ $tr->tgl }}</td>
+				<td>{{ $tr->batas_waktu }}</td>
 			</tr>
 			@endforeach
 		</tbody>

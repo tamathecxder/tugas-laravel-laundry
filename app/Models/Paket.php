@@ -28,6 +28,11 @@ class Paket extends Model
         return $this->belongsTo(Outlet::class, 'outlet_id');
     }
 
+    public function transaksi()
+    {
+        return $this->hasMany(Transaks::class);
+    }
+
 }
 
 

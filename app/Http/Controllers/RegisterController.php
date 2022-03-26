@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
+    /**
+     * Menampilkan halaman register dan mempassing data outlet ke view
+     */
     public function index() {
         return view('register.index', [
             'id_outlet' => Outlet::all(),
@@ -16,6 +19,14 @@ class RegisterController extends Controller
         ]);
     }
 
+    /**
+     * Method regist untuk meregistrasi user baru dan menyimpan data user tersebut ke database
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Validation\ValidationException
+     * @throws \Exception
+     * @throws \Throwable
+     */
     public function regist(Request $request, User $user) {
         $data = $request->validate([
             'nama' => 'required',

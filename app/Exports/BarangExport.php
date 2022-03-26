@@ -2,77 +2,97 @@
 
 namespace App\Exports;
 
-use App\Models\Penjemputan;
-use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\Importable;
-use Maatwebsite\Excel\Concerns\RegistersEventListeners;
-use Maatwebsite\Excel\Concerns\WithHeadings;
-use Maatwebsite\Excel\Concerns\WithEvents;
-use Maatwebsite\Excel\Concerns\WithMapping;
-use Maatwebsite\Excel\Concerns\WithStyles;
-use Maatwebsite\Excel\Events\AfterSheet;
+use App\Models\Barang;
 use Maatwebsite\Excel\Events\BeforeImport;
+use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithMapping;
+use Maatwebsite\Excel\Events\AfterSheet;
 
-class PenjemputanExport implements FromCollection, WithHeadings, WithEvents, withMapping
+class BarangExport implements FromCollection, withHeadings, withEvents, withMapping
 {
     /**
+    * Interface collection untuk mengambil data dari database
+    *
     * @return \Illuminate\Support\Collection
     */
     public function collection()
     {
-        return Penjemputan::all();
+        return Barang::all();
     }
 
-    public function map($penjemputan): array
+    /**
+     * Interface map untuk memetakan data dari database ke dalam array secara spesifik
+     *
+     * @param mixed $barang
+     * @return array
+     */
+    public function map($barang): array
     {
         return [
-            $penjemputan->id,
-            $penjemputan->member->nama,
-            $penjemputan->member->alamat,
-            $penjemputan->member->tlp,
-            $penjemputan->petugas_penjemputan,
-            $penjemputan->status
+            $barang->id,
+            $barang->nama_barang,
+            $barang->qty,
+            $barang->harga,
+            $barang->waktu_beli,
+            $barang->supplier,
+            $barang->status,
+            $barang->waktu_update_status
         ];
     }
 
+    /**
+     * Interface headings untuk mengambil judul dari kolom
+     *
+     * @return array
+     */
     public function headings(): array
     {
         return [
             'No.',
-            'Nama pelanggan',
-            'Alamat pelanggan',
-            'Tlp',
-            'Petugas penjemputan',
-            'Status',
+            'Nama barang',
+            'QTY',
+            'Harga',
+            'Waktu beli',
+            'Supplier',
+            'Status barang',
+            'Waktu update status',
         ];
     }
 
-    public function registerEvents(): array
+    /**
+     * Interface events untuk mengatur event yang akan dijalankan
+     *
+     * @return array
+     */
+    function registerEvents(): array
     {
         return [
-            // Array callable, refering to a static method.
-            BeforeImport::class => function (BeforeImport $event) {
-                $totalRows = $event->getReader()->getTotalRows();
+            BeforeImport::class => function(BeforeImport $event) {
+                $totalRows = $event->getReader()->getTotalRow();
 
-                if (!empty($totalRows)) {
+                if ( !empty($totalRows) ) {
                     echo $totalRows['Worksheet'];
                 }
             },
-
-            AfterSheet::class => function (AfterSheet $event) {
+            AfterSheet::class => function(AfterSheet $event) {
                 $event->sheet->getColumnDimension('A')->setAutoSize(true);
                 $event->sheet->getColumnDimension('B')->setAutoSize(true);
                 $event->sheet->getColumnDimension('C')->setAutoSize(true);
                 $event->sheet->getColumnDimension('D')->setAutoSize(true);
                 $event->sheet->getColumnDimension('E')->setAutoSize(true);
                 $event->sheet->getColumnDimension('F')->setAutoSize(true);
+                $event->sheet->getColumnDimension('G')->setAutoSize(true);
+                $event->sheet->getColumnDimension('H')->setAutoSize(true);
 
                 $event->sheet->insertNewRowBefore(1, 2);
-                $event->sheet->mergeCells('A1:F1');
-                $event->sheet->setCellValue('A1', 'DATA PENJEMPUTAN LAUNDRY SUMBER JAYA');
-                $event->sheet->getStyle('A1')->getFont()->setBold(true);
+                $event->sheet->mergeCells('A1:H1');
+                $event->sheet->setCellValue('A1', 'DATA PENGGUNAAN BARANG LAUNDRY SUMBER JAYA');
+                $event->sheet->getStyle('A1')->getFont()->setBOld(true);
                 $event->sheet->getStyle('A1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-                $event->sheet->getStyle('A3:F' . $event->sheet->getHighestRow())->applyFromArray([
+                $event->sheet->getStyle('A3:H' . $event->sheet->getHighestRow())->applyFromArray([
+                    // Set border
                     'borders' => [
                         'allBorders' => [
                             'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
@@ -81,34 +101,33 @@ class PenjemputanExport implements FromCollection, WithHeadings, WithEvents, wit
                     ],
                 ]);
                 $event->sheet->styleCells(
-                    'A3:F3',
+                    'A3:H3',
                     [
-                        //Set border Style
+                        // Set border Style
                         'borders' => [
                             'outline' => [
                                 'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
                                 'color' => ['argb' => '000000'],
                             ],
+
                         ],
 
-                        //Set font style
+                        // Set font style
                         'font' => [
                             'name'      =>  'Calibri',
                             'size'      =>  12,
                         ],
 
-                        //Set background style
+                        // Set background style
                         'fill' => [
                             'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
                             'startColor' => [
                                 'rgb' => 'ef5454',
-                            ]
+                             ]
                         ],
-
                     ]
                 );
             }
-
         ];
     }
 }

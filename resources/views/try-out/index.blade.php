@@ -48,13 +48,15 @@
                                                     <label for="jk" class="form-label">Jenis Kelamin :</label>
                                                 </div>
                                                 <div class="form-check col-md-4 col-sm-3">
-                                                    <input class="form-check-input" type="radio" name="jk" id="jk" value="L">
+                                                    <input class="form-check-input" type="radio" name="jk" id="jk"
+                                                        value="L">
                                                     <label class="form-check-label" for="jk">
                                                         Laki-laki
                                                     </label>
                                                 </div>
                                                 <div class="form-check col-md-4 col-sm-4">
-                                                    <input class="form-check-input" type="radio" name="jk" id="jk" value="P">
+                                                    <input class="form-check-input" type="radio" name="jk" id="jk"
+                                                        value="P">
                                                     <label class="form-check-label" for="jk">
                                                         Perempuan
                                                     </label>
@@ -62,11 +64,13 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-6">
-                                            <select id="status_menikah" name="status_menikah" class="form-select border form-select-sm" aria-label="Default select example" required>
+                                            <select id="status_menikah" name="status_menikah"
+                                                class="form-select border form-select-sm"
+                                                aria-label="Default select example" required>
                                                 <option selected disabled>Status Menikah ...</option>
                                                 <option value="single">Single</option>
                                                 <option value="couple">Couple</option>
-                                             </select>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -84,8 +88,9 @@
                                                         <label class="">Mulai Bekerja</label>
                                                     </div>
                                                     <div class="col-md-8 col-sm-8">
-                                                        <input type="date" name="mulai_bekerja" id="mulai_bekerja" class="form-control"
-                                                            onfocus="focused(this)" onfocusout="defocused(this)" required>
+                                                        <input type="date" name="mulai_bekerja" id="mulai_bekerja"
+                                                            class="form-control" onfocus="focused(this)"
+                                                            onfocusout="defocused(this)" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -95,40 +100,6 @@
                                 <button id="btn-simpan" type="submit" class="btn btn-success btn-sm">Input</button>
                                 <button id="btn-reset" type="reset" class="btn btn-danger btn-sm">Reset</button>
                             </form>
-                            {{-- <div class="row">
-                                <form id="formKaryawan" role="form" class="form-start">
-                                    <input type="hidden" name="_token" value="kjpktwXYVxgjjvcVPO8cPuq3ghsGU3I9657nTAPI">
-                                    <div class="input-group input-group-outline my-3">
-                                        <label class="form-label">ID</label>
-                                        <input type="text" name="id" id="id" class="form-control "
-                                            onfocus="focused(this)" onfocusout="defocused(this)" required>
-                                    </div>
-                                    <div class="input-group input-group-outline mb-3">
-                                        <label class="form-label">Nama</label>
-                                        <input type="text" name="nama" id="nama" class="form-control"
-                                            onfocus="focused(this)" onfocusout="defocused(this)" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="jk" class="form-label">Jenis Kelamin</label>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="jk" id="jk" value="L">
-                                            <label class="form-check-label" for="jk">
-                                                Laki-laki
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="jk" id="jk" value="P">
-                                            <label class="form-check-label" for="jk">
-                                                Perempuan
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <button id="btn-simpan" type="submit" class="btn btn-primary btn-sm">Submit</button>
-                                    <button id="btn-reset" type="reset" class="btn btn-danger btn-sm">Reset</button>
-                                </form>
-                                <div class="col-lg-6 col-md-12 col-12 z-index-0 fadeIn3 fadeInBottom">
-                                </div>
-                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -206,11 +177,10 @@
 @push('script')
     <script>
         $(document).ready(function() {
-            // gaji awal
-            const gajiAwal = 2000000;
-
             // init variable
             let dataKaryawan = JSON.parse(localStorage.getItem('dataKaryawan')) || [];
+
+            $('#tblKaryawan tbody').html(showData(dataKaryawan));
 
             // insert function to insert data to become an array
             function insert() {
@@ -219,9 +189,9 @@
 
                 data.forEach(function(item, index) {
                     let name = item['name'];
-                    let value = (name === 'id'
-                        || name === 'jml_anak'
-                    ? Number(item['value']) : item['value']);
+                    let value = (name === 'id' ||
+                        name === 'jml_anak' ?
+                        Number(item['value']) : item['value']);
 
                     newData[name] = value;
                 });
@@ -241,6 +211,19 @@
                     dataKaryawan.push(insert());
                     $('#tblKaryawan tbody').html(showData(dataKaryawan));
                     console.log(dataKaryawan);
+                });
+
+                $('#status_menikah').on('change', function() {
+                    let value = $('#status_menikah').val();
+                    console.log(value);
+
+                    if ( value == 'single' ) {
+                        $('#jml_anak').val('0');
+                        $('#jml_anak').attr('readonly', true);
+                        $('#jml_anak').attr('disabled', true);
+                    } else {
+                        $('#jml_anak').attr('readonly', false);
+                    }
                 });
 
                 // events for sorting button
@@ -266,14 +249,43 @@
             });
 
             // showData fn
-            function showData(arr) {
+            function showData(arr, x) {
                 let row = '';
+                const awal = 2000000;
+                let totalAwal = 0;
+                let totalTunjangan = 0;
+                let totalTotal = 0;
+                let tunjangan = 0;
+                let total = 0;
 
-                if (arr.length == null) {
-                    return row = `<tr><td colspan="3">Belum ada data sama sekali</td></tr>`;
+                if (arr.length === 0) {
+                    return row = `<tr><td colspan="8">Belum ada data sama sekali</td></tr>`;
                 }
 
-                arr.forEach(function(item, value) {
+                arr.forEach(function(item, value, date) {
+                    date = new Date(item['mulai_bekerja']);
+                    let ageDifMs = Date.now() - date.getTime();
+                    if (ageDifMs > 0) {
+                        let ageDate = new Date(ageDifMs);
+                        let newAge = Math.abs(ageDate.getUTCFullYear() - 1970);
+                        var tahun = newAge * 150000;
+                    } else {
+                        var tahun = 0
+                    }
+
+                    if (item['jml_anak'] >= 2) {
+                        var child = 2;
+                    } else if (item['jml_anak'] != 1) {
+                        var child = 0;
+                    } else {
+                        var child = 1;
+                    }
+
+                    let anak = 150000 * child;
+                    let status = (item['status'] === 'menikah' ? 250000 : 0);
+                    let tunjangan = anak + status + tahun;
+                    total = tunjangan + awal;
+
                     row += `<tr>`;
                     row += `<td>${item['id']}</td>`;
                     row += `<td>${item['nama']}</td>`;
@@ -281,9 +293,21 @@
                     row += `<td>${item['status_menikah']}</td>`;
                     row += `<td>${item['jml_anak']}</td>`;
                     row += `<td>${item['mulai_bekerja']}</td>`;
-                    row += `<td>${gajiAwal}</td>`;
+                    row += `<td>${awal}</td>`
+                    row += `<td>${tunjangan}</td>`
+                    row += `<td>${total}</td>`
                     row += `</tr>`;
+                    totalAwal += awal;
+                    totalTunjangan += tunjangan;
+                    totalTotal += total;
                 });
+                row += '<tr>'
+                row += '<td colspan="6" align="center">TOTAL</td>'
+                row += `<td>${totalAwal}</td>`
+                row += `<td>${totalTunjangan}</td>`
+                row += `<td>${totalTotal}</td>`
+                row += '</tr>'
+                console.log(totalAwal, totalTunjangan, totalTotal);
 
                 return row;
             }

@@ -161,7 +161,7 @@
                 <div class="card-header pb-0 p-3">
                     <div class="row">
                         <div class="col-md-8 col-sm-6 d-flex align-items-center">
-                            <h6 class="mb-0">Import Excel Ke Database</h6>
+                            <h6 class="mb-0">Import Excel Ke <br> Database</h6>
                         </div>
                     </div>
                     <div class="card-body">
@@ -169,7 +169,6 @@
                             <div class="col-md-12 mb-md-0 mb-4">
                                 <button type="button" class="btn bg-gradient-dark" data-bs-toggle="modal"
                                     data-bs-target="#formImport">Import ke excel</button>
-
 
                                 <!-- Modal -->
                                 <div class="modal fade" id="formImport" tabindex="-1" aria-labelledby="formImportLabel"
@@ -249,7 +248,7 @@
                 })
         });
 
-        // status konfirmasi
+        // status konfirmasi ubah status
         $('.statusTabel').change(function(e) {
             swal({
                     title: "Apakah kamu yakin ingin menggantinya?",
@@ -262,7 +261,6 @@
                     if (req) $(e.target).closest('form').submit()
                     else swal.close()
                 })
-
         });
 
 

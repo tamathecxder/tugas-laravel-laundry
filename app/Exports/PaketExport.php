@@ -13,11 +13,18 @@ use Maatwebsite\Excel\Concerns\WithStyles;
 use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Events\BeforeImport;
 
+/**
+ * Class PaketExport yang implements interface FromCollection, WithHeadings, WithMapping, WithEvents, WithStyles
+ */
 class PaketExport implements FromCollection, WithHeadings, WithEvents
 {
+    /**
+     * Menggunakan importable dan register event listener package
+     */
     use Importable, RegistersEventListeners;
 
     /**
+     * Menggunakan method collection() untuk mengambil data dari database
      * @return \Illuminate\Support\Collection
      */
     public function collection()
@@ -25,6 +32,10 @@ class PaketExport implements FromCollection, WithHeadings, WithEvents
         return Paket::where('outlet_id', auth()->user()->outlet_id)->get();
     }
 
+    /**
+     * Menggunakan method headings() untuk mengatur judul kolom
+     * @return array
+     */
     public function headings(): array
     {
         return [
@@ -38,6 +49,14 @@ class PaketExport implements FromCollection, WithHeadings, WithEvents
         ];
     }
 
+    /**
+     * Menggunakan method registerEvents() untuk mengatur style pada file excel
+     * seperti mengatur warna, font, dan border
+     * @return array
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     */
     public function registerEvents(): array
     {
         return [

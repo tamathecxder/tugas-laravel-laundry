@@ -10,8 +10,8 @@ use Maatwebsite\Excel\Concerns\WithStartRow;
 class PaketImport implements ToModel, WithHeadingRow
 {
     /**
+     * Mendeklarasikan field terhadap kolom yang ada pada file excel
     * @param array $row
-    *
     * @return \Illuminate\Database\Eloquent\Model|null
     */
     public function model(array $row)
@@ -25,6 +25,10 @@ class PaketImport implements ToModel, WithHeadingRow
         ]);
     }
 
+    /**
+     * Menentukan baris yang akan di-skip pada file excel
+     * @return int
+     */
     public function headingRow(): int
     {
         return 3;

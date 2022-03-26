@@ -14,18 +14,9 @@ use Barryvdh\DomPDF\Facade\Pdf;
 
 class MainTransaksiController extends Controller
 {
-    // TUMBAL VIEW
-    // public function testFaktur($id) {
-    //     $paket = Paket::find($id)
-    //     ->with('detail_transaksi')
-    //     ->where('id', $id)
-    //     ->get();
-
-    //     return view('main-transaksi.test-faktur', compact('paket'));
-    // }
-
     /**
-     * function for generate PDF and make it downloadable
+     * fungsi untuk meng-generate PDF dan membuatnya bisa didownload
+     * @param Request $request
      */
     public function downloadPDF() {
         $paket = Paket::with(['detail'])->get();
@@ -34,14 +25,19 @@ class MainTransaksiController extends Controller
         return $pdf->stream();
     }
 
+    /**
+     * function untuk mengetest tampilan PDF sebelum dia di-generate
+     * @param Request $request
+     */
     public function testPDF($id) {
         return view('main-transaksi.test', [
             'transaksi' => Transaksi::all()
         ]);
     }
+    
     /**
-     * Display a listing of the resource.
-     *
+     * Menampilkan halaman utama transaksi
+     * dengan mem-passing data kedalam view untuk nantinya bisa diakses dan diambil datanya
      * @return \Illuminate\Http\Response
      */
     public function index(Transaksi $transaksi)
@@ -57,7 +53,6 @@ class MainTransaksiController extends Controller
             $newArray = array();
             $newArray['id'] = $data->id;
             $newArray['kode_invoice'] = $data->kode_invoice;
-            $newArray['id_member'] = $data->member->nama;
             $newArray['id_member'] = $data->member->nama;
             $newArray['paket_id'] = $detail[$key]->paket->nama_paket;
             $newArray['tgl'] = $data->tgl;
@@ -79,7 +74,9 @@ class MainTransaksiController extends Controller
         ])->with('results', $results);
     }
 
-
+    /**
+     * Menggenerate kode invoice untuk data transaksi dan mengambil data transaksi terakhir
+     */
     public function generateKodeInvoice() {
         $last = Transaksi::orderBy('id', 'desc')->first();
         $last = ($last == null ? 1 : $last->id + 1);
@@ -89,25 +86,13 @@ class MainTransaksiController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
+     * Menyimpan sebuah data transaksi baru ke database sekaligus menyimpan data detail transaksi
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreMainTransaksiRequest $request)
     {
-        // dd($request);
-
         // include semua yang akan di-inputkan
         $request['outlet_id'] = auth()->user()->outlet_id;
         $request['kode_invoice'] = $this->generateKodeInvoice();
@@ -129,7 +114,7 @@ class MainTransaksiController extends Controller
         // proses input detail transaksi
         foreach( $request->paket_id as $i => $v) {
             $input_detail = DetailTransaksi::create([
-                'id_transaksi' => $input_transaksi->id,
+                'transaksi_id' => $input_transaksi->id,
                 'paket_id' => $request->paket_id[$i],
                 'qty' => $request->qty[$i],
                 'keterangan' => 'sukses'
@@ -138,40 +123,6 @@ class MainTransaksiController extends Controller
 
         return back()->with('success', 'Transaksi dan detailnya berhasil ditambahkan!');
 
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
     }
 
     /**

@@ -28,16 +28,6 @@ class PenjemputanController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StorePenjemputanRequest  $request
@@ -52,17 +42,6 @@ class PenjemputanController extends Controller
         } else {
             return redirect()->route('penjemputan.index')->with('error', 'Data penjemputan gagal diinputkan! harap coba lagi...');
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Penjemputan  $penjemputan
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Penjemputan $penjemputan)
-    {
-        //
     }
 
     /**

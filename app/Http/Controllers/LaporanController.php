@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DetailTransaksi;
 use App\Models\Paket;
 use App\Models\Transaksi;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -18,11 +19,13 @@ class LaporanController extends Controller
     public function index()
     {
         // $data['transaksi'] = Transaksi::where('outlet_id', auth()->user()->outlet_id)->get();
-        $products = DB::table('tb_detail_transaksi')
-            ->join('tb_transaksi', 'tb_detail_transaksi.id_transaksi', '=', 'tb_transaksi.id')->where('outlet_id', auth()->user()->outlet_id)->get();
-
+        // $products = DB::table('tb_detail_transaksi')
+        //     ->join('tb_transaksi', 'tb_detail_transaksi.id_transaksi', '=', 'tb_transaksi.id')->where('outlet_id', auth()->user()->outlet_id)->get();
+        $products = Transaksi::all();
+        
         return view('laporan.index', [
             'transaksi' => $products,
+            'detail_transaksi' => DetailTransaksi::all()
         ]);
     }
 
@@ -30,7 +33,7 @@ class LaporanController extends Controller
         $data = Transaksi::all();
 
         $pdf = PDF::loadview('laporan.generate-pdf', ['transaksi' => $data]);
-        return $pdf->download('laporanpdf');
+        return $pdf->download('laporanpdf.pdf');
     }
 
 

@@ -13,7 +13,8 @@
 @section('container')
     <div class="card border">
         <div class="card-header">
-            <h4 class="card-title">Cetak Faktur/Nota</h4>
+            <h4 class="card-title">Cetak Faktur/Nota</h4>    
+            <a href="{{ route('laporan.generate') }}" target="_blank" class="btn btn-danger my-2">Generate PDF</a>
         </div>
         <div class="card-body" style="margin-top: -30px;">
             <table class="table table-dark table-hover" id="tbl-laporan">
@@ -26,22 +27,30 @@
                         <th scope="col">Kode Invoice</th>
                         <th scope="col">Id Penaggung Jawab</th>
                         <th scope="col">Tanggal</th>
-                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($transaksi as $trs)
                         <tr>
-                            <td>{{ $trs->outlet_id }}</td>
-                            <td>{{ $trs->id_transaksi }}</td>
-                            <td>{{ $trs->paket_id }}</td>
-                            <td>{{ $trs->qty }}</td>
-                            <td>{{ $trs->kode_invoice }}</td>
-                            <td>{{ $trs->id_user }}</td>
-                            <td>{{ $trs->tgl }}</td>
+                            <td>{{ $trs->outlet->nama }}</td>
                             <td>
-                                <a href="{{ route('laporan.generate') }}" target="_blank">Generate PDF</a>
+                                @foreach ($trs->detail as $dtr)
+                                    {{ $dtr->transaksi_id }}
+                                @endforeach
                             </td>
+                            <td>
+                                @foreach ($trs->detail as $paket)
+                                    {{ $paket->paket_id }}
+                                @endforeach
+                            </td>
+                            <td>
+                                @foreach ($trs->detail as $item)
+                                    {{ $item->qty }}
+                                @endforeach
+                            </td>
+                            <td>{{ $trs->kode_invoice }}</td>
+                            <td>{{ $trs->user->nama }}</td>
+                            <td>{{ $trs->tgl }}</td>
                         </tr>
                     @endforeach
                 </tbody>

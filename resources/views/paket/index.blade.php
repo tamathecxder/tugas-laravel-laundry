@@ -215,7 +215,7 @@
             $('#tbl-paket').DataTable()
         });
 
-        // menghapus alert
+        // delete alert
         $("#success-alert").fadeTo(2000, 500).slideUp(500, function() {
             $("#success-alert").slideUp(500);
         });

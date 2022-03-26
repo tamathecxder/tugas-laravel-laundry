@@ -8,6 +8,7 @@ use App\Http\Controllers\MainTransaksiController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\OutletController;
 use App\Http\Controllers\PaketController;
+use App\Http\Controllers\BarangController;
 use App\Http\Controllers\PenjemputanController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TransaksiController;
@@ -66,8 +67,13 @@ Route::resource('/barang_inventaris', BarangInventarisController::class)->middle
 Route::get('/simulasi', [HomeController::class, 'simulasi'])->name('simulasi.sorting')->middleware('level:admin');
 Route::get('/test2', [HomeController::class, 'test'])->name('simulasi.test')->middleware('level:admin');
 Route::get('/simulasi-gaji-karyawan', [HomeController::class, 'simulasiGajiKaryawan'])->name('simulasi.gaji-karyawan')->middleware('level:admin');
+Route::get('/simulasi-transaksi-barang', [HomeController::class, 'barang'])->name('simulasi.transaksi-barang')->middleware('auth');
 
-
+// Penggunaan Data Barang
+Route::resource('/penggunaan_barang', BarangController::class);
+Route::post('/status/{id}', [BarangController::class, 'statusBarang'])->name('barang.status');
+Route::get('/export/penggunaan_barang', [BarangController::class, 'export'])->name('barang.export');
+Route::post('/import/penggunaan_barang', [BarangController::class, 'import'])->name('barang.import');
 // Transaksi pada admin dan kasir
 /**
  * Route::resource('/transaksi', TransaksiController::class)->middleware('level:admin,kasir', 'auth');
