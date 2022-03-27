@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LogDB;
 use App\Models\Barang;
 use Illuminate\Http\Request;
 use App\Exports\BarangExport;
 use App\Imports\BarangImport;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\StoreBarangRequest;
 use App\Http\Requests\UpdateBarangRequest;
@@ -23,6 +25,7 @@ class BarangController extends Controller
      */
     public function index()
     {
+        LogDB::record(Auth::user(), 'Akses view penggunaan barang', 'view barang');
         return view('data-barang.index', [
             'status_barang' => config('status_barang.status'),
             'data_barang' => Barang::all()
@@ -45,7 +48,6 @@ class BarangController extends Controller
         }
     }
 
-
     /**
      * Mengupdate status barang dan sekaligus mengupdate waktu update status
      *
@@ -55,6 +57,8 @@ class BarangController extends Controller
      */
     public function statusBarang(Request $request, $id)
     {
+        LogDB::record(Auth::user(), 'Update status barang', 'view barang');
+
         $barang = Barang::find($id);
         $barang->status = $request->status;
         $barang->waktu_update_status = now();

@@ -242,6 +242,7 @@
 
 @push('script')
     <script>
+        // function for datatable to id tbl-barang
         // function document ready
         $(function() {
             $('#tbl-barang').DataTable();
@@ -323,3 +324,4 @@
         });
     </script>
 @endpush
+

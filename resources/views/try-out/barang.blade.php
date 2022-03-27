@@ -124,13 +124,13 @@
                             </div>
                             <div class="col-md-4 col-sm-4 flex-column">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="sorting-cash">
+                                    <input class="form-check-input" type="checkbox" id="filter-cash">
                                     <label class="form-check-label" for="sort">
                                         Data Cash
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="sorting-emoney">
+                                    <input class="form-check-input" type="checkbox" id="filter-emoney">
                                     <label class="form-check-label" for="sort">
                                         Data E-money/Transaksi
                                     </label>
@@ -146,7 +146,7 @@
                             </div>
                         </div>
                         <div class="table-responsive p-0">
-                            <table class="table align-items-center mb-0" id="tblKaryawan">
+                            <table class="table align-items-center mb-0" id="tblBarang">
                                 <thead>
                                     <tr>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -186,11 +186,57 @@
     <script>
         $(document).ready(function() {
             // init variable
-            let dataBarang = JSON.parse(localStorage.getItem('dataBarang')) || [];
+            let dataBarang;
+            let filterDataBarang;
 
-            $('#tblKaryawan tbody').html(showData(dataBarang));
+            // load data barang transaksi
+            dataBarang = filterDataBarang = JSON.parse(localStorage.getItem('dataBarang')) || [];
 
-            // insert function to insert data to become an array
+            // menampilkan data barang transaksi
+            $('#tblBarang tbody').html(showData(dataBarang));
+
+            // fungsi untuk memfilter cash dan emoney
+            function filterCashAndEmoney(data) {
+                if ($('#filter-cash').is(':checked')) {
+                    data = data.filter(item => {
+                        return item.jenis_pembayaran === 'cash';
+                    });
+                }
+
+                if ($('#filter-emoney').is(':checked')) {
+                    data = data.filter(item => {
+                        return item.jenis_pembayaran === 'e-money/transfer';
+                    });
+                }
+
+                if ($('#filter-cash').is(':checked') && $('#filter-emoney').is(':checked')) {
+                    data = data.filter(item => {
+                        return item.jenis_pembayaran === 'cash' || item.jenis_pembayaran === 'e-money/transfer';
+                    });
+                }
+
+                return data;
+            }
+
+            // fungsi untuk memfilter data cash dan emoney dan menampilkan datanya sekaligus
+            function filterData(keyword) {
+                filterDataBarang = filterCashAndEmoney(dataBarang);
+                filterDataBarang = filterDataBarang.filter(item => {
+                    return item.nama_barang.toLowerCase().includes(keyword.toLowerCase());
+                });
+                $('#tblBarang tbody').html(showData(filterDataBarang));
+            }
+
+            // jalankan fungsi filterData ketika 2 checbox ditekan
+            $('#filter-cash, #filter-emoney').on('change', function() {
+                if ($('#filter-cash').is(':checked') && $('#filter-emoney').is(':checked')) {
+                    $('#tblBarang tbody').html(showData(dataBarang));
+                } else {
+                    filterData('');
+                }
+            });
+
+            // insert data barang transaksi ke local storage
             function insert() {
                 const data = $('#formBarang').serializeArray();
                 let newData = {};
@@ -211,7 +257,7 @@
 
             $(function() {
                 // show data diawal page refresh
-                $('#tblKaryawan tbody').html(showData(dataBarang));
+                $('#tblBarang tbody').html(showData(dataBarang));
 
                 // mengubah harga secara otomatis
                 $('#nama_barang').on('change', function() {
@@ -229,73 +275,52 @@
                     }
                 });
 
-                // filter
-                $('#sorting-cash').on('change', function() {
-                    alert('sorting cash')
-                });
-
                 // events
                 $('#formBarang').on('submit', function(e) {
                     e.preventDefault();
 
                     dataBarang.push(insert());
-                    $('#tblKaryawan tbody').html(showData(dataBarang));
+                    $('#tblBarang tbody').html(showData(dataBarang));
                     console.log(dataBarang);
-                });
-
-                $('#status_menikah').on('change', function() {
-                    let value = $('#status_menikah').val();
-                    console.log(value);
-
-                    if (value == 'single') {
-                        $('#jml_anak').val('0');
-                        $('#jml_anak').attr('readonly', true);
-                        $('#jml_anak').attr('disabled', true);
-                    } else {
-                        $('#jml_anak').attr('readonly', false);
-                    }
                 });
 
                 // events for sorting button
                 $('#sorting').on('click', function() {
                     dataBarang = insertionSort(dataBarang, 'id');
 
-                    $('#tblKaryawan tbody').html(showData(dataBarang));
+                    $('#tblBarang tbody').html(showData(dataBarang));
                     console.log(dataBarang);
                 });
 
                 // events search
-                // $('#btnSearch').on('click', function(e) {
-                //     let textSearch = $('#search').val();
-                //     let id = searching(dataBarang, 'id', textSearch);
-                //     let data = [];
-
-                //     if (id >= 0)
-                //         data.push(dataBarang[id]);
-                //     console.log(id);
-                //     console.log(data);
-                //     $('#tblKaryawan tbody').html(showData(data));
-                // });
-
                 $('#btnSearch').on('click', function(e) {
-                    let teksSearch = $('#search').val()
-                    //let id = searching(dataBuku, 'id', teksSearch)
-                    let idx = searching(dataBarang, 'id', teksSearch)
-                    console.log(idx)
-                    let data = []
-                    //if (id >= 0)
-                    //data.push(dataBuku[id])
-                    for (x = 0; x < idx.length; x++) {
-                        data.push(dataBuku[idx[x]])
-                        //console.log(x)
+                    let textSearch = $('#search').val();
+                    let thisID = searching(dataBarang, 'id', textSearch);
+                    let data = [];
+
+                    for( let x = 0; x < thisID.length; x++ ) {
+                        data.push(dataBarang[thisID[x]]);
                     }
 
-
-                    $('#tblBuku tbody').html(showData(data))
-                })
+                    console.log(id);
+                    console.log(data);
+                    $('#tblBarang tbody').html(showData(data));
+                });
             });
 
-            // showData fn
+            /*
+            * showData
+            *
+            * @param data
+            * @returns {string}
+            *
+            *
+            * variable row untuk menampung data yang akan ditampilkan
+            * variable countHarga untuk menampung harga yang akan ditampilkan
+            * variable countDiskon untuk menampung diskon yang akan ditampilkan
+            * variable countTotalHarga untuk menampung total harga yang akan ditampilkan
+            *
+            */
             function showData(arr, x) {
                 let row = '';
                 let countHarga = 0
@@ -308,6 +333,15 @@
                 }
 
                 arr.forEach(function(item, value) {
+                    /*
+                    * variable diskon awalnya adalah 0
+                    * variable diskon akan diubah jika ada diskon
+                    * variable subTotal berisi harga * qty
+                    *
+                    * ada kondisi dimana ketika subTotal lebih dari 50000
+                    * maka diskon akan diubah menjadi 15% dari subTotal
+                    * dan variable totalHarga akan berisi subTotal - diskon
+                    */
                     let diskon = 0;
                     let subTotal = item['harga'] * item['jumlah']
 
@@ -328,6 +362,12 @@
                     row += `<td>${item['jenis_pembayaran']}</td>`;
                     row += `</tr>`;
 
+                    /*
+                    * countHarga tadi diisi dengan harga * qty
+                    * countDiskon tadi diisi dengan diskon
+                    * countQty tadi diisi dengan qty
+                    * countTotalHarga tadi diisi dengan totalHarga
+                    */
                     countHarga += Number(item['harga']);
                     countQty += Number(item['jumlah']);
                     countDiskon += Number(diskon);
@@ -346,7 +386,22 @@
                 return row;
             }
 
-            // inserting to an array
+            /*
+                * Insertion Sort
+                * @param {Array} arr
+                * @param {String} key
+                * @return {Array}
+                *
+                * fungsi insertion sort adalah sebuah algoritma sorting yang berbasis pada pengurutan data secara manual.
+                * Algoritma ini dapat digunakan untuk mengurutkan data secara menyusun, mengurutkan data secara acak,
+                * mengurutkan data secara secara terurut, mengurutkan data secara secara terbalik, mengurutkan data secara secara terurut secara acak,
+                * mengurutkan data secara secara terurut secara secara terbalik, mengurutkan data secara secara terurut secara secara terbalik,
+                *
+                * pada variabel i, j yang merupakan indeks array, dimana i adalah indeks array yang sedang diproses,
+                * variabel id yang merupakan indeks array yang akan diurutkan, dimana id adalah indeks array yang akan diurutkan
+                * dan variabel value akan berisi nilai dari array yang akan diurutkan
+            */
+
             function insertionSort(arr, key) {
                 let i, j, id, value;
 
@@ -365,6 +420,21 @@
                 return arr;
             }
 
+            /*
+            * searching
+            *
+            * @param {Array} arr
+            * @param {String} key
+            * @param {String} value
+            * @return {Array}
+            *
+            * fungsi searching adalah sebuah algoritma searching yang berbasis pada pencarian data secara manual.
+            * variable buffer adalah sebuah array yang berisi data yang akan dicari
+            * parameter arr adalah array yang akan dicari
+            * parameter key adalah key pada array yang akan dicari
+            * parameter teks adalah teks yang dibangingkan dengan key tadi
+            * sehingga jika teks yang dibandingkan dengan key tadi sama dengan key maka akan dikembalikan nilai id
+            */
 
             function searching(arr, key, teks) {
                 let buffer = []
@@ -373,25 +443,6 @@
                         buffer.push(i)
                 }
                 return buffer;
-            }
-
-            // Searching function
-            // function searching(arr, key, text) {
-            //     for (let i = 0; i < arr.length; i++) {
-            //         if (arr[i][key] == text) {
-            //             return i;
-            //         }
-            //     }
-            //     return 'gagal';
-            // }
-
-            // menghitung umur
-            function calculateAge(birthday) {
-                birthday = new Date(birthday);
-                let ageDifMs = Date.now() - birthday.getTime();
-                let ageDate = new Date(ageDifMs);
-
-                return Math.abs(ageDate.getUTCFullYear() - 1970);
             }
         })
     </script>

@@ -80,7 +80,7 @@ class PaketExport implements FromCollection, WithHeadings, WithEvents
 
                 $event->sheet->insertNewRowBefore(1, 2);
                 $event->sheet->mergeCells('A1:G1');
-                $event->sheet->setCellValue('A1', 'DATA PAKET LAUNDRY SUMBER JAYA');
+                $event->sheet->setCellValue('A1', 'DATA PA KET LAUNDRY SUMBER JAYA');
                 $event->sheet->getStyle('A1')->getFont()->setBold(true);
                 $event->sheet->getStyle('A1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
                 $event->sheet->getStyle('A3:G' . $event->sheet->getHighestRow())->applyFromArray([

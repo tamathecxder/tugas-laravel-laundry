@@ -50,7 +50,6 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('auth.logout');
 Route::get('/register', [RegisterController::class, 'index'])->name('register')->middleware('guest');
 Route::post('/register', [RegisterController::class, 'regist'])->name('auth.register');
 
-
 // Main Transaksi
 Route::resource('/main-transaksi', MainTransaksiController::class)->middleware('level:admin,kasir');
 Route::get('/download_pdf/{transaksi:kode_invoice}', [MainTransaksiController::class, 'downloadPDF'])->name('download-pdf')->middleware('level:admin,kasir');
