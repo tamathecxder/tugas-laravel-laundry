@@ -26,19 +26,17 @@
                                 <div class="row">
                                     <div class="col-md-6 col-sm-6">
                                         <input type="hidden" name="_token" value="kjpktwXYVxgjjvcVPO8cPuq3ghsGU3I9657nTAPI">
-                                        <div class="input-group input-group-outline my-3">
-                                            <label class="form-label">ID</label>
+                                        <label class="form-label">ID</label>
+                                        <div class="input-group input-group-outline mb-3">
                                             <input type="text" name="id" id="id" class="form-control "
                                                 onfocus="focused(this)" onfocusout="defocused(this)" required>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-6">
-                                        <div class="input-group input-group-outline my-3">
+                                        <label class="form-label">Tanggal Beli</label>
+                                        <div class="input-group input-group-outline mb-3">
                                             <div class="row">
-                                                <div class="col-md-4 col-sm-4">
-                                                    <label class="">Tanggal Beli</label>
-                                                </div>
-                                                <div class="col-md-8 col-sm-8">
+                                                <div class="col-md-12 col-sm-8">
                                                     <input type="date" name="tgl_beli" id="tgl_beli" class="form-control"
                                                         onfocus="focused(this)" onfocusout="defocused(this)" required>
                                                 </div>
@@ -46,11 +44,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="my-3">
+                                <div class="mb-3">
                                     <div class="row">
                                         <div class="col-md-6 col-sm-6">
+                                            <label for="nama_barang" class="form-label">Pilih nama barang</label>
                                             <select id="nama_barang" name="nama_barang"
-                                                class="form-select border form-select-sm"
+                                                class="form-select border form-select-sm mb-3"
                                                 aria-label="Default select example" required>
                                                 <option selected disabled>Nama barang ...</option>
                                                 <option value="deterjen">Deterjen</option>
@@ -59,28 +58,26 @@
                                             </select>
                                         </div>
                                         <div class="col-md-6 col-sm-6">
-                                            <div class="input-group input-group-outline my-3">
-                                                <label for="harga" class="form-label">Harga</label>
+                                            <label for="harga" class="form-label">Harga</label>
+                                            <div class="input-group input-group-outline mb-3">
                                                 <input type="text" name="harga" id="harga" class="form-control">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6 col-sm-6">
-                                            <div class="input-group input-group-outline my-3">
-                                                <label class="form-label">Jumlah</label>
+                                            <label class="form-label">Jumlah</label>
+                                            <div class="input-group input-group-outline mb-3">
                                                 <input type="number" name="jumlah" id="jumlah" class="form-control "
                                                     onfocus="focused(this)" onfocusout="defocused(this)" required>
                                             </div>
                                         </div>
-                                        <div>
+                                        {{-- <div>
                                             <input type="hidden" name="diskon" id="diskon">
-                                        </div>
+                                        </div> --}}
                                         <div class="col-md-6 col-sm-6">
+                                            <label for="jk" class="form-label">Jenis pembayaran :</label>
                                             <div class="row">
-                                                <div class="col-md-4">
-                                                    <label for="jk" class="form-label">Jenis pembayaran :</label>
-                                                </div>
                                                 <div class="form-check col-md-3 col-sm-3">
                                                     <input class="form-check-input" type="radio" name="jenis_pembayaran"
                                                         id="jenis_pembayaran" value="cash">
@@ -211,7 +208,8 @@
 
                 if ($('#filter-cash').is(':checked') && $('#filter-emoney').is(':checked')) {
                     data = data.filter(item => {
-                        return item.jenis_pembayaran === 'cash' || item.jenis_pembayaran === 'e-money/transfer';
+                        return item.jenis_pembayaran === 'cash' || item.jenis_pembayaran ===
+                            'e-money/transfer';
                     });
                 }
 
@@ -298,7 +296,7 @@
                     let thisID = searching(dataBarang, 'id', textSearch);
                     let data = [];
 
-                    for( let x = 0; x < thisID.length; x++ ) {
+                    for (let x = 0; x < thisID.length; x++) {
                         data.push(dataBarang[thisID[x]]);
                     }
 
@@ -309,18 +307,18 @@
             });
 
             /*
-            * showData
-            *
-            * @param data
-            * @returns {string}
-            *
-            *
-            * variable row untuk menampung data yang akan ditampilkan
-            * variable countHarga untuk menampung harga yang akan ditampilkan
-            * variable countDiskon untuk menampung diskon yang akan ditampilkan
-            * variable countTotalHarga untuk menampung total harga yang akan ditampilkan
-            *
-            */
+             * showData
+             *
+             * @param data
+             * @returns {string}
+             *
+             *
+             * variable row untuk menampung data yang akan ditampilkan
+             * variable countHarga untuk menampung harga yang akan ditampilkan
+             * variable countDiskon untuk menampung diskon yang akan ditampilkan
+             * variable countTotalHarga untuk menampung total harga yang akan ditampilkan
+             *
+             */
             function showData(arr, x) {
                 let row = '';
                 let countHarga = 0
@@ -334,14 +332,14 @@
 
                 arr.forEach(function(item, value) {
                     /*
-                    * variable diskon awalnya adalah 0
-                    * variable diskon akan diubah jika ada diskon
-                    * variable subTotal berisi harga * qty
-                    *
-                    * ada kondisi dimana ketika subTotal lebih dari 50000
-                    * maka diskon akan diubah menjadi 15% dari subTotal
-                    * dan variable totalHarga akan berisi subTotal - diskon
-                    */
+                     * variable diskon awalnya adalah 0
+                     * variable diskon akan diubah jika ada diskon
+                     * variable subTotal berisi harga * qty
+                     *
+                     * ada kondisi dimana ketika subTotal lebih dari 50000
+                     * maka diskon akan diubah menjadi 15% dari subTotal
+                     * dan variable totalHarga akan berisi subTotal - diskon
+                     */
                     let diskon = 0;
                     let subTotal = item['harga'] * item['jumlah']
 
@@ -363,11 +361,11 @@
                     row += `</tr>`;
 
                     /*
-                    * countHarga tadi diisi dengan harga * qty
-                    * countDiskon tadi diisi dengan diskon
-                    * countQty tadi diisi dengan qty
-                    * countTotalHarga tadi diisi dengan totalHarga
-                    */
+                     * countHarga tadi diisi dengan harga * qty
+                     * countDiskon tadi diisi dengan diskon
+                     * countQty tadi diisi dengan qty
+                     * countTotalHarga tadi diisi dengan totalHarga
+                     */
                     countHarga += Number(item['harga']);
                     countQty += Number(item['jumlah']);
                     countDiskon += Number(diskon);
@@ -387,20 +385,20 @@
             }
 
             /*
-                * Insertion Sort
-                * @param {Array} arr
-                * @param {String} key
-                * @return {Array}
-                *
-                * fungsi insertion sort adalah sebuah algoritma sorting yang berbasis pada pengurutan data secara manual.
-                * Algoritma ini dapat digunakan untuk mengurutkan data secara menyusun, mengurutkan data secara acak,
-                * mengurutkan data secara secara terurut, mengurutkan data secara secara terbalik, mengurutkan data secara secara terurut secara acak,
-                * mengurutkan data secara secara terurut secara secara terbalik, mengurutkan data secara secara terurut secara secara terbalik,
-                *
-                * pada variabel i, j yang merupakan indeks array, dimana i adalah indeks array yang sedang diproses,
-                * variabel id yang merupakan indeks array yang akan diurutkan, dimana id adalah indeks array yang akan diurutkan
-                * dan variabel value akan berisi nilai dari array yang akan diurutkan
-            */
+             * Insertion Sort
+             * @param {Array} arr
+             * @param {String} key
+             * @return {Array}
+             *
+             * fungsi insertion sort adalah sebuah algoritma sorting yang berbasis pada pengurutan data secara manual.
+             * Algoritma ini dapat digunakan untuk mengurutkan data secara menyusun, mengurutkan data secara acak,
+             * mengurutkan data secara secara terurut, mengurutkan data secara secara terbalik, mengurutkan data secara secara terurut secara acak,
+             * mengurutkan data secara secara terurut secara secara terbalik, mengurutkan data secara secara terurut secara secara terbalik,
+             *
+             * pada variabel i, j yang merupakan indeks array, dimana i adalah indeks array yang sedang diproses,
+             * variabel id yang merupakan indeks array yang akan diurutkan, dimana id adalah indeks array yang akan diurutkan
+             * dan variabel value akan berisi nilai dari array yang akan diurutkan
+             */
 
             function insertionSort(arr, key) {
                 let i, j, id, value;
@@ -421,20 +419,20 @@
             }
 
             /*
-            * searching
-            *
-            * @param {Array} arr
-            * @param {String} key
-            * @param {String} value
-            * @return {Array}
-            *
-            * fungsi searching adalah sebuah algoritma searching yang berbasis pada pencarian data secara manual.
-            * variable buffer adalah sebuah array yang berisi data yang akan dicari
-            * parameter arr adalah array yang akan dicari
-            * parameter key adalah key pada array yang akan dicari
-            * parameter teks adalah teks yang dibangingkan dengan key tadi
-            * sehingga jika teks yang dibandingkan dengan key tadi sama dengan key maka akan dikembalikan nilai id
-            */
+             * searching
+             *
+             * @param {Array} arr
+             * @param {String} key
+             * @param {String} value
+             * @return {Array}
+             *
+             * fungsi searching adalah sebuah algoritma searching yang berbasis pada pencarian data secara manual.
+             * variable buffer adalah sebuah array yang berisi data yang akan dicari
+             * parameter arr adalah array yang akan dicari
+             * parameter key adalah key pada array yang akan dicari
+             * parameter teks adalah teks yang dibangingkan dengan key tadi
+             * sehingga jika teks yang dibandingkan dengan key tadi sama dengan key maka akan dikembalikan nilai id
+             */
 
             function searching(arr, key, teks) {
                 let buffer = []
