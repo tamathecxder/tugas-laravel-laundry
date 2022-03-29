@@ -15,3 +15,32 @@ class Barang extends Model
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
 }
+
+interface Perabotan
+{
+    public function defineAlat();
+}
+
+class Alat implements Perabotan
+{
+    public function defineAlat()
+    {
+        return 'default_nama_alat';
+    }
+}
+
+class Perkakas implements Perabotan
+{
+    public function defineAlat()
+    {
+        return 'default_nama_perkakas';
+    }
+}
+
+$alat = new Alat();
+echo $alat->defineAlat();
+
+$perkakas = new Perkakas();
+echo $perkakas->defineAlat();
+
+

@@ -23,7 +23,7 @@ class HomeController extends Controller
     }
 
     public function simulasiGajiKaryawan() {
-        return view('try-out.index');
+        return view('try-out.gaji-karyawan');
     }
 
     public function barang() {

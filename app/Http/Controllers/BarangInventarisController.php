@@ -4,10 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Models\BarangInventaris;
 use Database\Seeders\BarangInventar;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class BarangInventarisController extends Controller
 {
+    public function __call($method, $parameters)
+    {
+        // jika method yang dipanggil adalah index
+        if ($method == 'index') {
+            // return view('data-barang.index', [
+            //     'status_barang' => config('status_barang.status'),
+            //     'data_barang' => BarangInventaris::all()
+            // ]);
+            return view('data-barang.index', [
+                'status_barang' => config('status_barang.status'),
+                'data_barang' => BarangInventaris::all()
+            ]);
+        }
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -114,14 +130,16 @@ class BarangInventarisController extends Controller
      */
     public function destroy($id)
     {
-        $barang = BarangInventaris::findOrFail($id);
+        try {
+            $barang = BarangInventaris::findOrFail($id);
 
-        $delete = $barang->delete($id);
-
-        if ( $delete ) {
-            return redirect()->route('barang_inventaris.index')->with('success', 'Data barang tersebut telah berhasil dihapus');
-        } else {
-            return redirect()->route('barang_inventaris.index')->with('error', 'Data barang tersebut gagal dihapus!');
+            $delete = $barang->delete($id);
+            if ( $delete ) {
+                return redirect()->route('barang_inventaris.index')->with('success', 'Data barang tersebut telah berhasil dihapus');
+            }
+        } catch (ModelNotFoundException $exception) {
+            return redirect()->route('barang_inventaris.index')->with('error', $exception);
         }
+
     }
 }

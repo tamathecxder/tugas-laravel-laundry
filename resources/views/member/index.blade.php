@@ -64,8 +64,8 @@
                         </div>
 
                         <!-- Modal -->
-                        <div class="modal fade" id="inputDataMember" tabindex="-1" aria-labelledby="inputDataMemberLabel"
-                            aria-hidden="true">
+                        <div class="modal fade" id="inputDataMember" tabindex="-1"
+                            aria-labelledby="inputDataMemberLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -78,31 +78,36 @@
                                         <form role="form" method="post" action="{{ route('member.store') }}">
                                             @csrf
                                             <div id="method"></div>
-                                            <div class="input-group input-group-outline mb-3">
+                                            <div>
                                                 <label for="nama" class="form-label">Nama member</label>
-                                                <input type="text" name="nama" id="nama"
-                                                    class="form-control @error('nama') is-invalid @enderror"
-                                                    value="{{ old('nama') }}">
+                                                <div class="input-group input-group-outline mb-3">
+                                                    <input type="text" name="nama" id="nama"
+                                                        class="form-control @error('nama') is-invalid @enderror"
+                                                        value="{{ old('nama') }}" placeholder="masukkan nama member">
 
-                                                @error('nama')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
+                                                    @error('nama')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
+                                                </div>
                                             </div>
-                                            <div class="input-group input-group-outline mb-3">
+                                            <div>
                                                 <label for="alamat" class="form-label">Alamat</label>
-                                                <input type="text" name="alamat" id="alamat"
-                                                    class="form-control @error('alamat') is-invalid @enderror"
-                                                    value={{ old('alamat') }}>
+                                                <div class="input-group input-group-outline mb-3">
+                                                    <input type="text" name="alamat" id="alamat"
+                                                        class="form-control @error('alamat') is-invalid @enderror"
+                                                        value="{{ old('alamat') }}" placeholder="masukkan alamat dari member">
 
-                                                @error('alamat')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
+                                                    @error('alamat')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
+                                                </div>
                                             </div>
                                             <div class="mb-3">
+                                                <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
                                                 <select
                                                     class="form-select border form-select-sm @error('jenis_kelamin') is-invalid @enderror"
                                                     name="jenis_kelamin" id="jenis_kelamin">
@@ -119,21 +124,24 @@
                                                     </div>
                                                 @enderror
                                             </div>
-                                            <div class="input-group input-group-outline mb-3">
+                                            <div>
                                                 <label for="tlp" class="form-label">Nomor Telepon</label>
-                                                <input type="text" name="tlp" id="tlp"
-                                                    class="form-control @error('tlp') is-invalid @enderror"
-                                                    value={{ old('tlp') }}>
+                                                <div class="input-group input-group-outline mb-3">
+                                                    <input type="text" name="tlp" id="tlp"
+                                                        class="form-control @error('tlp') is-invalid @enderror"
+                                                        value="{{ old('tlp') }}" placeholder="masukkan nomor telepon dari member">
 
-                                                @error('tlp')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
+                                                    @error('tlp')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
+                                                </div>
                                             </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
                                         <button type="submit" class="btn btn-primary" id="btn-submit">Save changes</button>
 
                                         {{-- END FORM --}}
@@ -176,24 +184,59 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-12 mb-md-0 mb-4">
-                                <form method="post" action="{{ route('member.import') }}" enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="row">
-                                        <div class="col-md-8 col-6">
-                                            <div class="form-group">
-                                                <input type="file" name="excel" class="form-control border"
-                                                    placeholder="Pilih file excel(.xlsx)">
-                                            </div>
-                                            @error('file2')
-                                                <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                                            @enderror
+                            <div class="col-md-10">
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal">
+                                    Import ke Excel
+                                </button>
+                            </div>
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
                                         </div>
-                                        <div class="col-md-4 col-6">
-                                            <button type="submit" class="btn btn-info" id="submit"><i data-feather="download-cloud"></i> </button>
+                                        <div class="modal-body">
+                                            <form method="post" action="{{ route('member.import') }}"
+                                                enctype="multipart/form-data">
+                                                @csrf
+                                                <div class="row">
+                                                    <div class="col-md-9 col-6">
+                                                        <div class="form-group">
+                                                            <input type="file" name="excel" class="form-control border ms-2"
+                                                                placeholder="Pilih file excel(.xlsx)">
+                                                        </div>
+                                                        @error('file2')
+                                                            <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                                        @enderror
+
+                                                        <div class="my-3">
+                                                            <p>Klik <a href="{{ route('member.export-template') }}"
+                                                                    class="badge bg-info">disini</a> untuk mendownload
+                                                                template
+                                                                excel</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <button type="submit" class="btn btn-info" id="submit"><i
+                                                                data-feather="download-cloud"></i> </button>
+                                                    </div>
+                                                    <div class="row">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
                                         </div>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
                     </div>

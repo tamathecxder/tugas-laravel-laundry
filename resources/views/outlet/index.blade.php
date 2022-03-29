@@ -78,41 +78,47 @@
                                         <form role="form" method="post" action="{{ route('outlet.store') }}">
                                             @csrf
                                             <div id="method"></div>
-                                            <div class="input-group input-group-outline mb-3">
+                                            <div>
                                                 <label for="nama" class="form-label">Nama Outlet</label>
-                                                <input type="text" name="nama" id="nama"
-                                                    class="form-control @error('nama') is-invalid @enderror"
-                                                    value="{{ old('nama') }}">
+                                                <div class="input-group input-group-outline mb-3">
+                                                    <input type="text" name="nama" id="nama"
+                                                        class="form-control @error('nama') is-invalid @enderror"
+                                                        value="{{ old('nama') }}" placeholder="masukkan nama dari outlet">
 
-                                                @error('nama')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
+                                                    @error('nama')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
+                                                </div>
                                             </div>
-                                            <div class="input-group input-group-outline mb-3">
+                                            <div>
                                                 <label for="alamat" class="form-label">Alamat</label>
-                                                <input type="text" name="alamat" id="alamat"
-                                                    class="form-control @error('alamat') is-invalid @enderror"
-                                                    value={{ old('alamat') }}>
+                                                <div class="input-group input-group-outline mb-3">
+                                                    <input type="text" name="alamat" id="alamat"
+                                                        class="form-control @error('alamat') is-invalid @enderror"
+                                                        value="{{ old('alamat') }}" placeholder="masukkan alamat outlet">
 
-                                                @error('alamat')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
+                                                    @error('alamat')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
+                                                </div>
                                             </div>
-                                            <div class="input-group input-group-outline mb-3">
+                                            <div>
                                                 <label for="tlp" class="form-label">Nomor Telepon</label>
-                                                <input type="text" name="tlp" id="tlp"
-                                                    class="form-control @error('tlp') is-invalid @enderror"
-                                                    value={{ old('tlp') }}>
+                                                <div class="input-group input-group-outline mb-3">
+                                                    <input type="text" name="tlp" id="tlp"
+                                                        class="form-control @error('tlp') is-invalid @enderror"
+                                                        value="{{ old('tlp') }}" placeholder="masukkan nomor telepon outlet">
 
-                                                @error('tlp')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
+                                                    @error('tlp')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
+                                                </div>
                                             </div>
                                     </div>
                                     <div class="modal-footer">

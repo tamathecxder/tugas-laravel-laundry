@@ -79,6 +79,7 @@
                                             @csrf
                                             <div id="method"></div>
                                             <div class="mb-3">
+                                                <label for="jenis" class="form-label">Pilih jenis-jenis paket</label>
                                                 <select id="jenis" name="jenis" class="form-select border form-select-sm"
                                                     aria-label="Default select example" required>
                                                     <option selected>Jenis-jenis paket...</option>
@@ -94,10 +95,10 @@
                                                 @enderror
                                             </div>
                                             <div class="mb-3">
+                                                <label for="outlet_id" class="form-label">Outlet ID</label>
                                                 <select
                                                     class="form-select border form-select-sm @error('outlet_id') is-invalid @enderror"
                                                     name="outlet_id" id="outlet_id">
-                                                    <option selected disabled>OUTLET ID</option>
                                                     @foreach ($outlet as $otId)
                                                         <option value="{{ $otId->id }}"
                                                             @if (old('outlet_id') === $otId->id) selected @endif>
@@ -111,29 +112,33 @@
                                                     </div>
                                                 @enderror
                                             </div>
-                                            <div class="input-group input-group-outline mb-3">
+                                            <div>
                                                 <label for="nama_paket" class="form-label">Nama Paket</label>
-                                                <input type="text" name="nama_paket" id="nama_paket"
-                                                    class="form-control @error('nama_paket') is-invalid @enderror"
-                                                    value="{{ old('nama_paket') }}">
+                                                <div class="input-group input-group-outline mb-3">
+                                                    <input type="text" name="nama_paket" id="nama_paket"
+                                                        class="form-control @error('nama_paket') is-invalid @enderror"
+                                                        value="{{ old('nama_paket') }}" placeholder="masukkan nama paket cucian">
 
-                                                @error('nama_paket')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
+                                                    @error('nama_paket')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
+                                                </div>
                                             </div>
-                                            <div class="input-group input-group-outline mb-3">
+                                            <div>
                                                 <label for="harga" class="form-label">Harga Paket</label>
-                                                <input type="text" name="harga" id="harga"
-                                                    class="form-control @error('harga') is-invalid @enderror"
-                                                    value="{{ old('harga') }}">
+                                                <div class="input-group input-group-outline mb-3">
+                                                    <input type="text" name="harga" id="harga"
+                                                        class="form-control @error('harga') is-invalid @enderror"
+                                                        value="{{ old('harga') }}" placeholder="masukkan harga paket cucian">
 
-                                                @error('harga')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
+                                                    @error('harga')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
+                                                </div>
                                             </div>
                                     </div>
                                     <div class="modal-footer">
@@ -162,7 +167,8 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12 mb-md-0 mb-4">
-                                <a href="{{  route('paket.export')  }}" class="btn btn-success text-decoration-none"><i data-feather="file-text" class="align-items-center"></i> Export</a>
+                                <a href="{{ route('paket.export') }}" class="btn btn-success text-decoration-none"><i
+                                        data-feather="file-text" class="align-items-center"></i> Export</a>
                             </div>
                         </div>
                     </div>
@@ -178,24 +184,57 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-12 mb-md-0 mb-4">
-                                <form method="post" action="{{ route('paket.import') }}" enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="row">
-                                        <div class="col-md-8 col-6">
-                                            <div class="form-group">
-                                                <input type="file" name="file2" class="form-control border" placeholder="Pilih file excel(.xlsx)">
-                                            </div>
-                                            @error('file2')
-                                                <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="col-md-4 col-6">
-                                            <button type="submit" class="btn btn-info" id="submit"><i data-feather="download-cloud"></i></button>
-                                        </div>
+                        <div class="col-md-10">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">
+                                Import ke Excel
+                            </button>
+                        </div>
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
                                     </div>
-                                </form>
+                                    <div class="modal-body">
+                                        <form method="post" action="{{ route('paket.import') }}"
+                                            enctype="multipart/form-data">
+                                            @csrf
+                                            <div class="row">
+                                                <div class="col-md-9 col-6">
+                                                    <div class="form-group">
+                                                        <input type="file" name="file2" class="form-control border ms-2"
+                                                            placeholder="Pilih file excel(.xlsx)">
+                                                    </div>
+                                                    @error('file2')
+                                                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                                    @enderror
+
+                                                    <div class="my-3">
+                                                        <p>Klik <a href="{{ route('paket.export-template') }}"
+                                                                class="badge bg-info">disini</a> untuk mendownload template
+                                                            excel</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <button type="submit" class="btn btn-info" id="submit"><i
+                                                            data-feather="download-cloud"></i> </button>
+                                                </div>
+                                                <div class="row">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -256,9 +295,7 @@
 
             if (mode == 'edit') {
                 modal.find('.modal-title').text('Edit data Member');
-                modal.find('.modal-body #outlet_id').val({
-                    outlet_id
-                }).change();
+                modal.find('.modal-body #outlet_id').val(outlet_id).change();
                 modal.find('.modal-body #jenis').val(jenis).change();
                 modal.find('.modal-body #nama_paket').val(nama_paket).change();
                 modal.find('.modal-body #harga').val(harga).change();

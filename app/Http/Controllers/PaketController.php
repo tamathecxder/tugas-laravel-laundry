@@ -162,9 +162,8 @@ class PaketController extends Controller
 
     public function downloadPDF()
     {
-        $paket = Paket::all();
-        $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('paket.download-pdf', ['paket' => $paket]);
+        $data = Paket::where('outlet_id', auth()->user()->outlet_id)->get();
+        $pdf = PDF::loadView('paket.download-pdf', compact('data'));
         return $pdf->download('paket.pdf');
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Models\Paket;
+use App\Models\Member;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -10,33 +10,33 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Events\BeforeImport;
 
-class TemplatePaketExport implements FromCollection, WithHeadings, WithEvents, WithMapping
+class TemplateMemberExport implements FromCollection, WithHeadings, WithMapping, WithEvents
 {
     /**
     * @return \Illuminate\Support\Collection
     */
     public function collection()
     {
-        return Paket::all()->take(5)->makeHidden('id');
+        return Member::all()->take(5)->makeHidden('id');
     }
 
     public function map($barang): array
     {
         return [
-            auth()->user()->outlet_id,
-            'jenis',
-            'nama_paket',
-            'harga',
+            'nama_member',
+            'alamat',
+            'jenis_kelamib',
+            'tlp',
         ];
     }
 
     public function headings(): array
     {
         return [
-            'ID Outlet',
-            'Jenis',
-            'Nama Paket',
-            'Harga',
+            'Nama',
+            'Alamat',
+            'Jenis Kelamin',
+            'Tlp',
         ];
     }
 
@@ -58,7 +58,7 @@ class TemplatePaketExport implements FromCollection, WithHeadings, WithEvents, W
 
                 $event->sheet->insertNewRowBefore(1, 2);
                 $event->sheet->mergeCells('A1:D1');
-                $event->sheet->setCellValue('A1', 'DATA PAKET LAUNDRY SUMBER JAYA');
+                $event->sheet->setCellValue('A1', 'DATA MEMBER LAUNDRY SUMBER JAYA');
                 $event->sheet->getStyle('A1')->getFont()->setBOld(true);
                 $event->sheet->getStyle('A1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
                 $event->sheet->getStyle('A3:D' . $event->sheet->getHighestRow())->applyFromArray([

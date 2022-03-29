@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Exports\MemberExport;
+use App\Exports\TemplateMemberExport;
 use App\Models\Member;
 use App\Http\Requests\StoreMemberRequest;
 use App\Http\Requests\UpdateMemberRequest;
 use App\Imports\MemberImport;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -145,5 +147,17 @@ class MemberController extends Controller
         }
 
         return redirect()->route('member.index')->with('success', 'File excel berhasil diimport!');
+    }
+
+    public function exportTemplate()
+    {
+        return Excel::download(new TemplateMemberExport, 'member_template.xlsx');
+    }
+
+    public function downloadPDF()
+    {
+        $data = Member::all();
+        $pdf = PDF::loadView('member.download-pdf', compact('data'));
+        return $pdf->download('member.pdf');
     }
 }

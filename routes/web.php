@@ -22,6 +22,8 @@ Route::get('/', [HomeController::class, 'default'])->middleware('level:kasir,adm
 Route::resource('/member', MemberController::class)->middleware('level:admin');
 Route::get('/export/member', [MemberController::class, 'export'])->name('member.export')->middleware('level:admin');
 Route::post('/import/member', [MemberController::class, 'import'])->name('member.import')->middleware('level:admin');
+Route::get('/export/template/member', [MemberController::class, 'exportTemplate'])->name('member.export-template')->middleware('level:admin');
+Route::get('/download-pdf/member', [MemberController::class, 'downloadPDF'])->name('member.downloadPDF')->middleware('level:admin');
 
 // Route outlet
 Route::resource('/outlet', OutletController::class)->middleware('level:admin');
@@ -29,6 +31,7 @@ Route::get('/export/outlet', [OutletController::class, 'export'])->name('outlet.
 Route::post('/import/outlet', [OutletController::class, 'import'])->name('outlet.import')->middleware('level:admin');
 Route::get('/export/template/outlet', [OutletController::class, 'exportTemplate'])->name('outlet.export-template')->middleware('level:admin');
 Route::get('/download-pdf/outlet', [OutletController::class, 'downloadPDF'])->name('outlet.downloadPDF')->middleware('level:admin');
+
 
 // Route paket
 Route::resource('/paket', PaketController::class)->middleware('level:admin');

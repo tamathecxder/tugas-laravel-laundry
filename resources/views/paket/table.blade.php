@@ -10,6 +10,9 @@
                 <div class="table-responsive p-0">
                     <table class="table align-items-center mb-0" id="tbl-paket">
                         <thead>
+                            <div class="ms-4 text-start">
+                                <a href="{{ route('paket.downloadPDF') }}" class="btn btn-info">Download PDF</a>
+                            </div>
                             <tr>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
@@ -51,7 +54,7 @@
                                         data-toggle="tooltip" data-original-title="Edit user" data-bs-toggle="modal" data-bs-target="#inputDataPaket"
                                         data-mode="edit"
                                         data-id="{{ $data_paket->id }}"
-                                        data-id_outlet="{{ $data_paket->outlet_id }}"
+                                        data-outlet_id="{{ $data_paket->outlet_id }}"
                                         data-jenis="{{ $data_paket->jenis }}"
                                         data-nama_paket="{{ $data_paket->nama_paket }}"
                                         data-harga="{{ $data_paket->harga }}"

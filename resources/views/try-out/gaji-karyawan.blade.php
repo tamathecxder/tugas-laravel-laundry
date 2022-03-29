@@ -196,7 +196,7 @@
                 const awal = 2000000;
                 let totalGajiAwal = 0;
                 let totalTunjangan = 0;
-                let totalTotal = 0;
+                let totalAkhir = 0;
                 let tunjangan = 0;
                 let total = 0;
 
@@ -248,15 +248,15 @@
                     row += `</tr>`;
                     totalGajiAwal += Number(awal);
                     totalTunjangan += Number(tunjangan);
-                    totalTotal += Number(total);
+                    totalAkhir += Number(total);
                 });
                 row += '<tr>'
                 row += '<td colspan="6" align="center" class="bg-dark text-white">TOTAL</td>'
                 row += `<td>${totalGajiAwal}</td>`
                 row += `<td>${totalTunjangan}</td>`
-                row += `<td>${totalTotal}</td>`
+                row += `<td>${totalAkhir}</td>`
                 row += '</tr>'
-                console.log(totalGajiAwal, totalTunjangan, totalTotal);
+                console.log(totalGajiAwal, totalTunjangan, totalAkhir);
 
                 return row;
             }
