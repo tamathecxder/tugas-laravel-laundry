@@ -82,7 +82,8 @@
                                                     <div class="input-group input-group-outline mb-3">
                                                         <input type="text" name="nama_barang" id="nama_barang"
                                                             class="form-control @error('nama_barang') is-invalid @enderror"
-                                                            value="{{ old('nama_barang') }}" placeholder="inputkan nama barang">
+                                                            value="{{ old('nama_barang') }}"
+                                                            placeholder="inputkan nama barang">
 
                                                         @error('nama_barang')
                                                             <div class="invalid-feedback">
@@ -110,7 +111,8 @@
                                                     <div class="input-group input-group-outline mb-3">
                                                         <input type="text" name="harga" id="harga"
                                                             class="form-control @error('harga') is-invalid @enderror"
-                                                            value="{{ old('harga') }}" placeholder="Inputkan harga barang">
+                                                            value="{{ old('harga') }}"
+                                                            placeholder="Inputkan harga barang">
 
                                                         @error('harga')
                                                             <div class="invalid-feedback">
@@ -122,8 +124,9 @@
                                                 <div>
                                                     <label for="waktu_beli">Waktu beli</label>
                                                     <div class="input-group input-group-outline mb-3">
-                                                        <input type="datetime-local" name="waktu_beli" id="waktu_beli" value="{{ date('Y-m-d') }}T{{date('h:i')}}"
-                                                        class="form-control @error('waktu_beli') is-invalid @enderror">
+                                                        <input type="datetime-local" name="waktu_beli" id="waktu_beli"
+                                                            value="{{ date('Y-m-d') }}T{{ date('h:i') }}"
+                                                            class="form-control @error('waktu_beli') is-invalid @enderror">
 
                                                         @error('waktu_beli')
                                                             <div class="invalid-feedback">
@@ -137,7 +140,8 @@
                                                     <div class="input-group input-group-outline mb-3">
                                                         <input type="text" name="supplier" id="supplier"
                                                             class="form-control @error('supplier') is-invalid @enderror"
-                                                            value="{{ old('supplier') }}" placeholder="Inputkan supplier barang">
+                                                            value="{{ old('supplier') }}"
+                                                            placeholder="Inputkan supplier barang">
 
                                                         @error('supplier')
                                                             <div class="invalid-feedback">
@@ -147,9 +151,13 @@
                                                     </div>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="status" class="form-label" id="labelStatus">Status</label>
-                                                    <select class="form-select border form-select-sm @error('status') is-invalid @enderror" name="status" id="status">
-                                                        <option selected disabled>----- STATUS PENGGUNAAN BARANG -----</option>
+                                                    <label for="status" class="form-label"
+                                                        id="labelStatus">Status</label>
+                                                    <select
+                                                        class="form-select border form-select-sm @error('status') is-invalid @enderror"
+                                                        name="status" id="status">
+                                                        <option selected disabled>----- STATUS PENGGUNAAN BARANG -----
+                                                        </option>
                                                         @foreach ($status_barang as $status)
                                                             <option value="{{ $status }}">
                                                                 {{ $status }}
@@ -181,18 +189,13 @@
                 <div class="card my-3">
                     <div class="card-header pb-0 p-3">
                         <div class="row">
-                            <div class="col-md-8 d-flex align-items-center">
+                            <div class="col-md-6 d-flex align-items-center">
                                 <h6 class="mb-0"> Export Data Ke Excel</h6>
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-12 mb-md-0 mb-4">
-                                    <a href="{{ route('barang.export') }}"
-                                        class="btn btn-success text-decoration-none"><i data-feather="file-text"
-                                            class="align-items-center"></i> Export</a>
-                                </div>
-                            </div>
+                            <a href="{{ route('barang.export') }}" class="btn btn-success text-decoration-none"><i
+                                    data-feather="file-text" class="align-items-center"></i> Export</a>
                         </div>
                     </div>
                 </div>
@@ -201,32 +204,62 @@
                 <div class="card my-3">
                     <div class="card-header pb-0 p-3">
                         <div class="row">
-                            <div class="col-md-10 col-sm-6 d-flex align-items-center">
+                            <div class="col-md-12 col-sm-6 d-flex align-items-center">
                                 <h6 class="mb-0">Import Excel Ke Database</h6>
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-12 mb-md-0 mb-4">
-                                    <form method="post" action="{{ route('barang.import') }}"
-                                        enctype="multipart/form-data">
-                                        @csrf
-                                        <div class="row">
-                                            <div class="col-md-8 col-6">
-                                                <div class="form-group">
-                                                    <input type="file" name="excel" class="form-control border"
-                                                        placeholder="Pilih file excel(.xlsx)">
-                                                </div>
-                                                @error('file2')
-                                                    <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                            <div class="col-md-4 col-6">
-                                                <button type="submit" class="btn btn-info" id="submit"><i
-                                                        data-feather="download-cloud"></i> </button>
-                                            </div>
+                                <div class="col-md-10">
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal">
+                                        Import ke Excel
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
                                         </div>
-                                    </form>
+                                        <div class="modal-body">
+                                            <form method="post" action="{{ route('barang.import') }}"
+                                                enctype="multipart/form-data">
+                                                @csrf
+                                                <div class="row">
+                                                    <div class="col-md-9 col-6">
+                                                        <div class="form-group">
+                                                            <input type="file" name="excel" class="form-control border ms-2"
+                                                                placeholder="Pilih file excel(.xlsx)">
+                                                        </div>
+                                                        @error('file2')
+                                                            <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                                        @enderror
+
+                                                        <div class="my-3">
+                                                            <p>Klik <a href="{{ route('barang.export-template') }}" class="badge bg-info">disini</a> untuk mendownload template excel</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <button type="submit" class="btn btn-info" id="submit"><i
+                                                            data-feather="download-cloud"></i> </button>
+                                                    </div>
+                                                    <div class="row">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -324,4 +357,3 @@
         });
     </script>
 @endpush
-

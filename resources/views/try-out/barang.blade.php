@@ -177,6 +177,7 @@
         </div>
     </div>
 
+
 @endsection
 
 @push('script')
@@ -327,7 +328,7 @@
                 let countTotal = 0
 
                 if (arr.length === 0) {
-                    return row = `<tr><td colspan="8">Belum ada data sama sekali</td></tr>`;
+                    return row = `<tr><td colspan="8" align="center">Belum ada data sama sekali</td></tr>`;
                 }
 
                 arr.forEach(function(item, value) {

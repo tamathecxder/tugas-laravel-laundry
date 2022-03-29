@@ -6,11 +6,13 @@ use App\Models\LogDB;
 use App\Models\Barang;
 use Illuminate\Http\Request;
 use App\Exports\BarangExport;
+use App\Exports\TemplateBarangExport;
 use App\Imports\BarangImport;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\StoreBarangRequest;
 use App\Http\Requests\UpdateBarangRequest;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 /**
  * Class BarangController
@@ -140,4 +142,17 @@ class BarangController extends Controller
 
         return redirect()->route('penggunaan_barang.index')->with('success', 'File excel telah diimport!');
     }
+
+    public function exportTemplate()
+    {
+        return Excel::download(new TemplateBarangExport, 'penggunaan_barang_template.xlsx');
+    }
+
+    public function downloadPDF()
+    {
+        $data = Barang::all();
+        $pdf = PDF::loadView('data-barang.download-pdf', compact('data'));
+        return $pdf->download('data-barang.pdf');
+    }
+
 }

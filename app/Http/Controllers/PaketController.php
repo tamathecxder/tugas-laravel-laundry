@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Exports\PaketExport;
+use App\Exports\TemplatePaketExport;
 use App\Models\Paket;
 use App\Http\Requests\StorePaketRequest;
 use App\Http\Requests\UpdatePaketRequest;
 use App\Imports\PaketImport;
 use App\Models\Outlet;
 use App\Models\PaketJenis;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Maatwebsite\Excel\Facades\Excel;
 
 class PaketController extends Controller
@@ -150,5 +153,18 @@ class PaketController extends Controller
         }
 
         return redirect()->route('paket.index')->with('success', 'File excel berhasil diimport!');
+    }
+
+    public function exportTemplate()
+    {
+        return Excel::download(new TemplatePaketExport, 'paket_template.xlsx');
+    }
+
+    public function downloadPDF()
+    {
+        $paket = Paket::all();
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadView('paket.download-pdf', ['paket' => $paket]);
+        return $pdf->download('paket.pdf');
     }
 }

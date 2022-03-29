@@ -160,25 +160,58 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-12 mb-md-0 mb-4">
-                                <form method="post" action="{{ route('outlet.import') }}" enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="row">
-                                        <div class="col-md-8 col-6">
-                                            <div class="form-group">
-                                                <input type="file" name="excel" class="form-control border"
-                                                    placeholder="Pilih file excel(.xlsx)">
-                                            </div>
-                                            @error('file2')
-                                                <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="col-md-4 col-6">
-                                            <button type="submit" class="btn btn-info" id="submit"><i
-                                                    data-feather="download-cloud"></i> </button>
-                                        </div>
+                            <div class="col-md-10">
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal">
+                                    Import ke Excel
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
                                     </div>
-                                </form>
+                                    <div class="modal-body">
+                                        <form method="post" action="{{ route('outlet.import') }}"
+                                            enctype="multipart/form-data">
+                                            @csrf
+                                            <div class="row">
+                                                <div class="col-md-9 col-6">
+                                                    <div class="form-group">
+                                                        <input type="file" name="excel" class="form-control border ms-2"
+                                                            placeholder="Pilih file excel(.xlsx)">
+                                                    </div>
+                                                    @error('file2')
+                                                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                                    @enderror
+
+                                                    <div class="my-3">
+                                                        <p>Klik <a href="{{ route('outlet.export-template') }}"
+                                                                class="badge bg-info">disini</a> untuk mendownload template
+                                                            excel</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <button type="submit" class="btn btn-info" id="submit"><i
+                                                            data-feather="download-cloud"></i> </button>
+                                                </div>
+                                                <div class="row">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

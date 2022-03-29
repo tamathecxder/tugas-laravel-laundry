@@ -27,11 +27,15 @@ Route::post('/import/member', [MemberController::class, 'import'])->name('member
 Route::resource('/outlet', OutletController::class)->middleware('level:admin');
 Route::get('/export/outlet', [OutletController::class, 'export'])->name('outlet.export')->middleware('level:admin');
 Route::post('/import/outlet', [OutletController::class, 'import'])->name('outlet.import')->middleware('level:admin');
+Route::get('/export/template/outlet', [OutletController::class, 'exportTemplate'])->name('outlet.export-template')->middleware('level:admin');
+Route::get('/download-pdf/outlet', [OutletController::class, 'downloadPDF'])->name('outlet.downloadPDF')->middleware('level:admin');
 
 // Route paket
 Route::resource('/paket', PaketController::class)->middleware('level:admin');
 Route::get('/export/paket', [PaketController::class, 'export'])->name('paket.export')->middleware('level:admin');
 Route::post('/import/paket', [PaketController::class, 'import'])->name('paket.import')->middleware('level:admin');
+Route::get('/export/template/paket', [PaketController::class, 'exportTemplate'])->name('paket.export-template')->middleware('level:admin');
+Route::get('/download-pdf/paket', [PaketController::class, 'downloadPDF'])->name('paket.downloadPDF')->middleware('level:admin');
 
 // Route penjemputan
 Route::resource('/penjemputan', PenjemputanController::class)->middleware('level:admin');
@@ -73,6 +77,9 @@ Route::resource('/penggunaan_barang', BarangController::class);
 Route::post('/status/{id}', [BarangController::class, 'statusBarang'])->name('barang.status');
 Route::get('/export/penggunaan_barang', [BarangController::class, 'export'])->name('barang.export');
 Route::post('/import/penggunaan_barang', [BarangController::class, 'import'])->name('barang.import');
+Route::get('/export/template/penggunaan_barang', [BarangController::class, 'exportTemplate'])->name('barang.export-template');
+Route::get('/download-pdf/penggunaan_barang', [BarangController::class, 'downloadPDF'])->name('barang.downloadPDF');
+
 // Transaksi pada admin dan kasir
 /**
  * Route::resource('/transaksi', TransaksiController::class)->middleware('level:admin,kasir', 'auth');

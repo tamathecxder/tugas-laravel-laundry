@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\Models\Barang;
+use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
@@ -26,7 +27,7 @@ class BarangImport implements ToModel, withHeadingRow
             'nama_barang' => $row['nama_barang'],
             'qty' => $row['qty'],
             'harga' => $row['harga'],
-            'waktu_beli' => $row['waktu_beli'],
+            'waktu_beli' => Carbon::parse($row['waktu_beli'])->format('Y-m-d H:i:s'),
             'supplier' => $row['supplier'],
             'status' => $row['status']
         ]);

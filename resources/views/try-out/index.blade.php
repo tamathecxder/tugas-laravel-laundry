@@ -26,72 +26,65 @@
                                 <div class="row">
                                     <div class="col-md-6 col-sm-6">
                                         <input type="hidden" name="_token" value="kjpktwXYVxgjjvcVPO8cPuq3ghsGU3I9657nTAPI">
-                                        <div class="input-group input-group-outline my-3">
-                                            <label class="form-label">ID</label>
+                                        <label class="form-label">ID</label>
+                                        <div class="input-group input-group-outline mb-3">
                                             <input type="text" name="id" id="id" class="form-control "
                                                 onfocus="focused(this)" onfocusout="defocused(this)" required>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-6">
-                                        <div class="input-group input-group-outline my-3">
-                                            <label class="form-label">Nama</label>
+                                        <label class="form-label">Nama</label>
+                                        <div class="input-group input-group-outline mb-3">
                                             <input type="text" name="nama" id="nama" class="form-control"
                                                 onfocus="focused(this)" onfocusout="defocused(this)" required>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="my-3">
-                                    <div class="row">
-                                        <div class="col-md-6 col-sm-6">
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <label for="jk" class="form-label">Jenis Kelamin :</label>
-                                                </div>
-                                                <div class="form-check col-md-4 col-sm-3">
-                                                    <input class="form-check-input" type="radio" name="jk" id="jk"
-                                                        value="L">
-                                                    <label class="form-check-label" for="jk">
-                                                        Laki-laki
-                                                    </label>
-                                                </div>
-                                                <div class="form-check col-md-4 col-sm-4">
-                                                    <input class="form-check-input" type="radio" name="jk" id="jk"
-                                                        value="P">
-                                                    <label class="form-check-label" for="jk">
-                                                        Perempuan
-                                                    </label>
-                                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="row">
+                                            <label for="jk" class="form-label">Jenis Kelamin :</label>
+                                            <div class="form-check col-md-4 col-sm-3 mb-3">
+                                                <input class="form-check-input" type="radio" name="jk" id="jk" value="L">
+                                                <label class="form-check-label" for="jk">
+                                                    Laki-laki
+                                                </label>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6 col-sm-6">
-                                            <select id="status_menikah" name="status_menikah"
-                                                class="form-select border form-select-sm"
-                                                aria-label="Default select example" required>
-                                                <option selected disabled>Status Menikah ...</option>
-                                                <option value="single">Single</option>
-                                                <option value="couple">Couple</option>
-                                            </select>
+                                            <div class="form-check col-md-4 col-sm-4 mb-3">
+                                                <input class="form-check-input" type="radio" name="jk" id="jk" value="P">
+                                                <label class="form-check-label" for="jk">
+                                                    Perempuan
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-6 col-sm-6">
-                                            <div class="input-group input-group-outline my-3">
-                                                <label class="form-label">Jumlah Anak</label>
-                                                <input type="number" name="jml_anak" id="jml_anak" class="form-control "
-                                                    onfocus="focused(this)" onfocusout="defocused(this)" required>
-                                            </div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <label for="status_menikah" class="form-label">Pilih status pernikahan</label>
+                                        <select id="status_menikah" name="status_menikah"
+                                            class="form-select border form-select-sm mb-3" aria-label="Default select example"
+                                            required>
+                                            <option selected disabled>Status Menikah ...</option>
+                                            <option value="single">Single</option>
+                                            <option value="couple">Couple</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6">
+                                        <label class="form-label">Jumlah Anak</label>
+                                        <div class="input-group input-group-outline mb-3">
+                                            <input type="number" name="jml_anak" id="jml_anak" class="form-control"
+                                                required>
                                         </div>
-                                        <div class="col-md-6 col-sm-6">
-                                            <div class="input-group input-group-outline my-3">
-                                                <div class="row">
-                                                    <div class="col-md-4 col-sm-4">
-                                                        <label class="">Mulai Bekerja</label>
-                                                    </div>
-                                                    <div class="col-md-8 col-sm-8">
-                                                        <input type="date" name="mulai_bekerja" id="mulai_bekerja"
-                                                            class="form-control" onfocus="focused(this)"
-                                                            onfocusout="defocused(this)" required>
-                                                    </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="input-group input-group-outline mb-3">
+                                            <div class="row">
+                                                <label class="">Mulai Bekerja</label>
+                                                <div class="col-md-8 col-sm-8">
+                                                    <input type="date" name="mulai_bekerja" id="mulai_bekerja"
+                                                        class="form-control" onfocus="focused(this)"
+                                                        onfocusout="defocused(this)" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -159,11 +152,6 @@
                                         <td colspan="8" align="center">Belum ada data</td>
                                     </tr>
                                 </tbody>
-                                <tfoot class="bg-secondary text-dark">
-                                    <tr valign="bottom">
-                                        <td width="" colspan="6" align="center">Total</td>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </div>
                     </div>
@@ -190,6 +178,8 @@
                 data.forEach(function(item, index) {
                     let name = item['name'];
                     let value = (name === 'id' ||
+                        name === 'tunjangan' ||
+                        name === 'gajiAwal' ||
                         name === 'jml_anak' ?
                         Number(item['value']) : item['value']);
 
@@ -200,77 +190,35 @@
                 return newData;
             }
 
-            $(function() {
-                // show data diawal page refresh
-                $('#tblKaryawan tbody').html(showData(dataKaryawan));
-
-                // events
-                $('#formKaryawan').on('submit', function(e) {
-                    e.preventDefault();
-
-                    dataKaryawan.push(insert());
-                    $('#tblKaryawan tbody').html(showData(dataKaryawan));
-                    console.log(dataKaryawan);
-                });
-
-                $('#status_menikah').on('change', function() {
-                    let value = $('#status_menikah').val();
-                    console.log(value);
-
-                    if ( value == 'single' ) {
-                        $('#jml_anak').val('0');
-                        $('#jml_anak').attr('readonly', true);
-                        $('#jml_anak').attr('disabled', true);
-                    } else {
-                        $('#jml_anak').attr('readonly', false);
-                    }
-                });
-
-                // events for sorting button
-                $('#sorting').on('click', function() {
-                    dataKaryawan = insertionSort(dataKaryawan, 'id');
-
-                    $('#tblKaryawan tbody').html(showData(dataKaryawan));
-                    console.log(dataKaryawan);
-                });
-
-                // events search
-                $('#btnSearch').on('click', function(e) {
-                    let textSearch = $('#search').val();
-                    let id = searching(dataKaryawan, 'id', textSearch);
-                    let data = [];
-
-                    if (id >= 0)
-                        data.push(dataKaryawan[id]);
-                    console.log(id);
-                    console.log(data);
-                    $('#tblKaryawan tbody').html(showData(data));
-                });
-            });
-
             // showData fn
-            function showData(arr, x) {
+            function showData(dataKaryawan) {
                 let row = '';
                 const awal = 2000000;
-                let totalAwal = 0;
+                let totalGajiAwal = 0;
                 let totalTunjangan = 0;
                 let totalTotal = 0;
                 let tunjangan = 0;
                 let total = 0;
 
-                if (arr.length === 0) {
-                    return row = `<tr><td colspan="8">Belum ada data sama sekali</td></tr>`;
+                if (dataKaryawan.length === 0) {
+                    return row = `<tr><td colspan="8" align="center">Belum ada data sama sekali</td></tr>`;
                 }
 
-                arr.forEach(function(item, value, date) {
+                dataKaryawan.forEach(function(item, value) {
                     date = new Date(item['mulai_bekerja']);
-                    let ageDifMs = Date.now() - date.getTime();
+                    console.log(date);
+                    var ageDifMs = Date.now() - date.getTime();
                     if (ageDifMs > 0) {
-                        let ageDate = new Date(ageDifMs);
-                        let newAge = Math.abs(ageDate.getUTCFullYear() - 1970);
+                        var ageDate = new Date(ageDifMs);
+                        var newAge = Math.abs(ageDate.getUTCFullYear() - 1970);
                         var tahun = newAge * 150000;
                     } else {
                         var tahun = 0
+                    }
+
+                    // mengosongkan value jml_anak jika status_menikahnya single
+                    if (item['status_menikah'] === 'single') {
+                        item['jml_anak'] = 0;
                     }
 
                     if (item['jml_anak'] >= 2) {
@@ -282,8 +230,9 @@
                     }
 
                     let anak = 150000 * child;
-                    let status = (item['status'] === 'menikah' ? 250000 : 0);
-                    let tunjangan = anak + status + tahun;
+                    let status = (item['status'] === 'couple' ? 250000 : 0);
+
+                    tunjangan = anak + status + tahun;
                     total = tunjangan + awal;
 
                     row += `<tr>`;
@@ -297,17 +246,17 @@
                     row += `<td>${tunjangan}</td>`
                     row += `<td>${total}</td>`
                     row += `</tr>`;
-                    totalAwal += awal;
-                    totalTunjangan += tunjangan;
-                    totalTotal += total;
+                    totalGajiAwal += Number(awal);
+                    totalTunjangan += Number(tunjangan);
+                    totalTotal += Number(total);
                 });
                 row += '<tr>'
-                row += '<td colspan="6" align="center">TOTAL</td>'
-                row += `<td>${totalAwal}</td>`
+                row += '<td colspan="6" align="center" class="bg-dark text-white">TOTAL</td>'
+                row += `<td>${totalGajiAwal}</td>`
                 row += `<td>${totalTunjangan}</td>`
                 row += `<td>${totalTotal}</td>`
                 row += '</tr>'
-                console.log(totalAwal, totalTunjangan, totalTotal);
+                console.log(totalGajiAwal, totalTunjangan, totalTotal);
 
                 return row;
             }
@@ -349,6 +298,55 @@
 
                 return Math.abs(ageDate.getUTCFullYear() - 1970);
             }
+
+            $(function() {
+                // show data diawal page refresh
+                $('#tblKaryawan tbody').html(showData(dataKaryawan));
+
+                // events
+                $('#formKaryawan').on('submit', function(e) {
+                    e.preventDefault();
+
+                    dataKaryawan.push(insert());
+                    $('#tblKaryawan tbody').html(showData(dataKaryawan));
+                    console.log(dataKaryawan);
+                });
+
+                $('#status_menikah').on('change', function() {
+                    let value = $('#status_menikah').val();
+                    console.log(value);
+
+                    if (value == 'single') {
+                        $('#jml_anak').val(0);
+                        $('#jml_anak').attr('readonly', true);
+                        $('#jml_anak').attr('disabled', true);
+                    } else {
+                        $('#jml_anak').attr('readonly', false);
+                        $('#jml_anak').attr('disabled', false);
+                    }
+                });
+
+                // events for sorting button
+                $('#sorting').on('click', function() {
+                    dataKaryawan = insertionSort(dataKaryawan, 'id');
+
+                    $('#tblKaryawan tbody').html(showData(dataKaryawan));
+                    console.log(dataKaryawan);
+                });
+
+                // events search
+                $('#btnSearch').on('click', function(e) {
+                    let textSearch = $('#search').val();
+                    let id = searching(dataKaryawan, 'id', textSearch);
+                    let data = [];
+
+                    if (id >= 0)
+                        data.push(dataKaryawan[id]);
+                    console.log(id);
+                    console.log(data);
+                    $('#tblKaryawan tbody').html(showData(data));
+                });
+            });
         })
     </script>
 @endpush

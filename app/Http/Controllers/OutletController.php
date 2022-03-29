@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Exports\OutletExport;
+use App\Exports\TemplateOutletExport;
 use App\Models\Outlet;
 use App\Http\Requests\StoreOutletRequest;
 use App\Http\Requests\UpdateOutletRequest;
 use App\Imports\OutletImport;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Maatwebsite\Excel\Facades\Excel;
 
 class OutletController extends Controller
@@ -143,4 +145,19 @@ class OutletController extends Controller
 
         return redirect()->route('outlet.index')->with('success', 'File excel telah diimport!');
     }
+
+    public function exportTemplate()
+    {
+        return Excel::download(new TemplateOutletExport, 'outlet_template.xlsx');
+    }
+
+    // make a function for generate outlet PDF using DOMPDF
+    public function downloadPDF()
+    {
+        $outlet = Outlet::all();
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadView('outlet.download-pdf', ['outlet' => $outlet]);
+        return $pdf->download('outlet.pdf');
+    }
+
 }
