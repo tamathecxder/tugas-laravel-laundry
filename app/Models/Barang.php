@@ -16,31 +16,31 @@ class Barang extends Model
 
 }
 
-interface Perabotan
-{
-    public function defineAlat();
-}
+// interface Perabotan
+// {
+//     public function defineAlat();
+// }
 
-class Alat implements Perabotan
-{
-    public function defineAlat()
-    {
-        return 'default_nama_alat';
-    }
-}
+// class Alat implements Perabotan
+// {
+//     public function defineAlat()
+//     {
+//         return 'default_nama_alat';
+//     }
+// }
 
-class Perkakas implements Perabotan
-{
-    public function defineAlat()
-    {
-        return 'default_nama_perkakas';
-    }
-}
+// class Perkakas implements Perabotan
+// {
+//     public function defineAlat()
+//     {
+//         return 'default_nama_perkakas';
+//     }
+// }
 
-$alat = new Alat();
-echo $alat->defineAlat();
+// $alat = new Alat();
+// echo $alat->defineAlat();
 
-$perkakas = new Perkakas();
-echo $perkakas->defineAlat();
+// $perkakas = new Perkakas();
+// echo $perkakas->defineAlat();
 
 

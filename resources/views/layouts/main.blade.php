@@ -29,7 +29,7 @@
     {{-- feather icons --}}
     {{-- <script src="https://unpkg.com/feather-icons"></script> --}}
     <script src="{{ asset('assets/js/feather.min.js') }}"></script>
-    
+
     {{-- bootstrap --}}
     {{-- <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}"> --}}
 
@@ -39,13 +39,11 @@
     <style>
         #search {
             width: 100%;
-            padding: 10px 15px;
+            padding: 6px 15px;
             margin: 5px 0;
             box-sizing: border-box;
         }
-
     </style>
-
 
 </head>
 
@@ -133,6 +131,7 @@
     </script>
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script async defer src="{{ asset('assets') }}/js/github/buttons.js"></script>
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="{{ asset('assets') }}/js/material-dashboard.min.js?v=3.0.0"></script>
     @stack('script')

@@ -54,15 +54,6 @@
             @endcan
 
             @can('isKasir')
-                {{-- <li class="nav-item">
-          <a class="{{ request()->routeIs('transaksi.index') ? 'active bg-gradient-primary' : '' }} nav-link text-white" href="{{ route('transaksi.index') }}">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">receipt_long</i>
-            </div>
-            <span class="nav-link-text ms-1">Transaksi</span>
-          </a>
-        </li> --}}
-
                 <li class="nav-item">
                     <a class="{{ request()->routeIs('main-transaksi.index') ? 'active bg-gradient-primary' : '' }} nav-link text-white"
                         href="{{ route('main-transaksi.index') }}">
@@ -75,15 +66,6 @@
             @endcan
 
             @can('isAdmin')
-                {{-- <li class="nav-item">
-          <a class="{{ request()->routeIs('transaksi.index') ? 'active bg-gradient-primary' : '' }} nav-link text-white" href="{{ route('transaksi.index') }}">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">receipt_long</i>
-            </div>
-            <span class="nav-link-text ms-1">Transaksi</span>
-          </a>
-        </li> --}}
-
                 <li class="nav-item">
                     <a class="{{ request()->routeIs('main-transaksi.index') ? 'active bg-gradient-primary' : '' }} nav-link text-white"
                         href="{{ route('main-transaksi.index') }}">
@@ -134,6 +116,14 @@
                     <span class="nav-link-text ms-1">Penggunaan Barang</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link text-white " href="{{ route('absensi.index') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">person</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Absensi Kerja</span>
+                </a>
+            </li>
 
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Simulasi</h6>
@@ -168,6 +158,18 @@
                         <i class="material-icons opacity-10">person</i>
                     </div>
                     <span class="nav-link-text ms-1">Simulasi transaksi barang</span>
+                </a>
+            </li>
+
+            <li class="nav-item mt-3">
+                <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Uji Kompetensi</h6>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white " href="{{ route('ujikom.index') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">person</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Simulasi Penjualan Aksesoris</span>
                 </a>
             </li>
         </ul>

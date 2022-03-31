@@ -1,4 +1,4 @@
-<form action="{{ route('barang.status', $barang->id) }}" method="post">
+<form action="{{ route('barang.statusBarang', $barang->id) }}" method="post">
     @csrf
     <select name="status" id="status" class="form-select border form-select-sm status-barang">
         <option value="{{ $barang->status }}"selected>{{ $barang->status }}</option>

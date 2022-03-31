@@ -60,3 +60,33 @@
             //         filterData('');
             //     }
             // });
+
+
+            // function untuk mengurutkan array 2 dimensi menggunakan metode selection sort
+            // function selectionSort(arr, sortBy, sortDirection) {
+            //     let swapIdX;
+
+            //     for ( let i = 0; i < arr.length; i++ ) {
+            //         swapIdX = 1;
+
+            //         // mencari index array dengan data terbesar atau terkecil
+            //         for ( let j = i + 1; j < arr.length; j++ ) {
+            //             if ( sortDirection === 'ASC' && arr[swapIdX][sortBy] > arr[j][sortBy] ) {
+            //                 swapIdX = j;
+            //             } else if ( sortDirection === 'DESC' && arr[swapIdX][sortBy] < arr[j][sortBy] ) {
+            //                 swapIdX = j;
+            //             }
+            //         }
+
+            //         // jika ada data yang lebih kecil atau lebih besar dari data index ke-i, maka tukarkan data
+            //         if ( swapIdX != 1 ) {
+            //             let temp = arr[swapIdX];
+            //             arr[swapIdX] = arr[i];
+            //             arr[i] = temp;
+            //         }
+            //     }
+            // }
+
+            // const sortAksesoris = () => {
+            //     selectionSort(filterdataAksesoris, $('#sort-by').val(), $('#sort-direction').val());
+            // }

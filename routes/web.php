@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\BarangInventarisController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LaporanController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\PenjemputanController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\UjikomController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -77,11 +79,22 @@ Route::get('/simulasi-transaksi-barang', [HomeController::class, 'barang'])->nam
 
 // Penggunaan Data Barang
 Route::resource('/penggunaan_barang', BarangController::class);
-Route::post('/status/{id}', [BarangController::class, 'statusBarang'])->name('barang.status');
+Route::post('/status/{id}/barang', [BarangController::class, 'statusBarang'])->name('barang.statusBarang');
 Route::get('/export/penggunaan_barang', [BarangController::class, 'export'])->name('barang.export');
 Route::post('/import/penggunaan_barang', [BarangController::class, 'import'])->name('barang.import');
 Route::get('/export/template/penggunaan_barang', [BarangController::class, 'exportTemplate'])->name('barang.export-template');
 Route::get('/download-pdf/penggunaan_barang', [BarangController::class, 'downloadPDF'])->name('barang.downloadPDF');
+
+// Absensi Karyawan
+Route::resource('/absensi', AbsensiController::class)->middleware('level:admin');
+Route::post('/status/{id}/absensi', [AbsensiController::class, 'statusKaryawan'])->name('absensi.status');
+Route::get('/export/absensi', [AbsensiController::class, 'export'])->name('absensi.export');
+Route::post('/import/absensi', [AbsensiController::class, 'import'])->name('absensi.import');
+Route::get('/export/template/absensi', [AbsensiController::class, 'exportTemplate'])->name('absensi.export-template');
+Route::get('/download-pdf/absensi', [AbsensiController::class, 'downloadPDF'])->name('absensi.downloadPDF');
+
+// Ujikom
+Route::get('/simulasi-penjualan-aksesoris', [UjikomController::class, 'index'])->name('ujikom.index')->middleware('level:admin');
 
 // Transaksi pada admin dan kasir
 /**
