@@ -13,8 +13,10 @@ use Maatwebsite\Excel\Events\BeforeImport;
 class AbsensiExport implements FromCollection, WithHeadings, WithEvents, WithMapping
 {
     /**
-    * @return \Illuminate\Support\Collection
-    */
+     * Interface collection untuk mengambil data dari database
+     *
+     * @return \Illuminate\Support\Collection
+     */
     public function collection()
     {
         return Absensi::all();

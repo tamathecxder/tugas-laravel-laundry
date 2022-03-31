@@ -13,6 +13,10 @@ class LogDB extends Model
     protected $guarded = ['id', 'created_at', 'updated_at'];
     protected $primaryKey = 'id';
 
+    /**
+     * fungsi record untuk mencatat log ketika dipanggil dalam function
+     *
+     */
     public static function record($user_id = null, $event, $extra = null)
     {
         return static::create([

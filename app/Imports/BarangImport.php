@@ -17,6 +17,7 @@ class BarangImport implements ToModel, withHeadingRow
 
     /**
      * function model untuk mengimport data ke model barang
+     *
      * @param array $row
      * @return \Illuminate\Database\Eloquent\Model|null
      */

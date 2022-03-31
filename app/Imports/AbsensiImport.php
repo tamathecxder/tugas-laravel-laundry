@@ -9,6 +9,7 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 class AbsensiImport implements ToModel, WithHeadingRow
 {
     /**
+     * function model bertugas untuk mengimport data ke database dengan menyamakan dulu antara nama table dengan nama dari tiap row dalam excel
     * @param array $row
     *
     * @return \Illuminate\Database\Eloquent\Model|null
@@ -24,6 +25,10 @@ class AbsensiImport implements ToModel, WithHeadingRow
         ]);
     }
 
+    /**
+     * heading row bertugas melewatkan baris baris pada excel agar data yang diambil bisa diatur untuk baris row keberapa
+     * atau simplenya function headingRow ini untuk mengambil data dari baris yang di return kan
+     */
     public function headingRow(): int
     {
         return 3;
