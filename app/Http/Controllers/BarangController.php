@@ -41,6 +41,8 @@ class BarangController extends Controller
      */
     public function store(StoreBarangRequest $request)
     {
+        LogDB::record(Auth::user(), 'Me', 'view barang');
+
         $barang = Barang::create($request->all());
 
         if ( $barang ) {

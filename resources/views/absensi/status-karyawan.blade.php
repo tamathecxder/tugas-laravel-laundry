@@ -1,4 +1,4 @@
-<form action="{{ route('absensi.status', $ab->id) }}" method="post">
+<form action="{{ route('absensi.status', $ab->id) }}" method="post" id="formStatusAbsensi">
     @csrf
     <input type="hidden" name="id" value="{{ $ab->id }}">
     <select name="status" id="status" class="form-select border form-select-sm status-absensi">

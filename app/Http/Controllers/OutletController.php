@@ -8,8 +8,10 @@ use App\Models\Outlet;
 use App\Http\Requests\StoreOutletRequest;
 use App\Http\Requests\UpdateOutletRequest;
 use App\Imports\OutletImport;
+use App\Models\LogDB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
 class OutletController extends Controller
@@ -21,6 +23,8 @@ class OutletController extends Controller
      */
     public function index()
     {
+        LogDB::record(Auth::user(), 'Mengakses ke view outlet', 'view outlet');
+
         return view('outlet.index', [
             'outlet' => Outlet::all(),
         ]);
@@ -44,6 +48,8 @@ class OutletController extends Controller
      */
     public function store(StoreOutletRequest $request)
     {
+        LogDB::record(Auth::user(), 'Insert data outlet', 'view outlet');
+
         $data = $request->validate([
             'nama' => 'required',
             'alamat' => 'required',
@@ -89,6 +95,8 @@ class OutletController extends Controller
      */
     public function update(UpdateOutletRequest $request, $id)
     {
+        LogDB::record(Auth::user(), 'Update data outlet', 'view outlet');
+
         $outlet = Outlet::findOrFail($id);
 
         $rules = $request->validate([
@@ -114,6 +122,8 @@ class OutletController extends Controller
      */
     public function destroy($id)
     {
+        LogDB::record(Auth::user(), 'Delete data outlet', 'view outlet');
+
         $outlet = Outlet::findOrFail($id);
 
         $delete = $outlet->delete($id);
@@ -126,11 +136,15 @@ class OutletController extends Controller
     }
 
     public function export() {
+        LogDB::record(Auth::user(), 'Excel export data outlet', 'view outlet');
+
         $date = date('Y-m-d');
         return Excel::download(new OutletExport, $date . '_outlet.xlsx');
     }
 
     public function import(Request $request) {
+        LogDB::record(Auth::user(), 'Excel import data outlet', 'view outlet');
+
         $validatedData = $request->validate([
             'excel' => 'required|file|mimes:xlsx,csv,xls'
         ]);
@@ -148,12 +162,16 @@ class OutletController extends Controller
 
     public function exportTemplate()
     {
+        LogDB::record(Auth::user(), 'Excel export template data outlet', 'view outlet');
+
         return Excel::download(new TemplateOutletExport, 'outlet_template.xlsx');
     }
 
     // make a function for generate outlet PDF using DOMPDF
     public function downloadPDF()
     {
+        LogDB::record(Auth::user(), 'Generate PDF data outlet', 'view outlet');
+
         $outlet = Outlet::all();
         $pdf = App::make('dompdf.wrapper');
         $pdf->loadView('outlet.download-pdf', ['outlet' => $outlet]);

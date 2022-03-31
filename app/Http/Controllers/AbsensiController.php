@@ -8,8 +8,10 @@ use App\Models\Absensi;
 use App\Http\Requests\StoreAbsensiRequest;
 use App\Http\Requests\UpdateAbsensiRequest;
 use App\Imports\AbsensiImport;
+use App\Models\LogDB;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
 class AbsensiController extends Controller
@@ -21,6 +23,8 @@ class AbsensiController extends Controller
      */
     public function index()
     {
+        LogDB::record(Auth::user(), 'Mengakses ke view absensi karyawan', 'view absensi karyawan');
+
         return view('absensi.index', [
             'absensi' => Absensi::all(),
             'status_karyawan' => config('status_karyawan.status'),
@@ -45,16 +49,19 @@ class AbsensiController extends Controller
      */
     public function store(StoreAbsensiRequest $request)
     {
-        // // jika status nya masuk, maka waktu selesai kerja diisi dengan jam 15:00:00
-        // if ($request->status == 'masuk') {
-        //     $request->merge([
-        //         'waktu_selesai_kerja' => '15:00:00'
-        //     ]);
-        // } else if ( $request->status == 'cuti' || $request->status == 'sakit' ) {
+        // jika status nya masuk, maka waktu selesai kerja diisi dengan jam 15:00:00
+        if ($request->status == 'masuk') {
+            $request->merge([
+                'waktu_selesai_kerja' => '15:00:00'
+            ]);
+        }
+        // else if ( $request->status == 'cuti' || $request->status == 'sakit' ) {
         //     $request->merge([
         //         'waktu_selesai_kerja' => '00:00:00'
         //     ]);
         // }
+
+        LogDB::record(Auth::user(), 'Insert data absensi karyawan', 'view absensi karyawan');
 
         $absensi = Absensi::create($request->all());
 
@@ -67,6 +74,8 @@ class AbsensiController extends Controller
 
     public function statusKaryawan(Request $request)
     {
+        LogDB::record(Auth::user(), 'Update status_masuk karyawan', 'view absensi karyawan');
+
         $absensi = Absensi::find($request->id);
         $absensi->status = $request->status;
         $absensi->waktu_selesai_kerja = '15:00:00';
@@ -111,6 +120,8 @@ class AbsensiController extends Controller
      */
     public function update(UpdateAbsensiRequest $request, $id)
     {
+        LogDB::record(Auth::user(), 'Update data absensi karyawan', 'view absensi karyawan');
+
         $absensi = Absensi::findOrFail($id);
 
         $update = $absensi->update($request->all());
@@ -129,7 +140,10 @@ class AbsensiController extends Controller
      */
     public function destroy($id)
     {
+        LogDB::record(Auth::user(), 'Delete data absensi barang', 'view absensi karyawan');
+
         $absensi = Absensi::findOrFail($id);
+
         $delete = $absensi->delete();
 
         if ( $delete ) {
@@ -147,6 +161,8 @@ class AbsensiController extends Controller
      */
     public function export()
     {
+        LogDB::record(Auth::user(), 'Excel export data absensi karyawan', 'view absensi karyawan');
+
         $date = date('Y-m-d');
         return Excel::download(new AbsensiExport, $date . '_absensi.xlsx');
     }
@@ -161,6 +177,8 @@ class AbsensiController extends Controller
      */
     public function import(Request $request)
     {
+        LogDB::record(Auth::user(), 'Excel import data absensi karyawan', 'view absensi karyawan');
+
         $validatedData = $request->validate([
             'excel' => 'required|file|mimes:xlsx,csv,xls'
         ]);
@@ -173,16 +191,20 @@ class AbsensiController extends Controller
             ]);
         }
 
-        return redirect()->route('penggunaan_absensi.index')->with('success', 'File excel telah diimport!');
+        return redirect()->route('absensi.index')->with('success', 'File excel telah diimport!');
     }
 
     public function exportTemplate()
     {
+        LogDB::record(Auth::user(), 'Excel export template data absensi karyawan', 'view absensi karyawan');
+
         return Excel::download(new TemplateAbsensiExport, 'absensi_template.xlsx');
     }
 
     public function downloadPDF()
     {
+        LogDB::record(Auth::user(), 'Generate PDF data absensi karyawan', 'view absensi karyawan');
+
         $data = Absensi::all();
         $pdf = Pdf::loadView('absensi.download-pdf', compact('data'));
         return $pdf->download('data-absensi.pdf');
