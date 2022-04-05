@@ -61,9 +61,8 @@ Route::post('/register', [RegisterController::class, 'regist'])->name('auth.regi
 
 // Main Transaksi
 Route::resource('/main-transaksi', MainTransaksiController::class)->middleware('level:admin,kasir');
-Route::get('/download_pdf/{transaksi:kode_invoice}', [MainTransaksiController::class, 'downloadPDF'])->name('download-pdf')->middleware('level:admin,kasir');
-Route::get('/stream_pdf', [MainTransaksiController::class, 'stream_pdf'])->name('stream-pdf')->middleware('level:admin,kasir');
-Route::get('/test-pdf/{id}', [MainTransaksiController::class, 'testPDF'])->name('main-transaksi.test');
+// buat route get untuk menangani method show dengan wildcard nya kode_invoice
+Route::get('/main-transaksi/{kode_invoice}', [MainTransaksiController::class, 'show'])->name('main-transaksi.show')->middleware('level:admin,kasir');
 
 // Laporan
 Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index')->middleware('level:admin,kasir,owner');

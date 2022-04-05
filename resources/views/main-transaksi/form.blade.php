@@ -60,9 +60,9 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <button type="button" class="btn btn-info col-2" data-bs-toggle="modal"
+                        <button type="button" class="btn btn-info col-4" data-bs-toggle="modal"
                             data-bs-target="#modalMember">
-                            <i class="fas fa-plus">Pilih Member</i>
+                            Pilih Member
                         </button>
                     </div>
                 </div>
@@ -125,17 +125,17 @@
                                 </tr>
                                 <tr>
                                     <td colspan="3" align="right">Biaya Tambahan</td>
-                                    <td><input type="number" name="biaya_tambahan" style="wight: 150px" value="0"></td>
+                                    <td><input type="number" name="biaya_tambahan" min="0" id="biaya-tambahan" style="wight: 150px" value="0"></td>
                                 </tr>
                                 <tr>
                                     <td colspan="3" align="right">Diskon</td>
-                                    <td><input type="number" value="0" name="diskon" id="diskon" style="width: 140px">
+                                    <td><input type="number" value="0" name="diskon" min="0" id="diskon" style="width: 140px">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="3" align="right">Pajak <input type="number" value="0" min="0"
                                             class="qty" name="pajak" id="pajak-persen" size="2"
-                                            style="width: 40px"></td>
+                                            style="width: 100px"></td>
                                     <td><span id="pajak-harga">0</span></td>
                                 </tr>
                                 <tr style="background: black; color: white;" class="fw-bold text-2xl">
@@ -199,7 +199,7 @@
 
 <!-- Modal Paket -->
 <div class="modal fade" id="modalPaket" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Pilih Paket</h5>

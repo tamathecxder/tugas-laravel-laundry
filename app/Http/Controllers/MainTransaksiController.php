@@ -34,11 +34,13 @@ class MainTransaksiController extends Controller
      * function untuk mengetest tampilan PDF sebelum dia di-generate
      * @param Request $request
      */
-    public function testPDF($id) {
-        return view('main-transaksi.test', [
-            'transaksi' => Transaksi::all()
-        ]);
+
+    // buatlah fungsi untuk menampilkan view spesifik transaksi dengan parameter nya adalah kode invoice
+    public function show($kode_invoice) {
+        $transaksi = Transaksi::with(['member', 'paket', 'detail'])->where('kode_invoice', $kode_invoice)->first();
+        return view('main-transaksi.show', compact('transaksi'));
     }
+
 
     /**
      * Menampilkan halaman utama transaksi
@@ -68,7 +70,7 @@ class MainTransaksiController extends Controller
             $results[] = $newArray;
         }
 
-        $data['paket'] = Paket::with(['detail'])->get();
+        $data['paket'] = Paket::with(['detail'])->where('outlet_id', auth()->user()->outlet_id)->get();
         $data['member'] = Member::all();
 
         return view('main-transaksi.index', [
