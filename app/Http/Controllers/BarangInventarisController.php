@@ -7,16 +7,16 @@ use Database\Seeders\BarangInventar;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
+/**
+ * Class BarangInventarisController
+ *
+ * @package App\Http\Controllers
+ */
 class BarangInventarisController extends Controller
 {
     public function __call($method, $parameters)
     {
-        // jika method yang dipanggil adalah index
         if ($method == 'index') {
-            // return view('data-barang.index', [
-            //     'status_barang' => config('status_barang.status'),
-            //     'data_barang' => BarangInventaris::all()
-            // ]);
             return view('data-barang.index', [
                 'status_barang' => config('status_barang.status'),
                 'data_barang' => BarangInventaris::all()
@@ -35,16 +35,6 @@ class BarangInventarisController extends Controller
             'barang_inventaris' => BarangInventaris::all(),
             'kondisi' => config('kondisi_barang.kondisi'),
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -70,28 +60,6 @@ class BarangInventarisController extends Controller
         } else {
             return redirect()->back()->with('error', 'Data gagal ditambah');
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-
     }
 
     /**

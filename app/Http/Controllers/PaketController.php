@@ -15,6 +15,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Maatwebsite\Excel\Facades\Excel;
 
+
+/**
+ * Class PaketController
+ *
+ * @package App\Http\Controllers
+ */
 class PaketController extends Controller
 {
     /**
@@ -29,16 +35,6 @@ class PaketController extends Controller
         return view('paket.index', [
             'jenis' => PaketJenis::$jenis,
         ])->with($data);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -63,28 +59,6 @@ class PaketController extends Controller
         } else {
             return redirect()->route('paket.index')->with('error', 'Data paket gagal ditambahkan!');
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Paket  $paket
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Paket $paket)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Paket  $paket
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Paket $paket)
-    {
-        //
     }
 
     /**
@@ -134,11 +108,23 @@ class PaketController extends Controller
         }
     }
 
+    /**
+     * Export data paket to excel
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function export() {
         $tanggal = date('Y-m-d');
         return Excel::download(new PaketExport, $tanggal . "_paket.xlsx");
     }
 
+    /**
+     * fungsi import untuk mengimport data paket dari excel ke database
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function import(Request $request) {
         $request->validate([
             'file2' => 'file|required|mimes:xlsx',
@@ -155,11 +141,21 @@ class PaketController extends Controller
         return redirect()->route('paket.index')->with('success', 'File excel berhasil diimport!');
     }
 
+    /**
+     * fungsi exportTemplate untuk mengekspor template paket yang nantinya akan dipakai untuk import data paket
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function exportTemplate()
     {
         return Excel::download(new TemplatePaketExport, 'paket_template.xlsx');
     }
 
+    /**
+     * fungsi pdf untuk mengekspor data paket ke pdf
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function downloadPDF()
     {
         $data = Paket::where('outlet_id', auth()->user()->outlet_id)->get();

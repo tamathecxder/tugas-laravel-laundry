@@ -14,6 +14,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
+/**
+ * Class AbsensiController
+ *
+ * @package App\Http\Controllers
+ */
 class AbsensiController extends Controller
 {
     /**
@@ -29,16 +34,6 @@ class AbsensiController extends Controller
             'absensi' => Absensi::all(),
             'status_karyawan' => config('status_karyawan.status'),
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -72,6 +67,13 @@ class AbsensiController extends Controller
         }
     }
 
+    /**
+     * fungsi statusKaryawan untuk mengambil data status karyawan untuk diupdate dari absensi karyawan dan kemudian
+     * menginputkan waketu selesai kerja ke absensi karyawan
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function statusKaryawan(Request $request)
     {
         LogDB::record(Auth::user(), 'Update status_masuk karyawan', 'view absensi karyawan');
@@ -87,28 +89,6 @@ class AbsensiController extends Controller
         }
 
         return redirect()->route('absensi.index')->with('success', 'Data absensi berhasil diubah');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Absensi  $absensi
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Absensi $absensi)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Absensi  $absensi
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Absensi $absensi)
-    {
-        //
     }
 
     /**
@@ -194,6 +174,14 @@ class AbsensiController extends Controller
         return redirect()->route('absensi.index')->with('success', 'File excel telah diimport!');
     }
 
+    /**
+     * fungsi exportTemplate untuk mengambil data absensi karyawan dan mengirimkan ke excel sebagai template
+     *
+     * @return \Illuminate\Http\Response
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
+     * @throws \PhpOffice\PhpSpreadsheet\Reader\Exception
+     */
     public function exportTemplate()
     {
         LogDB::record(Auth::user(), 'Excel export template data absensi karyawan', 'view absensi karyawan');
@@ -201,6 +189,12 @@ class AbsensiController extends Controller
         return Excel::download(new TemplateAbsensiExport, 'absensi_template.xlsx');
     }
 
+    /**
+     * fungsi downloadPDF adalah untuk mengambil data absensi karyawan dan mengirimkan ke pdf, kemudian pdf tersebut nantinya akan dapat diunduh
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function downloadPDF()
     {
         LogDB::record(Auth::user(), 'Generate PDF data absensi karyawan', 'view absensi karyawan');

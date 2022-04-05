@@ -13,6 +13,8 @@ use Maatwebsite\Excel\Events\BeforeImport;
 class TemplateBarangExport implements FromCollection, WithHeadings, WithEvents, WithMapping
 {
     /**
+    * Interface collection untuk mengambil data dari database
+    *
     * @return \Illuminate\Support\Collection
     */
     public function collection()
@@ -21,6 +23,12 @@ class TemplateBarangExport implements FromCollection, WithHeadings, WithEvents, 
         return Barang::all()->take(1)->makeHidden('id');
     }
 
+    /**
+     * Interface map untuk memetakan data dari database ke dalam array secara spesifik
+     *
+     * @param mixed $barang
+     * @return array
+     */
     public function map($barang): array
     {
         return [
@@ -33,6 +41,11 @@ class TemplateBarangExport implements FromCollection, WithHeadings, WithEvents, 
         ];
     }
 
+    /**
+     * Interface headings untuk mengambil judul dari kolom
+     *
+     * @return array
+     */
     public function headings(): array
     {
         return [
@@ -45,6 +58,11 @@ class TemplateBarangExport implements FromCollection, WithHeadings, WithEvents, 
         ];
     }
 
+    /**
+     * Interface events untuk mengatur event yang akan dijalankan
+     *
+     * @return array
+     */
     function registerEvents(): array
     {
         return [

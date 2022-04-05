@@ -13,14 +13,22 @@ use Maatwebsite\Excel\Events\BeforeImport;
 class TemplateOutletExport implements FromCollection, WithEvents, WithHeadings, WithMapping
 {
     /**
-     * @return \Illuminate\Support\Collection
-     */
+    * Interface collection untuk mengambil data dari database
+    *
+    * @return \Illuminate\Support\Collection
+    */
     public function collection()
     {
         return Outlet::all()->take(5)->makeHidden('id');
     }
 
-    public function map($barang): array
+    /**
+     * Interface map untuk memetakan data dari database ke dalam array secara spesifik
+     *
+     * @param mixed $outlet
+     * @return array
+     */
+    public function map($outlet): array
     {
         return [
             'nama_outlet',
@@ -29,6 +37,11 @@ class TemplateOutletExport implements FromCollection, WithEvents, WithHeadings, 
         ];
     }
 
+    /**
+     * Interface headings untuk mengambil judul dari kolom
+     *
+     * @return array
+     */
     public function headings(): array
     {
         return [
@@ -38,6 +51,11 @@ class TemplateOutletExport implements FromCollection, WithEvents, WithHeadings, 
         ];
     }
 
+    /**
+     * Interface events untuk mengatur event yang akan dijalankan
+     *
+     * @return array
+     */
     function registerEvents(): array
     {
         return [

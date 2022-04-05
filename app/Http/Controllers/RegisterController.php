@@ -7,6 +7,11 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
+/**
+ * Class RegisterController
+ *
+ * @package App\Http\Controllers
+ */
 class RegisterController extends Controller
 {
     /**

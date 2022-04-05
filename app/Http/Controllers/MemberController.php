@@ -12,6 +12,11 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
+/**
+ * Class MemberController
+ *
+ * @package App\Http\Controllers
+ */
 class MemberController extends Controller
 {
     /**
@@ -24,16 +29,6 @@ class MemberController extends Controller
         return view('member.index', [
             'member' => Member::all(),
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-
     }
 
     /**
@@ -58,28 +53,6 @@ class MemberController extends Controller
         } else {
             return redirect()->route('member.index')->with('error', 'Data member gagal ditambahkan!');
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Member  $member
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Member $member)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Member  $member
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Member $member)
-    {
-        //
     }
 
     /**
@@ -133,6 +106,11 @@ class MemberController extends Controller
         return Excel::download(new MemberExport, $date . '_member.xlsx');
     }
 
+    /**
+     * Import data member ke database
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function import(Request $request) {
         $validatedData = $request->validate([
             'excel' => 'required|mimes:xlsx,csv,xls|file',
@@ -149,11 +127,21 @@ class MemberController extends Controller
         return redirect()->route('member.index')->with('success', 'File excel berhasil diimport!');
     }
 
+    /**
+     * Export template excel member untuk nanti diimport ke database
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function exportTemplate()
     {
         return Excel::download(new TemplateMemberExport, 'member_template.xlsx');
     }
 
+    /**
+     * Export pdf member
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function downloadPDF()
     {
         $data = Member::all();

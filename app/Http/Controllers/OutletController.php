@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
+/**
+ * Class OutletController
+ *
+ * @package App\Http\Controllers
+ */
 class OutletController extends Controller
 {
     /**
@@ -28,16 +33,6 @@ class OutletController extends Controller
         return view('outlet.index', [
             'outlet' => Outlet::all(),
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -62,28 +57,6 @@ class OutletController extends Controller
         } else {
             return redirect()->route('outlet.index')->with('error', 'Data outlet gagal ditambahkan!');
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Outlet  $outlet
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Outlet $outlet)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Outlet  $outlet
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Outlet $outlet)
-    {
-        //
     }
 
     /**
@@ -135,6 +108,12 @@ class OutletController extends Controller
         }
     }
 
+    /**
+     * Export data outlet ke excel
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function export() {
         LogDB::record(Auth::user(), 'Excel export data outlet', 'view outlet');
 
@@ -142,6 +121,12 @@ class OutletController extends Controller
         return Excel::download(new OutletExport, $date . '_outlet.xlsx');
     }
 
+    /**
+     * Import data outlet dari excel ke database
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function import(Request $request) {
         LogDB::record(Auth::user(), 'Excel import data outlet', 'view outlet');
 
@@ -160,6 +145,13 @@ class OutletController extends Controller
         return redirect()->route('outlet.index')->with('success', 'File excel telah diimport!');
     }
 
+
+    /**
+     * Export template data outlet ke excel untuk nantinya diimport ke database
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function exportTemplate()
     {
         LogDB::record(Auth::user(), 'Excel export template data outlet', 'view outlet');
@@ -167,7 +159,12 @@ class OutletController extends Controller
         return Excel::download(new TemplateOutletExport, 'outlet_template.xlsx');
     }
 
-    // make a function for generate outlet PDF using DOMPDF
+    /**
+     * Meng-generate PDF dari data outlet yang ada
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function downloadPDF()
     {
         LogDB::record(Auth::user(), 'Generate PDF data outlet', 'view outlet');

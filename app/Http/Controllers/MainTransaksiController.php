@@ -12,6 +12,11 @@ use App\Models\Transaksi;
 use App\Models\DetailTransaksi;
 use Barryvdh\DomPDF\Facade\Pdf;
 
+/**
+ * Class MainTransaksiController
+ *
+ * @package App\Http\Controllers
+ */
 class MainTransaksiController extends Controller
 {
     /**
@@ -34,7 +39,7 @@ class MainTransaksiController extends Controller
             'transaksi' => Transaksi::all()
         ]);
     }
-    
+
     /**
      * Menampilkan halaman utama transaksi
      * dengan mem-passing data kedalam view untuk nantinya bisa diakses dan diambil datanya

@@ -6,6 +6,10 @@ use App\Models\DetailTransaksi;
 use App\Http\Requests\StoreDetailTransaksiRequest;
 use App\Http\Requests\UpdateDetailTransaksiRequest;
 
+/**
+ * Class DetailTransaksiController
+ * @package App\Http\Controllers
+ */
 class DetailTransaksiController extends Controller
 {
     /**

@@ -145,11 +145,20 @@ class BarangController extends Controller
         return redirect()->route('penggunaan_barang.index')->with('success', 'File excel telah diimport!');
     }
 
+    /**
+     * Export template data barang ke excel untuk nantinya diimport ke database
+     * @return \Illuminate\Http\Response
+     */
     public function exportTemplate()
     {
         return Excel::download(new TemplateBarangExport, 'penggunaan_barang_template.xlsx');
     }
 
+    /**
+     * Generate dan download pdf dari data barang yang ada di database
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function downloadPDF()
     {
         $data = Barang::all();

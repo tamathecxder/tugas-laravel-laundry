@@ -12,6 +12,8 @@ use Maatwebsite\Excel\Events\BeforeImport;
 class OutletExport implements FromCollection, WithHeadings, WithEvents
 {
     /**
+    * Interface collection untuk mengambil data dari database
+    *
     * @return \Illuminate\Support\Collection
     */
     public function collection()
@@ -19,6 +21,11 @@ class OutletExport implements FromCollection, WithHeadings, WithEvents
         return Outlet::all();
     }
 
+    /**
+     * Interface headings untuk mengambil judul dari kolom
+     *
+     * @return array
+     */
     public function headings(): array
     {
         return [
@@ -31,6 +38,11 @@ class OutletExport implements FromCollection, WithHeadings, WithEvents
         ];
     }
 
+    /**
+     * Interface events untuk mengatur event yang akan dijalankan
+     *
+     * @return array
+     */
     public function registerEvents(): array
     {
         return [

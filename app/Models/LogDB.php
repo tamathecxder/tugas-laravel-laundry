@@ -14,8 +14,7 @@ class LogDB extends Model
     protected $primaryKey = 'id';
 
     /**
-     * fungsi record untuk mencatat log ketika dipanggil dalam function
-     *
+     * fungsi record untuk mensetting log dan fungsi ini juga dapat dipanggil di luar class untuk dijadikan logging dari aplikasi
      */
     public static function record($user_id = null, $event, $extra = null)
     {

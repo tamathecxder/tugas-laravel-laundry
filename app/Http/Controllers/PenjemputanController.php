@@ -11,6 +11,12 @@ use App\Imports\PenjemputanImport;
 use App\Exports\PenjemputanExport;
 use Maatwebsite\Excel\Facades\Excel;
 
+
+/**
+ * Class PenjemputanController
+ *
+ * @package App\Http\Controllers
+ */
 class PenjemputanController extends Controller
 {
     /**
@@ -42,17 +48,6 @@ class PenjemputanController extends Controller
         } else {
             return redirect()->route('penjemputan.index')->with('error', 'Data penjemputan gagal diinputkan! harap coba lagi...');
         }
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Penjemputan  $penjemputan
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Penjemputan $penjemputan)
-    {
-        //
     }
 
     /**
@@ -88,12 +83,24 @@ class PenjemputanController extends Controller
         }
     }
 
+    /**
+     * Export data penjemputan to excel
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function export()
     {
         $date = date('Y-m-d');
         return Excel::download(new PenjemputanExport, $date . "_penjemputan.xlsx");
     }
 
+    /**
+     * Import data penjemputan dari excel ke database
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function import(Request $request) {
         $request->validate([
             'file2' => 'file|required|mimes:xlsx',
@@ -110,6 +117,13 @@ class PenjemputanController extends Controller
         return redirect()->route('penjemputan.index')->with('success', 'File excel berhasil diimport!');
     }
 
+    /**
+     * Mengganti status penjemputan
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Penjemputan  $penjemputan
+     * @return \Illuminate\Http\Response
+     */
     public function status(Request $request, $id)
     {
         $ganti = Penjemputan::where('id', $id)->update(array('status' => $request->status));

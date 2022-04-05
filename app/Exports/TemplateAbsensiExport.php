@@ -13,6 +13,8 @@ use Maatwebsite\Excel\Events\BeforeImport;
 class TemplateAbsensiExport implements FromCollection, WithHeadings, WithEvents, WithMapping
 {
     /**
+    * Interface collection untuk mengambil data dari database
+    *
     * @return \Illuminate\Support\Collection
     */
     public function collection()
@@ -20,7 +22,13 @@ class TemplateAbsensiExport implements FromCollection, WithHeadings, WithEvents,
         return Absensi::all()->take(1)->makeHidden('id');
     }
 
-    public function map($barang): array
+    /**
+     * Interface map untuk memetakan data dari database ke dalam array secara spesifik
+     *
+     * @param mixed $absensi
+     * @return array
+     */
+    public function map($absensi): array
     {
         return [
             'default_nama_karyawan',
@@ -30,6 +38,11 @@ class TemplateAbsensiExport implements FromCollection, WithHeadings, WithEvents,
         ];
     }
 
+    /**
+     * Interface headings untuk mengambil judul dari kolom
+     *
+     * @return array
+     */
     public function headings(): array
     {
         return [
@@ -40,6 +53,11 @@ class TemplateAbsensiExport implements FromCollection, WithHeadings, WithEvents,
         ];
     }
 
+    /**
+     * Interface events untuk mengatur event yang akan dijalankan
+     *
+     * @return array
+     */
     function registerEvents(): array
     {
         return [

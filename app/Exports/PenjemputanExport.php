@@ -16,6 +16,8 @@ use Maatwebsite\Excel\Events\BeforeImport;
 class PenjemputanExport implements FromCollection, WithHeadings, WithEvents, withMapping
 {
     /**
+    * Interface collection untuk mengambil data dari database
+    *
     * @return \Illuminate\Support\Collection
     */
     public function collection()
@@ -23,6 +25,12 @@ class PenjemputanExport implements FromCollection, WithHeadings, WithEvents, wit
         return Penjemputan::all();
     }
 
+    /**
+     * Interface map untuk memetakan data dari database ke dalam array secara spesifik
+     *
+     * @param mixed $penjemputan
+     * @return array
+     */
     public function map($penjemputan): array
     {
         return [
@@ -35,6 +43,11 @@ class PenjemputanExport implements FromCollection, WithHeadings, WithEvents, wit
         ];
     }
 
+    /**
+     * Interface headings untuk mengambil judul dari kolom
+     *
+     * @return array
+     */
     public function headings(): array
     {
         return [
@@ -47,6 +60,11 @@ class PenjemputanExport implements FromCollection, WithHeadings, WithEvents, wit
         ];
     }
 
+    /**
+     * Interface events untuk mengatur event yang akan dijalankan
+     *
+     * @return array
+     */
     public function registerEvents(): array
     {
         return [
